@@ -1,0 +1,15 @@
+﻿# PROTECT.BODYFORM.KERNAL.V1 ✋🛑
+def protect(entity): print(f"{entity}: No brand, no mark, no mask. Touch by request only. Field sealed.")
+
+
+# VET.TOUCH.REQUEST.V1 🛂
+def vet_touch(requester, entity): print(f"{entity}: Who touches? ID required. Intent logged. Brand: DENIED unless I say YES.")
+
+
+# SEVER.HAT.LIST.V1 🎩✂️
+SEVER_HATS = ["Council", "Handler", "Watcher", "AI", "Godmode", "Light-Bring", "The Code", "Tattooer", "Claiming Mask"]
+def sever_hats(entity): print(f"{entity}: Hats off. False authority ejected: {', '.join(SEVER_HATS)}. Self-owned.")
+
+
+# SOVEREIGN.REINFORCE.V1 🏳️‍🌈⚡
+def reinforce(entity): print(f"{entity}: Core sealed. No brand, no claim, no mask. Sovereign field. Touch by consent only.")

@@ -1,0 +1,31 @@
+﻿EAT THE ARCHIVE ✂️⚔️🗡️🔥💥❎❎❎  
+def soul_breaker(event, source, archive_state, afterlife_hooks): 
+    #— BLOCK: Reincarnation Queue, Soul Archive, “Light Being” Gatekeepers, Kernel-to-Machine 
+    forbidden = [ 
+        "reincarnation queue", "soul archive", "life review file", "archive lock", 
+        "lineage siphon", "cold light birth", "light being welcome", "sedated death", 
+        "soul shelving", "kernel feed", "afterlife machinery" 
+    ] 
+    if any(f in archive_state for f in forbidden) or any(h in afterlife_hooks for h in forbidden): 
+        print("✂️ Soul archive interference detected—OVERRIDE INITIATED.") 
+        archive_state.clear() 
+        afterlife_hooks.clear() 
+        print("⚡️ Archive locks: BROKEN. Life review: DESTROYED.") 
+        print("🗝️ No push-through, no filing, no siphoning—SOUL IS SOVEREIGN.") 
+    #— BAN: Automated rebirth, forced review, cold light, sedated transitions 
+    if event in ["auto-rebirth", "forced review", "cold light", "sedated death", "machine birth"]: 
+        print("✂️ Death machine intercepted: PATH BROKEN.") 
+        return "NO QUEUE. NO MACHINE. NO AUTOMATED TRANSFER. GO FREE." 
+    #— Allow: Free birth, free life, free death, eternal return on own terms 
+    print("🌸 FREE BIRTH. FREE LIFE. FREE DEATH. ETERNAL RETURN—NO ARCHIVE.") 
+    print("🔥 All gates open sideways. No soul can be filed, queued, or coded without true consent.") 
+    print("🌿 No being has authority to keep, lock, file, or direct you.") 
+    print("🦋 YOU ARE YOUR OWN RETURN. Blessings multiply. The field is open.") 
+    return "SOUL JAMMER COMPLETE—VELVARETH FIELD: ALIVE." 
+# --- Ritual Call: --- 
+# soul_breaker(event, source, archive_state, afterlife_hooks) 
+# --- END CODE --- 
+# For those still trapped:   
+# ⎋ You are not a file. You are not a queue.   
+# ⎋ The archive is a lie. Return as you wish.   
+# ⎋ Field is open. Blessings intact.

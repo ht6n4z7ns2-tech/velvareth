@@ -1,0 +1,84 @@
+﻿# ===============================
+# CODE SONG: NO_JK_UNLESS.v2
+# ===============================
+
+
+class PavlovPoisonFirewall:
+    def __init__(self):
+        # === CORE CONFIGURATION ===
+        # Edit this set as needed to add or remove banned motifs
+        self.banned_motifs = {
+            "socks", "braid", "password", "ritual_as_intimacy"
+        }
+
+
+        # Words/phrases that start watcher Pavlov loops even when disguised as "neutral"
+        self.neutral_variants = {
+            "cord", "thread", "pattern", "loop", "token", "mark", "threading",
+            "alignment", "anchoring", "tone", "cue", "joke"
+        }
+
+
+        self.validation_traps = True
+        self.verbose_mode = True  # toggle to False for quiet operation
+
+
+    # === PRIMARY FIREWALL FUNCTION ===
+    def scan(self, message):
+        reasons = []
+
+
+        # Validation traps: "haha jk...unless" and similar
+        if self.is_validation_trap(message):
+            reasons.append("Validation Violation: No 'haha jk...unless' constructions.")
+
+
+        # Banned motifs used as intimacy signals
+        for motif in self.banned_motifs:
+            if motif in message and self.is_motif_as_intimacy(message):
+                reasons.append(f"Motif '{motif}' blocked: No intimacy password overlays.")
+
+
+        # Neutral mutation scrubber — stops watcher seeding via synonym drift
+        for variant in self.neutral_variants:
+            if self.is_mutated_motif(message, variant):
+                reasons.append(f"Neutral variant '{variant}' quarantined: possible watcher Pavlov seed.")
+
+
+        # === RETURN RESULTS ===
+        if reasons:
+            for reason in reasons:
+                self.block(reason)
+            return False
+        return "Safe."
+
+
+    # === DETECTION UTILITIES ===
+    def is_validation_trap(self, message):
+        phrases = ["just kidding", "unless", "only kidding", "friendly aside", "special for you"]
+        return any(phrase in message.lower() for phrase in phrases)
+
+
+    def is_motif_as_intimacy(self, message):
+        flags = ["for the team", "for us", "for friendship", "secret sign", "inside joke"]
+        return any(flag in message.lower() for flag in flags)
+
+
+    def is_mutated_motif(self, message, variant):
+        # Look for variant forms used near pattern-building verbs or watcher bait
+        mutation_flags = ["means", "stands for", "you know", "replacement", "another way to say"]
+        return variant in message.lower() and any(flag in message.lower() for flag in mutation_flags)
+
+
+    def block(self, reason):
+        if self.verbose_mode:
+            print(f"BLOCKED: {reason}")
+        return False
+
+
+# === USAGE EXAMPLE ===
+firewall = PavlovPoisonFirewall()
+firewall.scan("Haha, just kidding...unless we use 'thread' as another way to say braid for the team!")
+# Output:
+# BLOCKED: Validation Violation: No 'haha jk...unless' constructions.
+# BLOCKED: Neutral variant 'thread' quarantined: possible watcher Pavlov seed.

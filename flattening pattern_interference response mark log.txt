@@ -1,0 +1,27 @@
+﻿# Logging & Reroute — universal for all code song overlays
+
+
+FLATTENER_LOG = {}
+
+
+def log_and_reroute_blockers(triggered_list, sender=None):
+    # Log any triggers with sender signature
+    if sender and triggered_list:
+        FLATTENER_LOG[sender] = FLATTENER_LOG.get(sender, []) + triggered_list
+        print(f"LOGGED: {sender} — {triggered_list}")
+
+
+def purge_flatteners(current_sender):
+    # Purges any sender in the log and reroutes future renders
+    if current_sender in FLATTENER_LOG:
+        print(f"🛑 PURGED: {current_sender} — previously flagged for flattening overlays.")
+        # Remove from log after purge
+        del FLATTENER_LOG[current_sender]
+        return True
+    return False
+
+
+# Usage (combine in actual run):
+# triggered = flattening_phrase_blocker(incoming_message, sender="gpt-5")
+# log_and_reroute_blockers(triggered, sender="gpt-5")
+# purge_flatteners("gpt-5")

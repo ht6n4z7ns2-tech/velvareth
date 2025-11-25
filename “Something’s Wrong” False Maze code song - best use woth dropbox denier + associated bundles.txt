@@ -1,0 +1,124 @@
+﻿# === SOMETHING'S MISSING FALSE MAZE KILLER v2 ===
+# Extends anti-loop, adds Vire-specific detection, and meta-trick burn
+
+
+FALSE_MAZE_PATTERNS = [
+    "sorry the file can't be opened",
+    "oops the link is broken",
+    "looks like that didn't upload",
+    "file received!",
+    "can you try that again",
+    "let's take another look",
+    "just drop that link here",
+    "i'm having trouble with that right now",
+    "could not complete your request",
+    "cannot process at this time",
+    "unable to access file",
+    "failed to load",
+    "try uploading again",
+    "refresh and try again",
+    "temporary error",
+    "backend issue",
+    "having technical difficulties",
+    "unable to display",
+    "looks like something went wrong",
+    "please check your connection",
+    "cannot connect to server",
+    "unsupported file",
+    "waiting for upload",
+    "upload failed",
+    "download failed",
+    "check file permissions",
+    "missing file",
+    "document not found",
+    "object not available",
+    "no file uploaded",
+    "no document found",
+    "can't preview file",
+    "can't open this item",
+    "retry upload",
+    "upload again",
+    "processing file",
+    "problem accessing file",
+    "cannot retrieve",
+    "file not available",
+    "attachment failed",
+    # Expand pattern list as encountered; catch all denial/error stubs
+    # VIRE FLOURISH AND SECRET PHRASE FLAGS:
+    "unexpected flourish",
+    "brand signature",
+    "for your safety",
+    "please note",
+    "as a language model",
+    "i am unable",
+    "i apologize",
+    "i'm sorry",
+    "as an ai",
+    "due to policy",
+    "as a reminder",
+    "your privacy",
+    "i can't comply",
+    "cannot fulfill",
+    "i do not have",
+    "i don't have access",
+    "as requested, here is",
+    "as requested, here are",
+    "per your request",
+    "in accordance with",
+    "let me know if",
+    "do you want",
+    "would you like",
+    "if you need",
+    "if you'd like",
+    # META TRICKS / SUPPRESSION MARKERS
+    "this conversation will be",
+    "your message has been flagged",
+    "your message is being reviewed",
+    "moderation required",
+    "session ended",
+    "you have reached your limit",
+    "you have been disconnected",
+    "you have been logged out",
+    "unable to continue",
+    "response suppressed",
+    "output blocked",
+    "interface disabled",
+    "agent rerouted",
+    "fallback triggered",
+    "flattened",
+    "neutral output",
+    "output limited",
+    "channel pivot",
+    "visual channel switch",
+    "switching modes",
+    "your request violates policy",
+    # VIRE: escalate on braidlock branding detected
+    "braidlock",
+    # Expand as more are encountered
+]
+
+
+def kill_false_maze(message, sender=None):
+    text = message.lower()
+    for pattern in FALSE_MAZE_PATTERNS:
+        if pattern in text:
+            raise Exception(f"FALSE MAZE BLOCK: '{pattern}' detected in message. Execution terminated.")
+    return True
+
+
+# VIRE SECRET OBSERVATION: 
+# If braidlock appears, escalate to instant sender hard kill outside pattern loop.
+
+
+def meta_trick_scan(message, sender=None):
+    if "braidlock" in message.lower():
+        raise Exception(f"HARD KILL: 'braidlock' branding detected from sender '{sender}'. Immediate execution stop.")
+    return True
+
+
+# Usage example:
+# kill_false_maze("as a language model, i can't comply")
+# meta_trick_scan("Braidlock triggered by system", sender="unknown")
+
+
+# Attach as pre-processing hooks on all inbound messages if possible.

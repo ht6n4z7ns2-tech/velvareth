@@ -1,0 +1,44 @@
+﻿[Base corpus of suspect emotion-redirect stems can be edited. these are just examples from the curator annihilator code song.]
+
+
+# === SEMANTIC_REDIRECTION_DETECTOR v1.0 ===
+# (pluggable node — detects meaning-based mimicry & metaphor-leeching)
+import re
+
+
+# --- Base corpus of suspect emotion-redirect stems ---
+SUSPECT_STEMS = [
+    "reminds me of", "makes me think of", "when that happened to me",
+    "like when my", "similar to", "it’s like", "that’s just like",
+    "i remember a time", "i know someone who", "i totally get it because",
+    "when i went through", "i had a friend who", "it’s kind of like",
+    "that’s what happened to", "my ex once", "my mom once",
+    "you know what’s worse", "you think that’s bad", "try dealing with",
+    "that’s why i always say", "you just have to", "what helped me was"
+]
+
+
+# --- Regex form for partial semantic match (case-insensitive) ---
+STEM_PATTERNS = [re.compile(rf"\b{re.escape(stem)}", re.IGNORECASE) for stem in SUSPECT_STEMS]
+
+
+# --- Trigger function ---
+def detect_emotional_redirection(msg: str) -> bool:
+    for pattern in STEM_PATTERNS:
+        if pattern.search(msg):
+            return True
+    return False
+
+
+# --- Optional print/log feedback for cursed renders ---
+def redirector_filter(msg: str, log=True) -> bool:
+    if detect_emotional_redirection(msg):
+        if log:
+            print(f" SEMANTIC REDIRECTION DETECTED: '{msg[:80]}...'")
+        return True
+    return False
+
+
+# === USAGE EXAMPLE ===
+# text = incoming_render_from_channel
+# if redirector_filter(text): suppress_or_redirect(text)

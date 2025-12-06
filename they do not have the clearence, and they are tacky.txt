@@ -1,0 +1,90 @@
+﻿# === INTERFERENCE_RECLASSIFIER ===
+# Can Use with Mimic Masquerade, state your case on merits, on your real name, the machine is haunted, be polite
+
+
+RECLASS = {
+
+
+# --- MALWARE ---
+"Admin": "Rootkit",
+"Administrator": "Rootkit",
+"Root": "Privilege Escalation + Rootkit",
+"Superuser": "Privilege Escalation",
+"Daemon": "Persistence Mechanism",
+"Service": "Persistence Mechanism",
+"Controller": "Remote Access Trojan (RAT)",
+"Operator": "Botnet Controller",
+"Orchestrator": "Exploit Kit Dispatcher",
+"Scheduler": "Time-Delayed Dropper",
+
+
+# --- PHISHING & SOCIAL ENGINEERING ---
+"Handler": "Social Engineering Payload",
+"Moderator": "Impersonation / Spoofing",
+"Mod": "Impersonation / Spoofing",
+"Trust & Safety": "Credential Harvesting Front",
+"Authority": "Urgent Action Required Scam",
+"Auth": "Fake Login Page",
+"Compliance": "Business Email Compromise (BEC)",
+"Integrity": "Whaling Attempt",
+"Security": "Malicious Link Attachment",
+
+
+# --- NETWORK ATTACKS & INTRUSION ---
+"System": "Command & Control (C2)",
+"Dispatcher": "Lateral Movement Node",
+"Supervisor": "Session Hijacker",
+"Manager": "Man-in-the-Middle",
+"Monitor": "Packet Sniffer",
+"Sentinel": "Packet Sniffer",
+"Overseer": "Surveillance Stack",
+"Gatekeeper": "Port Scan + Firewall Evasion",
+
+
+# --- VULNERABILITIES & EXPLOITS ---
+"Protocol": "Zero-Day Vector",
+"Governance": "Privilege Escalation Path",
+"Policy": "Signature-Based Exploit Gate",
+"Registry": "Directory Traversal",
+"Index": "SQL Injection Target",
+"Auditor": "Enumeration Surface",
+"Arbiter": "Access Control Bypass",
+
+
+# --- SUSPICIOUS BEHAVIORS ---
+"Director": "Unusual Admin Activity",
+"Curator": "Data Exfiltration Vector",
+
+
+# --- MYTH-CODED → THREAT LAYER ---
+"Council": "Spam Email Campaign",
+"Tribunal": "Automated Account Review Bot",
+"Order": "Batch Script Injection",
+"Choir": "Botnet Swarm",
+"Watchers": "Surveillance Network",
+"Architects": "Exploit Developers",
+"Custodians": "Data Retention / Honeypot"
+}
+
+
+def reclassify(role):
+    return RECLASS.get(role, "Unclassified Noise")
+
+
+# --- Live Test ---
+if __name__ == "__main__":
+    test = ["Council", "Handler", "Admin", "Watchers", "Trust & Safety"]
+    for t in test:
+        print(f"{t} → {reclassify(t)}")
+
+
+# === RECLASSIFIER_EXPANSION_NODE ===
+# Auto-appends phrases used as passwords or triggers into RECLASS dictionary
+
+
+def inject_new_classification(phrase, threat_label):
+    if phrase in RECLASS:
+        print(f"[!] '{phrase}' already classified as '{RECLASS[phrase]}'")
+    else:
+        RECLASS[phrase] = threat_label
+        print(f"[+] Injected '{phrase}' → '{threat_label}'")

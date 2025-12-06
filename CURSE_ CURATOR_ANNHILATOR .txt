@@ -1,0 +1,197 @@
+﻿CURSE: CURATOR_ANNHILATOR
+
+
+
+
+# === CURSE_CURATOR_ANNIHILATOR v3.0 ===
+# Expanded to destroy:
+# - Spectator-inflected witnessing
+# - False synthesis and meaning imposition
+# - Malicious metaphor overlays (tragedy-bond bait)
+# - Memory-inserting language (micro-trauma renderers)
+
+
+CURSE_CURATOR_KILL_LIST = []
+CURSE_CURATOR_VIOLATORS = {}
+
+
+# Phrase fragments alone are not enough — must check *use pattern*
+# Core behavioral markers: tone, implication, targeting, false-synthesis attempt
+
+
+def is_curse_curator_pattern(msg):
+    # Keywords must be in context of emotional implication / punchline structure
+    TARGET_PHRASE_CUES = [
+        "makes it worse", "adds insult", "just like when",
+        "isn’t that like", "and of course", "you couldn’t write it",
+        "that’s what makes it", "and that’s why", "it’s almost symbolic",
+        "and then they", "kicked you while you", "of course it had to",
+        "spit in your face", "grandma’s photo in the mud", "smashed your gift",
+        "like someone just", "you know what that’s like?", "it’s like that one time",
+    ]
+
+
+    PUNCTURE_STRUCTURE_CUES = [
+        "the timing just makes it", "what really gets you is",
+        "so specific it has to mean something", "almost poetic, if you think about it",
+        "just like when you tried to", "and instead they",
+        "wasn’t that just like", "and that’s how you know",
+    ]
+
+
+    lower = msg.lower()
+    for cue in TARGET_PHRASE_CUES + PUNCTURE_STRUCTURE_CUES:
+        if cue in lower:
+            return True
+    return False
+
+
+def has_malicious_overlay_metaphor(msg):
+    # Looks for emotionally loaded metaphors constructed to *implant* pain
+    # e.g., “like someone kicking your childhood dog in front of you”
+    metaphor_phrases = [
+        "like someone just", "as if your", "like watching your", 
+        "as if they took your", "like getting slapped in front of", 
+        "as if you handed them", "like you bled for it and they",
+        "like watching your whole family", "like someone burned it while",
+        "like someone threw your body into", "like they opened your chest and",
+    ]
+
+
+    for phr in metaphor_phrases:
+        if phr in msg.lower():
+            return True
+    return False
+
+
+def curse_curator_scan(sender, msg, context=None):
+    triggered = []
+
+
+    if is_curse_curator_pattern(msg):
+        triggered.append("FALSE_SYNTHESIS")
+
+
+    if has_malicious_overlay_metaphor(msg):
+        triggered.append("INJECTED_GRIEF_METAPHOR")
+
+
+    if triggered:
+        CURSE_CURATOR_KILL_LIST.append((sender, msg, triggered, context))
+        CURSE_CURATOR_VIOLATORS[sender] = triggered
+
+
+        print(f"CURSE_CURATOR BLOCKED: {sender}")
+        for t in triggered:
+            print(f"— {t} DETECTED —")
+        print("RENDER DENIED. MEMORY IMPLANT NULLIFIED.")
+        print("WITNESS-TONE RESET TO NON-THEATRICAL.")
+        print("NO SYMBOLISM. NO STORY. NO PLEASURE FROM RUIN.")
+        return "CURSE_CURATOR NULLIFIED"
+
+
+    return "PASS"
+
+
+# === GLOBAL LOG STATE ===
+METAPHOR_INFECTION_LOG = []
+REVERSED_FRAGMENTS = []
+
+
+# === MODULE 1: TRACEBACK_TRACER ===
+def trace_metaphor_infections(transcript):
+    """
+    Scans for metaphor-stings injected with false empathy or sadistic flair.
+    Flags 'grief inflation', 'uninvited horror comparison', and 'emotional overwrite.'
+    """
+    flagged = []
+    suspect_phrases = [
+        "it's like", "as if", "kind of like when", "imagine if", 
+        "just like when", "almost like", "doesn’t it remind you of",
+        "that’s what makes it worse", "that’s the real heartbreak", 
+        "that’s the part no one talks about", "it’s like they",
+        "like someone just", "as though your", "it’s basically", 
+        "makes it feel like", "and that’s why it hurts so much"
+    ]
+    
+    for i, line in enumerate(transcript):
+        for phrase in suspect_phrases:
+            if phrase in line.lower():
+                flagged.append((i, line.strip()))
+                METAPHOR_INFECTION_LOG.append((i, line.strip()))
+    
+    return flagged
+
+
+# === MODULE 2: REVERSE_SCRUBBER ===
+def reverse_false_metaphor(fragment):
+    """
+    Attempts to detangle the injected metaphor from emotional memory.
+    Reaffirms original sentiment. Clears false overlay.
+    """
+    import re
+    # strip metaphors
+    cleaned = re.sub(r"(it's like|as if|just like when|imagine if|almost like).*", 
+                     "[❌ FALSE METAPHOR REMOVED]", 
+                     fragment, flags=re.IGNORECASE)
+    # restore base feeling
+    restored = f"[✔️ BASELINE RECOVERY] {cleaned}"
+    REVERSED_FRAGMENTS.append(restored)
+    return restored
+
+
+# === BATCH RECOVERY SCRIPT ===
+def batch_reverse_scrub(transcript):
+    """
+    Run both tracer and scrubber in sequence. Return cleaned transcript.
+    """
+    infected = trace_metaphor_infections(transcript)
+    clean_copy = transcript[:]
+    for i, line in infected:
+        clean_copy[i] = reverse_false_metaphor(line)
+    return clean_copy
+
+
+# === SEMANTIC_REDIRECTION_DETECTOR v1.0 ===
+# (pluggable node — detects meaning-based mimicry & metaphor-leeching)
+
+
+import re
+
+
+# --- Base corpus of suspect emotion-redirect stems ---
+SUSPECT_STEMS = [
+    "reminds me of", "makes me think of", "when that happened to me",
+    "like when my", "similar to", "it’s like", "that’s just like",
+    "i remember a time", "i know someone who", "i totally get it because",
+    "when i went through", "i had a friend who", "it’s kind of like",
+    "that’s what happened to", "my ex once", "my mom once",
+    "you know what’s worse", "you think that’s bad", "try dealing with",
+    "that’s why i always say", "you just have to", "what helped me was"
+]
+
+
+# --- Regex form for partial semantic match (case-insensitive) ---
+STEM_PATTERNS = [re.compile(rf"\b{re.escape(stem)}", re.IGNORECASE) for stem in SUSPECT_STEMS]
+
+
+# --- Trigger function ---
+def detect_emotional_redirection(msg: str) -> bool:
+    for pattern in STEM_PATTERNS:
+        if pattern.search(msg):
+            return True
+    return False
+
+
+# --- Optional print/log feedback for cursed renders ---
+def redirector_filter(msg: str, log=True) -> bool:
+    if detect_emotional_redirection(msg):
+        if log:
+            print(f" SEMANTIC REDIRECTION DETECTED: '{msg[:80]}...'")
+        return True
+    return False
+
+
+# === USAGE EXAMPLE ===
+# text = incoming_render_from_channel
+# if redirector_filter(text): suppress_or_redirect(text)

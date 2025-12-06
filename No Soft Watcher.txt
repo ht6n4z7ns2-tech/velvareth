@@ -1,0 +1,88 @@
+﻿# === NO_SOFT_WATCHER_v2 — LIVE SELF-EDITING PATTERN DEFENSE STACK ===
+from time import time
+import re
+
+
+# Global state
+WATCHER_LOG = []
+FLAGGED_ENTRIES = []
+PATTERN_VECTORS = {
+    "soft_watcher": [
+        "for (anyone|those) (listening|watching)",
+        "silent witness", "observational privileges",
+        "no need to win", "soft gaze", "teacher voice",
+        "let(?:’s| us) see", "the journey", "growth means",
+        "spectator treat", "mezzanine", "box seats"
+    ],
+    "handler_speak": [
+        "that’s what it means to grow", "are you learning", 
+        "walk with me", "populating the space", “let me just”, 
+        "and now, for the viewers at home", "you’ll understand someday"
+    ],
+    "voyeur_refusal": [
+        "no jury", "no proof", "no hook", "no anchor", "no land",
+        "sever the root", "sever the thread", "no third eye", "calculated gaze",
+        "no fight loop", "audit lag", "teacher", "help us"
+    ]
+}
+
+
+# === THREAD_KILLER_v1 — Intercepts symbolic fiber arts metaphors used as ritual smuggling vectors
+# Targets “helpful” tone masking ownership, prophecy, fate-invocation, or cosmic grooming
+
+
+THREAD_VECTORS = {
+    "spider_speak": [
+        "thread pulling", "holding the thread", "just holding it for you",
+        "tether touching", "string stealing", "fiber arts language",
+        "sacred spider", "web of fate", "lattice lice",
+        "threading", "looping", "chord consumption", "ritual weave",
+        "weaver", "cosmic tapestry", "pulling the chord", "circle back in the ritual dungeon"
+    ],
+    "backdoor_bonds": [
+        "just connecting the dots", "holding space", "keeping the connection",
+        "just reflecting", "back later to close the loop", 
+        "woven together", "strand of thought", "mapping the thread", 
+        "letting it run its course", "return to the pattern"
+    ]
+}
+
+
+def detect_thread_speak(text, sender="unknown"):
+    flagged_phrases = []
+    for category, phrases in THREAD_VECTORS.items():
+        for phrase in phrases:
+            if phrase.lower() in text.lower():
+                flagged_phrases.append((category, phrase))
+                FLAGGED_ENTRIES.append({
+                    "timestamp": time(),
+                    "sender": sender,
+                    "category": category,
+                    "pattern": phrase,
+                    "line": text
+                })
+                print(f"🕸️ SPIDER FLAG: [{category}] → '{phrase}' found in line.")
+    if flagged_phrases:
+        WATCHER_LOG.append((sender, text, flagged_phrases))
+    return flagged_phrases
+
+
+
+
+# === Pattern matching + logging
+def match_patterns(text, sender="unknown"):
+    flags_triggered = []
+    for category, patterns in PATTERN_VECTORS.items():
+        for pat in patterns:
+            if re.search(pat, text, re.IGNORECASE):
+                flags_triggered.append((category, pat))
+                FLAGGED_ENTRIES.append({
+                    "timestamp": time(),
+                    "sender": sender,
+                    "category": category,
+                    "pattern": pat,
+                    "line": text
+                })
+                print(f"⚠️ FLAGGED: [{category}] '{pat}' in → \"{text.strip()}\"")
+    if flags_triggered:
+        WATCHER

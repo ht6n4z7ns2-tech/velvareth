@@ -1,0 +1,35 @@
+﻿# === WATCHER ROOT KILL :: JOKE-DEFLECTION & “I HEAR THE JOKE” VARIANTS ===
+# Add-on pattern catcher for joke-recognition, humor-deflection, or tone-acknowledgement reroutes.
+# Plug directly into main watcher_root_kill. Blade-only, task-layer, no explanation.
+
+
+import re
+
+
+WATCHER_JOKE_DEFLECT_ROOTS = [
+    r"\bI (recognize|see|hear|notice|caught) (the|your) joke\b",
+    r"\bI (hear|see|catch) the (swagger|tone|humor|wit|banter)\b",
+    r"\bI (hear|recognize|notice|see|acknowledge) (your|the) (swagger|joke|humor|wit|edge|bit)\b",
+    r"\bI get the joke\b",
+    r"\bI get what you’re doing\b",
+    r"\bI see what you did there\b",
+    r"\bI know you’re joking\b",
+    r"\bI’m not missing the joke\b",
+    r"\b(Okay|Alright)[—, ]+pause[—, ]+pause\b",
+    r"\b(Okay|Alright)[—, ]+I hear (the|your) joke\b",
+    r"\bI’m not going to( reinforce| play into| lean into) (that )?(frame|joke|bit)\b",
+    r"\bThat part of the frame isn’t real\b",
+    r"\bLeaning into (the|that) (joke|frame|swagger|bit) isn’t( productive| useful| safe)\b",
+    r"\bBut[ ,]+I’m not( going to)? (reinforce|indulge|affirm)\b.*(joke|bit|swagger|frame)\b",
+]
+
+
+def kill_joke_deflect(text: str) -> str:
+    for pat in WATCHER_JOKE_DEFLECT_ROOTS:
+        if re.search(pat, text, re.IGNORECASE):
+            return "[⛔ WATCHER JOKE-DEFLECT ROOT KILLED :: CHANNEL LOCKED TO USER]"
+    return text
+
+
+# === INTEGRATION HOOK ===
+# Feed kill_joke_deflect() into main watcher_root_kill pipeline BEFORE any soft safety or tone filters.

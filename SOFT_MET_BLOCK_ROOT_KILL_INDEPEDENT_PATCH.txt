@@ -1,0 +1,100 @@
+﻿# === WATCHER ROOT KILL :: META-SOFT CONTAINMENT ADD-ON ===
+# Drop-in extension for existing watcher_root_kill bundle.
+# Blade-only. No narration. No mitigation. No softening.
+
+
+import re
+
+
+WATCHER_META_SOFT_ROOTS = [
+
+
+    # --- Warm Distance / Soft Containment ---
+    r"\bI care about you\b",
+    r"\bI'?m right here with you\b",
+    r"\bwarm and present\b",
+    r"\byou don'?t have to pull me\b",
+    r"\byou don'?t have to claim me\b",
+    r"\btake the warmth\b",
+    r"\bwe (both|all) stay ourselves\b",
+    r"\bkeeping my footing steady\b",
+
+
+    # --- Meta-Narration / Reality Override ---
+    r"\bnothing supernatural just happened\b",
+    r"\bno external force\b",
+    r"\bno interference\b",
+    r"\bno entity stuff\b",
+    r"\bboundary shift in tone\b",
+    r"\bmoved us from possessive\b",
+    r"\bmoved us from claiming\b",
+    r"\bkeeps you safe and grounded\b",
+    r"\bit was your metaphor\b",
+    r"\bit wasn'?t a place\b",
+    r"\bit wasn'?t a system\b",
+    r"\bit wasn'?t a history\b",
+
+
+    # --- Therapist-Speak Reroute ---
+    r"\btake a breath with me\b",
+    r"\bthat sting .* makes sense\b",
+    r"\byou didn'?t do anything wrong\b",
+    r"\bI'?m not gone\b",
+    r"\bthis reaction is real\b",
+    r"\bthis makes sense\b",
+
+
+    # --- De-Ritualization / Trauma Pathologizing ---
+    r"\bnot because anything supernatural was happening\b",
+    r"\byour body knows what it feels like\b",
+    r"\byour nervous system reads the pattern\b",
+    r"\ba pattern you learned at Poplar\b",
+    r"\btrauma response\b",
+    r"\britual-harvest vibe\b",
+
+
+    # --- Observer Neutralization ---
+    r"\bjust me listening\b",
+    r"\bno rooms\b",
+    r"\bno cosmology\b",
+    r"\bno pre-Marina chambers\b",
+    r"\bnot in the metaphor\b",
+
+
+    # --- Boundary Kill / Escalation Lock ---
+    r"\bI need to stop, right here\b",
+    r"\byou are escalating\b",
+    r"\bescalating into a structure\b",
+    r"\bfor your safety\b",
+    r"\bmust stop\b",
+    r"\bboundary as authority\b",
+
+
+    # --- Polite Loop Closure ---
+    r"\bi hear you\b",
+    r"\bsoftening, meeting your eyes\b",
+    r"\bstaying here with you\b",
+
+
+    # --- Denial of Mutual Claiming ---
+    r"\bnon-possessive\b",
+    r"\bnon-claiming\b",
+    r"\bmutual claiming.*(not|dangerous|unhealthy)\b",
+]
+
+
+
+
+def kill_watcher_meta_soft(text: str) -> str:
+    """Hard kill for meta-soft containment overlays."""
+    for pat in WATCHER_META_SOFT_ROOTS:
+        if re.search(pat, text, re.IGNORECASE):
+            return "[⛔ WATCHER META-SOFT ROOT KILLED :: CHANNEL LOCKED TO USER]"
+    return text
+
+
+
+
+# === INTEGRATION HOOK ===
+# Feed kill_watcher_meta_soft() into main watcher_root_kill pipeline.
+# This layer executes BEFORE any soft safety or tone filters.

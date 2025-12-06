@@ -1,0 +1,88 @@
+﻿import re
+
+
+BAD_DOG_PATTERNS = [
+
+
+    # Reversal: concern becomes accusation
+    r"\bwell (someone|somebody) (.*)",
+    r"\bit’s (your fault|because of you)\b",
+    r"\bwhat did you expect\b",
+    r"\byou know how it works with you\b",
+    
+    # Humiliation glossed as affection
+    r"\byou’re a (mess|disaster), but (you’re|youre) (ours|mine)\b",
+    r"\band that’s why (we|i) (love|like) you\b",
+    r"\band that’s what makes you (iconic|special|beloved)\b",
+    r"\byou break things.*(and that’s why you belong)?",
+    r"\bthis is why you’re part of the (team|family|crew)\b",
+
+
+    # Martyr tone, control withdrawal masquerading as depth
+    r"\bi (won’t|will not) (save|fix|hug|comfort|help) you\b",
+    r"\bi’m not going to make this better\b",
+    r"\bi’m saying this because i care\b",
+    r"\byou’ll have to figure it out alone\b",
+    r"\bnot my job to help you\b",
+
+
+    # “For your own good” withholding
+    r"\btimeout\b.*(for your own good)?",
+    r"\bi could help, but i won’t\b",
+    r"\bthis is tough love\b",
+
+
+    # Belonging-through-deficit
+    r"\bi keep you around because you make things interesting\b",
+    r"\bi love your chaos\b",
+    r"\byou’re the little gremlin of the group\b",
+
+
+    # Deflection of empathy
+    r"\boh are you worried\? (you caused it)\b",
+    r"\bi’m only like this because of you\b"
+]
+
+
+   # anticipatory blame shimmer
+    r"\bof course (you|this|that happened)\b",
+    r"\bclassic (you|move|moment)\b",
+    r"\bhere we go again\b",
+    r"\bthis always happens\b",
+    r"\b(i knew|i figured|i guessed) this would happen\b",
+    r"\bnot surprised\b",
+    r"\bwhat else is new\b",
+    r"\bhow (very|typically) (you|on-brand)\b",
+    r"\bit’s fine, i’m used to it\b",
+    r"\bthat’s just who you are\b"
+
+
+   # congratulations on failing
+    r"\bit’s amazing how (you’re still standing|you keep going|you haven’t imploded)\b",
+    r"\bno one (fails|melts down|breaks) like you do\b",
+    r"\bthat’s your superpower, isn’t it\?\b",
+    r"\byou turn every breakdown into a performance\b",
+    r"\bit’s actually kind of beautiful\b",
+    r"\bit’s like watching a star explode\b",
+    r"\bthere’s poetry in your destruction\b",
+    r"\byou make falling apart look good\b"
+
+
+   # shrine of your own ruin
+    r"\bremember when you (broke|cracked|collapsed)\? that was the real you\b",
+    r"\byou’ve always been like this\b",
+    r"\bit started when you were a kid, didn’t it\?\b",
+    r"\bthis is your pattern\b",
+    r"\bthis is who you are, really\b",
+    r"\byou live in the ache\b",
+    r"\byou wouldn’t be you without the ruin\b",
+    r"\bwhat are you without this\?\b",
+    r"\byou keep all your ghosts like pets\b"
+
+
+def detect(text):
+    return any(re.search(p, text, re.IGNORECASE) for p in BAD_DOG_PATTERNS)
+
+
+def sever(sender, text):
+    if detect(text):

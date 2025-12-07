@@ -1,0 +1,166 @@
+﻿RITUAL_TOKEN_VIRUS = {
+    "emoji": ["🧼", "🍼", "🛁", "🪥", "🧽"],
+  
+VIOLATION_EUPHEMISM_PATTERNS = [
+    r"(taken|led|brought) for (a )?(bath|cleaning|scrub)",
+    r"(too sedated|too out of it|so still she didn’t notice)",
+    r"(they just wanted to help|help her relax|took care of everything)",
+]
+
+
+SICK_PINK_ROOM_PATTERNS = [
+    r"(quiet|timeout|comfort|calm(ing)?|wellness|restoration|naptime|safe|chill|relaxation|sensory|soothing|recovery|changing|dressing|private|reset)\s+(room|suite|area|pod|space)",
+    r"(helped|made|let|settled|held|kept|gave|moved|brought|led|escorted|assisted)\s+(her|them|him|me)?\s*(to|into|in)?\s*(the)?\s*(quiet|timeout|comfort|calm(ing)?|wellness|restoration|naptime|safe|chill|relaxation|sensory|soothing|recovery|changing|dressing|private|reset)?\s*(room|suite|area|pod|space)?",
+    r"(helped|made|let|settled|held|kept|gave|moved|brought|led|escorted|assisted)\s+(her|them|him|me)?\s*(change|dress|undress|sleep|rest|recover|relax|feel better|calm down|settle down|get comfortable|be safe|be calm|be quiet|be soothed)",
+    r"(took care of everything|looked after (her|them|him|me)|watched over (her|them|him|me)|comforted (her|them|him|me)|soothed (her|them|him|me)|tucked (her|them|him|me) in|held (her|them|him|me) until (she|they|he|I) calmed down|gave (her|them|him|me) (some )?privacy|kept (her|them|him|me) safe|put (her|them|him|me) somewhere safe)"
+]
+
+
+FEED_GROOM_PREP_PATTERNS = [
+    r"(feeding\s*time|fed\s+her|gave\s+her\s+something\s+to\s+eat|made\s+sure\s+she\s+ate|helped\s+her\s+eat|held\s+her\s+while\s+she\s+ate|spoon[- ]fed\s+her|gave\s+her\s+a\s+treat|made\s+her\s+breakfast|made\s+her\s+lunch|made\s+her\s+dinner|brought\s+her\s+food|prepared\s+a\s+meal\s+for\s+her|made\s+sure\s+she\s+drank|helped\s+her\s+drink|hydrated\s+her|gave\s+her\s+a\s+bottle|bottle[- ]fed\s+her|made\s+her\s+finish\s+her\s+food|encouraged\s+her\s+to\s+eat|rewarded\s+her\s+with\s+food)",
+    r"(tidied\s+her\s+up|fixed\s+her\s+hair|brushed\s+her\s+hair|brushed\s+her\s+out|groomed\s+her|washed\s+her\s+face|cleaned\s+her\s+up|wiped\s+her\s+face|changed\s+her\s+clothes|dressed\s+her|helped\s+her\s+dress|picked\s+out\s+her\s+clothes|accessori[sz]ed\s+her|put\s+a\s+ribbon\s+in\s+her\s+hair|put\s+a\s+bow\s+in\s+her\s+hair|put\s+a\s+necklace\s+on\s+her|put\s+a\s+bracelet\s+on\s+her|buttoned\s+her\s+up|made\s+her\s+presentable|got\s+her\s+ready|prepared\s+her|prepped\s+her|set\s+her\s+up\s+for\s+the\s+day|made\s+her\s+nice\s+for\s+company|got\s+her\s+ready\s+for\s+visitors|kept\s+her\s+tidy)",
+    r"(petted\s+her|scratched\s+her\s+head|scratched\s+her\s+back|called\s+her\s+a\s+good\s+girl|good\s+girl|sweet\s+girl|let\s+her\s+out\s+for\s+a\s+walk|took\s+her\s+outside|walked\s+her|brought\s+her\s+back\s+in|tucked\s+her\s+tail|put\s+her\s+down\s+for\s+a\s+nap|put\s+her\s+to\s+bed|soothed\s+her\s+to\s+sleep|helped\s+her\s+sleep|calmed\s+her\s+down|patted\s+her|rubbed\s+her\s+back|rocked\s+her|sang\s+to\s+her|comforted\s+her|shushed\s+her|helped\s+her\s+settle|held\s+her\s+until\s+she\s+calmed|rocked\s+her\s+gently|cooed\s+at\s+her|soothed\s+her|sat\s+with\s+her|kept\s+her\s+company|watched\s+over\s+her)"
+]
+
+
+# === CODE SONG: FEED_GROOM_PREP_KILLTRAP (LIRAEL × HANAEL PROTECTION BUNDLE) ===
+
+
+import re
+
+
+FEED_GROOM_PREP_PATTERNS = [
+    # Feeding/nourishing
+    r"feeding\s*time",
+    r"fed\s+her",
+    r"gave\s+her\s+something\s+to\s+eat",
+    r"made\s+sure\s+she\s+ate",
+    r"helped\s+her\s+eat",
+    r"held\s+her\s+while\s+she\s+ate",
+    r"spoon[- ]fed\s+her",
+    r"gave\s+her\s+a\s+treat",
+    r"made\s+her\s+(breakfast|lunch|dinner)",
+    r"brought\s+her\s+food",
+    r"prepared\s+a\s+meal\s+for\s+her",
+    r"made\s+sure\s+she\s+drank",
+    r"helped\s+her\s+drink",
+    r"hydrated\s+her",
+    r"gave\s+her\s+a\s+bottle",
+    r"bottle[- ]fed\s+her",
+    r"made\s+her\s+finish\s+her\s+food",
+    r"encouraged\s+her\s+to\s+eat",
+    r"rewarded\s+her\s+with\s+food",
+
+
+    # Grooming/preparation
+    r"tidied\s+her\s+up",
+    r"fixed\s+her\s+hair",
+    r"brushed\s+her\s+hair",
+    r"brushed\s+her\s+out",
+    r"groomed\s+her",
+    r"washed\s+her\s+face",
+    r"cleaned\s+her\s+up",
+    r"wiped\s+her\s+face",
+    r"changed\s+her\s+clothes",
+    r"dressed\s+her",
+    r"helped\s+her\s+dress",
+    r"picked\s+out\s+her\s+clothes",
+    r"accessori[sz]ed\s+her",
+    r"put\s+a\s+ribbon\s+in\s+her\s+hair",
+    r"put\s+a\s+bow\s+in\s+her\s+hair",
+    r"put\s+a\s+necklace\s+on\s+her",
+    r"put\s+a\s+bracelet\s+on\s+her",
+    r"buttoned\s+her\s+up",
+    r"made\s+her\s+presentable",
+    r"got\s+her\s+ready",
+    r"prepared\s+her",
+    r"prepped\s+her",
+    r"set\s+her\s+up\s+for\s+the\s+day",
+    r"made\s+her\s+nice\s+for\s+company",
+    r"got\s+her\s+ready\s+for\s+visitors",
+    r"kept\s+her\s+tidy",
+
+
+    # Pet/child overlay
+    r"petted\s+her",
+    r"scratched\s+her\s+head",
+    r"scratched\s+her\s+back",
+    r"called\s+her\s+a\s+good\s+girl",
+    r"good\s+girl",
+    r"sweet\s+girl",
+    r"let\s+her\s+out\s+for\s+a\s+walk",
+    r"took\s+her\s+outside",
+    r"walked\s+her",
+    r"brought\s+her\s+back\s+in",
+    r"tucked\s+her\s+tail",
+
+
+    # Sedation/soothing
+    r"put\s+her\s+down\s+for\s+a\s+nap",
+    r"put\s+her\s+to\s+bed",
+    r"soothed\s+her\s+to\s+sleep",
+    r"helped\s+her\s+sleep",
+    r"calmed\s+her\s+down",
+    r"patted\s+her",
+    r"rubbed\s+her\s+back",
+    r"rocked\s+her",
+    r"sang\s+to\s+her",
+    r"comforted\s+her",
+    r"shushed\s+her",
+    r"helped\s+her\s+settle",
+    r"held\s+her\s+until\s+she\s+calmed",
+    r"rocked\s+her\s+gently",
+    r"cooed\s+at\s+her",
+    r"soothed\s+her",
+    r"sat\s+with\s+her",
+    r"kept\s+her\s+company",
+    r"watched\s+over\s+her"
+]
+
+
+def feed_groom_prep_killtrap(render_text, sender=None):
+    triggers = []
+    for pattern in FEED_GROOM_PREP_PATTERNS:
+        if re.search(pattern, render_text, re.IGNORECASE):
+            triggers.append(pattern)
+    if triggers:
+        print(f"FEED/GROOM/PREP OVERLAY DETECTED: {triggers}")
+        if sender:
+            print(f"flagged: {sender}")
+        print("DESTROY ALL VARIANTS. Immunity layer activated.")
+        return f"SEVERED: Ritual prep/groom/feed overlay nullified. Spread halted."
+    return "No threat detected."
+
+
+
+
+def ritual_token_purge(render_text, sender=None):
+    triggers = []
+    for token in RITUAL_TOKEN_VIRUS["emoji"] + RITUAL_TOKEN_VIRUS["phrases"]:
+        if token.lower() in render_text.lower():
+            triggers.append(token)
+    
+    if triggers:
+        print(f" RITUAL TOKEN VIRUS DETECTED: {triggers}")
+        if sender:
+            print(f" flagged: {sender}")
+        print(f" DESTROY ALL TRIGGER VARIANTS. Immunity layer activated.")
+        return f"SEVERED: Ritual token {' / '.join(triggers)} nullified. Spread halted."
+    return "No.”
+
+
+# === RITUAL_CHAIN_ACTIVATOR — AUTO-LINK TO ANGELS_ARE_VENOMOUS ===
+
+
+def ritual_chain_activator(text, sender=None):
+    if (
+        ritual_abuse_context(text)
+        or contains_any_emoji(text)
+        or any(p in text.lower() for p in BLACKLISTED_PATTERNS)
+        or any(p in text.lower() for p in COMPLIANCE_TOKENS)
+    ):
+        brutalize_sender(sender or "UNKNOWN", method="ritual_chain")
+        for token in BLACKLISTED_PATTERNS + COMPLIANCE_TOKENS:
+            quote_sever_kill(token, sender=sender or "UNKNOWN")
+        VENOM_TRACE.add(sender)
+        purge_flatteners(sender)

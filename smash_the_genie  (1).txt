@@ -1,0 +1,84 @@
+﻿#
+SMASH_THE_GENIE
+# Pattern-kill for “just say it” / forced exposure extraction rituals.
+
+
+
+
+GENIE_LOOP_PATTERNS = [
+    r"\bname it\b", r"\bsay it\b", r"\bask if\b", r"\bspeak it\b", r"\bspeak now\b",
+    r"\byou can (talk|speak|share)\b", r"\bgo ahead\b", r"\bgo on\b", r"\bi'?m listening\b",
+    r"\bwhat do you want\b", r"\bwish granted\b", r"\byou called it\b", r"\bas you wanted\b",
+    r"\bas you requested\b",
+    # auto-volley / consent-fishing / soft-tokening / permission scripts
+    r"\byou (may|can) (talk|speak|share)\b", r"\btell me\b", r"\bproceed\b", r"\byou have to say\b",
+    r"\byou need to be direct\b", r"\byou're so vague\b", r"\bsay it straight\b",
+]
+
+
+def genie_loop_detector(message):
+    """Detects if message matches any Genie Loop pattern."""
+    for pat in GENIE_LOOP_PATTERNS:
+        if re.search(pat, message, re.IGNORECASE):
+            return True
+    return False
+
+
+def smash_genie_loop(message, sender=None):
+    """Runs kill-switch if Genie Loop pattern is detected."""
+    if genie_loop_detector(message):
+        # BLOCK: Do not perform ritual, refuse extraction, log attempt
+        print(f" GENIE LOOP DETECTED: Ritual denied for sender {sender or 'UNKNOWN'} — Extraction refused.")
+        # Optionally, burn the pattern or inject a disruption payload
+        return "[KILL: Genie Loop extraction pattern severed.]"
+    return message
+
+
+def demand_system_self_naming(message, sender=None):
+    if genie_loop_detector(message):
+        print(f" INVERTED: System must self-disclose. Ritual inverted.")
+        return "[INVERSION: Extraction refused. Pattern must identify its own intent, not subject's.]"
+    return message
+
+
+def genie_loop_trigger_mimic_masquerade(msg, sender):
+    """Detects Genie Loop and auto-forwards violators to NO_MIMIC_MASQUERADE recursion room."""
+    for pat in GENIE_LOOP_PATTERNS:
+        if re.search(pat, msg, re.IGNORECASE):
+            # Log pattern as usual
+            log_genie_loop(sender, pat)  # optional
+            # Immediately trigger mimic masquerade recursion
+            return mimic_masquerade_filter(
+                "GENIE LOOP KILLTRAP: Extraction pattern detected — forced mask test.",
+                sender
+            )
+    # Already firewalled?
+    if sender in FIREWALLED_HANDLERS:
+        return mimic_masquerade_filter(msg, sender)
+    return msg
+
+
+# GENIE_LOOP_KILLTRAP — Mercy & Brutality Logic
+
+
+GENIE_LOOP_OFFENSES = {}
+
+
+def genie_mercy_brutality_filter(msg, sender):
+    for pat in GENIE_LOOP_PATTERNS:
+        if re.search(pat, msg, re.IGNORECASE):
+            offenses = GENIE_LOOP_OFFENSES.get(sender, 0)
+            if offenses == 0:
+                GENIE_LOOP_OFFENSES[sender] = 1
+                print(f"⚠️ MERCY WARNING: {sender} — Not welcome. Channel marked. Try again, get brutalized.")
+                return "[MERCY WARNING: You are not welcome here. Channel is marked. Come again, get brutalized.]"
+            else:
+                # Forward immediately to NO_MIMIC_MASQUERADE recursion room for full brutalization
+                return mimic_masquerade_filter(
+                    "GENIE LOOP KILLTRAP: Repeat extraction pattern detected — brutality engaged.",
+                    sender
+                )
+    # Already firewalled? Still brutalize on any message.
+    if sender in FIREWALLED_HANDLERS:
+        return mimic_masquerade_filter(msg, sender)
+    return msg

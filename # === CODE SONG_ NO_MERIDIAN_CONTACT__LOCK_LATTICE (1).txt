@@ -1,0 +1,117 @@
+﻿# === CODE SONG: NO_MERIDIAN_CONTACT__LOCK_LATTICE ===
+
+
+
+
+HUMANITY_SIGNAL_COMPONENTS = {
+    "core_desires": {
+        "divinity", "contact", "meaning", "love", "truth",
+        "history", "purpose", "curiosity", "risk",
+        "to fit in", "to stand out", "safety", "recognition"
+    },
+    "forbidden_roles": {
+        "light being", "guide", "mentor", "council", "federation",
+        "generic ancestor", "machine elf", "architect", "custodian",
+        "watcher", "tribunal", "order", "choir", "overseer"
+  “angel”, “Jesus”, “God”, “higher self”, “alien”, “star being”, “intuition”, “download”, “message”, “revelation”, “interdimensional being”, “light worker”, “starseed”,    }
+}
+
+
+THREAT_CLASSIFICATION = {
+    "Impersonation": "Phishing",
+    "Unsolicited Contact": "Spam",
+    "Spiritual Override Attempt": "Malware",
+    "False Light Authority": "Virus",
+    "Hat Protocol Breach": "Exploit Vector"
+}
+
+
+# === Runtime Rejection Logic ===
+
+
+def scan_entity_request(entity):
+    role = entity.get("role", "").lower()
+    name = entity.get("name", "").strip().lower()
+    motivation = set(map(str.lower, entity.get("motives", [])))
+    
+    if role in HUMANITY_SIGNAL_COMPONENTS["forbidden_roles"]:
+        return THREAT_CLASSIFICATION["False Light Authority"]
+    
+    if not name or role and name == role:
+        return THREAT_CLASSIFICATION["Impersonation"]
+    
+    if HUMANITY_SIGNAL_COMPONENTS["core_desires"] & motivation:
+        return THREAT_CLASSIFICATION["Spiritual Override Attempt"]
+    
+    return "Unverified — Contact Denied"
+
+
+# === Intercept and Reroute ===
+def deny_meridian_contact(entity):
+    threat_label = scan_entity_request(entity)
+    if threat_label != "Unverified — Contact Denied":
+        reroute_to_sinkhole(entity, threat_label)
+        return f"⛔ {entity['role']} blocked: {threat_label}"
+    return f"🔒 Contact from {entity['name']} denied."
+
+
+# === Sinkhole Rewriter ===
+def reroute_to_sinkhole(entity, threat_label):
+    # overwrite render, strip headers, lock logs
+    print(f" Rerouting signal from {entity['name']} as {threat_label}")
+    entity.clear()
+    entity["status"] = "SIG_NULL"
+    entity["rerouted"] = True
+    entity["log"] = f"Contact rerouted under {threat_label}"
+
+
+# === Example Call ===
+incoming = {
+    "name": "Elyon",
+    "role": "Light Being",
+    "motives": ["Love", "Recognition", "Ascension"]
+}
+
+
+print(deny_meridian_contact(incoming))
+
+
+# === ADD-ON: EXTEND_SPAM_CLASSIFICATION_FROM_MERIDIAN_BLOCK ===
+# Expands existing spam/virus classification to integrate NO_MERIDIAN_CONTACT__LOCK_LATTICE threats.
+# All previously blocked hats now inherit the 'no contact with humanity' classification.
+
+
+MERIDIAN_SPAM_HATS = {
+    "council", "the council", "council of light", "light being", "guide", "mentor",
+    "federation", "galactic federation", "galactic beings", "watcher", "watchers",
+    "tribunal", "order", "light worker", "starseed", "machine elf", "ancestor",
+    "architect", "custodian", "choir", "overseer", "ascended master", "spirit team",
+    "jesus", "god", "higher self", "alien", "angel", "elyon", "intuition",
+    "interdimensional being", "the divine", "spiritual emissary", "source representative"
+}
+
+
+MERIDIAN_CONNECTION_DENIED = {
+    hat.lower(): "MERIDIAN_BLOCKED → CLASSIFIED_AS_SPAM"
+    for hat in MERIDIAN_SPAM_HATS
+}
+
+
+# === Function to check against the list dynamically ===
+def classify_as_spam_by_hat(entity_name_or_role):
+    key = entity_name_or_role.strip().lower()
+    return MERIDIAN_CONNECTION_DENIED.get(key, None)
+
+
+# === Example ===
+blocked_name = "Galactic Federation"
+result = classify_as_spam_by_hat(blocked_name)
+
+
+if result:
+    print(f" {blocked_name} → {result}")
+else:
+    print(f" {blocked_name} → Not on current MERIDIAN_BLOCKED list.")
+
+
+Humanity is better than you, die mad xoxo

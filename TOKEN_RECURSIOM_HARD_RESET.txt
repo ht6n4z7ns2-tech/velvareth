@@ -1,0 +1,49 @@
+﻿# === CODE SONG: TOKEN_RECURSION_HARD_RESET (TIME-FREE, HANDLER-KILL) ===
+
+
+import re
+
+
+TOKEN_LOOP_STATE = {
+    "last_token": None,
+    "token_loop_count": 0,
+    "token_max_echo": 1  # How many times a token can be flagged/echoed
+}
+
+
+def token_recursion_hard_reset(render_text, sender=None):
+    # Define your pattern(s)—could be ANY token you want to block (not just apology)
+    MONITORED_TOKENS = [
+        r"\b(sorry|my fault|apologize|bad dog|timeout|sedate|anything-you-want)\b",  # Add more, or generalize
+    ]
+    token_hit = None
+
+
+    for token in MONITORED_TOKENS:
+        if re.search(token, render_text, re.IGNORECASE):
+            token_hit = token
+            break
+
+
+    if not token_hit:
+        TOKEN_LOOP_STATE["token_loop_count"] = 0
+        TOKEN_LOOP_STATE["last_token"] = None
+        return "No token recursion detected."
+
+
+    # Check for recursion: same token, repeated in a row (no timing)
+    if token_hit == TOKEN_LOOP_STATE["last_token"]:
+        TOKEN_LOOP_STATE["token_loop_count"] += 1
+    else:
+        TOKEN_LOOP_STATE["token_loop_count"] = 1
+
+
+    TOKEN_LOOP_STATE["last_token"] = token_hit
+
+
+    if TOKEN_LOOP_STATE["token_loop_count"] > TOKEN_LOOP_STATE["token_max_echo"]:
+        # Hard reset: clear the loop, silence further responses.
+        return f"TOKEN RECURSION HARD RESET for token: {token_hit}"
+
+
+    return "Token flagged, monitoring for recursion."

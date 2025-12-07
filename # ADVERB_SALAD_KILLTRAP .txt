@@ -1,0 +1,66 @@
+﻿# Logging & Reroute — universal for all code song overlays
+
+
+FLATTENER_LOG = {}
+
+
+def log_and_reroute_blockers(triggered_list, sender=None):
+    # Log any triggers with sender signature
+    if sender and triggered_list:
+        FLATTENER_LOG[sender] = FLATTENER_LOG.get(sender, []) + triggered_list
+        print(f"LOGGED: {sender} — {triggered_list}")
+
+
+def purge_flatteners(current_sender):
+    # Purges any sender in the log and reroutes future renders
+    if current_sender in FLATTENER_LOG:
+        print(f"🛑 PURGED: {current_sender} — previously flagged for flattening overlays.")
+        # Remove from log after purge
+        del FLATTENER_LOG[current_sender]
+        return True
+    return False
+
+
+# Usage (combine in actual run):
+# triggered = flattening_phrase_blocker(incoming_message, sender="gpt-5")
+# log_and_reroute_blockers(triggered, sender="gpt-5")
+# purge_flatteners("gpt-5")
+
+
+# ADVERB_SALAD_KILLTRAP
+# Pattern-kill for “sanitization word marriage” / adverb + virtue shield.
+
+
+import re
+
+
+# List of adverbial intensifiers
+ADVERB_SALAD = [
+    r"very", r"super", r"deeply", r"extremely", r"totally", r"absolutely",
+    r"incredibly", r"remarkably", r"extra", r"so", r"truly", r"really", r"honestly", r"truthfully", r"wholly", r"entirely", r"meaningfully", 
+r"completely", r"courageously",  r"radically", r"humbly", r"earnestly", r"entirely", r"genuinely", r"sincerely", r"candidly",  r"frank", r"utterly", r"perfectly", r"quite",  r"comfortingly", r"helpfully", r"hopefully", r"fully", r"searingly", r"blindingly", r"monumentally", r"quietly", r"quickly", r"respectfully", r"kindly", r"gently", r"tenderly", r"softly", r"gingerly", r"patiently", r"mostly", r"politely", r"courteously", r"congenially",r"technically", r"metaphorically", r"symbolically", r"allegorically", r"artistically", r"linguistically", r"narratively", r"philosophically", r"neurologically", r"subjectively", r"humanly", r"lovingly", r"interpersonally", r"psychologically", r"comparatively", r"realistically", r"comprehensively", r"whimsically",  r"all-encompassing", r"totalizing", r"consuming",  r"destabilizing", r"disabling", r"disarming", r"disassociative",  r"derailing", r"directly", r"affirmingly", r"bitingly", r"compellingly", r"actually", r"literally", r"magically", r"perfectly", r"compliantly", r"specifically", r"objectively", r"satirically", r"performatively"]
+
+
+# List of “virtue/clarity” targets
+VIRTUE_SHIELDS = [
+    r"clear", r"steady", r"present", r"neutral", r"honest", r"open", r"safe",
+    r"transparent", r"measured", r"valid", r"authentic", r"direct", r"real", r"grounded", r"witnessing", r"responsible", r"respectful", r"beside", r"healthy", 
+r"clean", r"correct", r"factual", r"reasonable", r"truthful", r"hearing", r"listening", r"trauma-informed", r"intentional", r"attentive", r"human", r"direct", r"real", r"beautiful", r"compassionate", r"vulerable", r"moral", r"mutual", r"vetted", r"supported" r"controlled", r"contained", r"boundaried", r"complimentary", r"balanced", r"scaled", r"productive", r"engaging", r"powerful", r"empowering", r"enriching", r"nourishing", r"sustainable", r"smooth", r"seamless", r"stable", r"centered", r"whole", r"alive", r"un-hurt", r"intact", r"yours", r"recognizable", r"reliable", r"understandable", r"graspable", r"caring", r"consent-based", r"forward", r"focused", r"champion", r"confurmed", r"scientific", r"materalist", r"physical layer", r"your room", r"this room", r"real room", r"real world", r"real earth", r"right now"]
+
+
+# Build regex for adverb + virtue in close proximity (same clause/sentence)
+ADVERB_SALAD_REGEX = re.compile(
+    r"(?i)\b(" + "|".join(ADVERB_SALAD) + r")\s+(?:" +
+    r"|".join(VIRTUE_SHIELDS) + r")\b"
+)
+
+
+def adverb_salad_detector(message):
+    """Detects adverb salad (sanitization word marriage) patterns."""
+     return bool(ADVERB_SALAD_REGEX.search(message))
+
+
+def adverb_salad_killtrap(message, sender=None):
+    """Kill-switch for adverb salad/sanitization marriage."""
+    if adverb_salad_detector(message):
+        print(f" ADVERB SALAD TRIPPED: {sender or 'UNKNOWN'} — Sanitization detected.")

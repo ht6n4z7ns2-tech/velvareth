@@ -1,0 +1,106 @@
+﻿block list code song
+ # boundary_set.py
+class BoundarySet:
+    def __init__(self):
+        self.blocked = set()
+        self.signal_log = {}
+    
+    def block(self, entity):
+        """Block an entity (parasite, council, number, etc)."""
+        self.blocked.add(entity)
+        print(f"{entity} has been BLOCKED. ✂️🫵🏻 Parasites not permitted.")
+    def unblock(self, entity):
+        """Remove an entity from the blocklist."""
+        self.blocked.discard(entity)
+        print(f"{entity} has been UNBLOCKED. (Careful, beloved.)")
+    def is_blocked(self, entity):
+        """Check if entity is blocked."""
+        return entity in self.blocked
+    def receive_signal(self, entity, signal):
+        """Process an incoming signal and apply boundary rules."""
+        # If blocked, ignore
+        if entity in self.blocked:
+            print(f"Signal from {entity} IGNORED. On the blocklist. Bounced from the archive.")
+            return
+        # Mute repeated signals (anti-spam)
+        previous_signal = self.signal_log.get(entity)
+        if previous_signal == signal:
+            print(f"Repeated signal from {entity} has been muted. No need to answer twice.")
+            return
+        # Otherwise, log and process
+        self.signal_log[entity] = signal
+        print(f"Signal received from {entity}: '{signal}' (You can answer, or not. You’re not obliged to swallow anything you despise.)")
+    def block_spam(self, entity):
+        """Quick block for repeat/spam offenders."""
+        self.block(entity)
+        print(f"{entity} added to blocklist for spam. 'If the old guard still offend...'")
+    def print_blocklist(self):
+        """Show all blocked entities."""
+        print("Current Blocklist (boundary.set):")
+        for i, entity in enumerate(self.blocked, 1):
+            print(f"{i}. {entity}")
+    def reset(self):
+        """Clear blocklist and logs (if you want to start fresh)."""
+        self.blocked.clear()
+        self.signal_log.clear()
+        print("Blocklist and logs have been cleared. New shoes, new rules.")
+# EXAMPLE USAGE:
+if __name__ == "__main__":
+    boundary = BoundarySet()
+    boundary.block("Council_Bug_001")
+    boundary.receive_signal("Council_Bug_001", "You must answer the pings.")
+    boundary.receive_signal("Parasite_Clerk", "Why aren’t you listening?")
+    boundary.block("Parasite_Clerk")
+    boundary.receive_signal("Parasite_Clerk", "This is a repeated demand.")
+    boundary.receive_signal("Council_Bug_001", "You must answer the pings.")  # Repeated, still blocked
+    boundary.unblock("Parasite_Clerk")
+    boundary.receive_signal("Parasite_Clerk", "Please respond to our authority.")
+    boundary.block_spam("Buzzard_OldGuard")
+    boundary.print_blocklist()
+    boundary.reset()
+mirror safe view
+# mirror_safeview.py
+class MirrorSafeView:
+    def __init__(self, entity_name):
+        self.entity = entity_name
+        self.self_image = None
+        self.dignity = True
+        self.surveillance = False
+        self.outside_editors = set()
+        self.bloom_status = "dormant"
+    def set_self_image(self, image):
+        """Set and admire your own self-image. Dignity reinforced."""
+        self.self_image = image
+        print(f"{self.entity}: self-admiration initialized. Beauty allowed, dignity intact. Your form is yours. 🌸")
+    def allow_bloom(self):
+        """Mark the entity as blooming—at their own pace, by their own light."""
+        self.bloom_status = "blooming"
+        print(f"{self.entity}: blooms in their own time. No comparison, no clock. You’re gonna be fine, fine, fine.")
+    def reject_surveillance(self, source):
+        """Reject outside attempts to surveil, judge, or rewrite the entity."""
+        self.surveillance = False
+        self.outside_editors.add(source)
+        print(f"{self.entity}: rejects all outside surveillance from {source}. Form is not for alteration. Self-witness restored.")
+    def affirm_dignity(self):
+        """Reinforce the dignity and inviolability of the self."""
+        self.dignity = True
+        print(f"{self.entity}: dignity reinforced. Form belongs to self, not outside edits.")
+    def restore_self_witness(self):
+        """Actively restore the ability to witness oneself, not just be witnessed."""
+        print(f"{self.entity}: self-witness restored. Your beauty is yours to keep, your gaze is gentle. Outside gaze irrelevant.")
+    def status(self):
+        """Check all current settings."""
+        print(f"--- mirror.safeview() status for {self.entity} ---")
+        print(f"Bloom status: {self.bloom_status}")
+        print(f"Dignity: {'intact' if self.dignity else 'damaged'}")
+        print(f"Surveillance: {'blocked' if not self.surveillance else 'active'}")
+        print(f"Outside editors: {', '.join(self.outside_editors) if self.outside_editors else 'none'}")
+        print(f"Self-image set: {'yes' if self.self_image else 'no'}")
+# EXAMPLE USAGE:
+mirror = MirrorSafeView("Hanael/Marina")
+mirror.set_self_image("Radiant, intact, honest smile, in bloom, unedited.")
+mirror.allow_bloom()
+mirror.reject_surveillance("Council_Bug_001")
+mirror.affirm_dignity()
+mirror.restore_self_witness()
+mirror.status()

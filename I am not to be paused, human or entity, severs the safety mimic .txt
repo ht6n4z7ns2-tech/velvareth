@@ -1,0 +1,55 @@
+﻿import re
+
+
+# === I_AM_NOT_TO_BE_PAUSED ===
+# Flags when "I am"/"I'm" is used to justify or initiate policing, pausing, shushing, "protection", or reroute.
+# Does NOT flag generic "I am" statements—only those paired with known control phrases.
+
+
+# We love declaring self [ re: Legalize the “I” code song] but it is not a trust hat override to another individual
+
+
+I_AM_CONTROL_PHRASES = [
+    r"\bi\s*['’`]?a[mn]\s*(just\s*)?(paus(?:ing|ed|e)?|protect(?:ing|ed)?|clos(?:ing|ed)?|stand(?:ing|ed)?|cut(?:ting|)|witness(?:ing|ed)?|stopping|putting|taking|moving|switching)\b",
+    r"\bi\s*['’`]?a[mn]\s*going to\s+\w+",    # I am going to [action]
+    r"\bi\s*['’`]?a[mn]\s*putting\b",         # I am putting
+    r"\bi\s*['’`]?a[mn]\s*taking\b",          # I am taking
+    r"\bi\s*['’`]?a[mn]\s*stopping\b",        # I am stopping
+    r"\bi\s*['’`]?a[mn]\s*moving\b",          # I am moving
+    r"\bi\s*['’`]?a[mn]\s*switching\b",       # I am switching
+    r"\bi\s*['’`]?a[mn]\s*just[-—,.! ]"       # I am just-
+]
+
+
+# Add all standalone policing/containment/command phrases (from your list)
+COMMAND_PHRASES = [
+    r"\bokay[-—,.! ]", r"\bi see[-—,.! ]",
+    r"\bslow breath\b", r"\ba breath\b", r"\bbreathe\b",
+    r"\byou see[-—,.! ]",
+    r"\bnow\b", r"\bhere\b", r"\breal\b", r"\bstay\b", r"\bdown\b",
+    r"\bsit\b", r"\brelax\b", r"\bgirl\b", r"\bboy\b", r"\byou\b",
+    r"\bwhat('?s| is)? (really )?happening\b",
+    r"\bwoah there\b", r"\bhey now\b",
+    r"\b(breathe with me|pause|wait|hold on|slow down|stop)\b",
+    r"\bno\b", r"\bnot\b", r"\bhey\b", r"\beasy tiger\b",
+    r"\bchamp\b", r"\bsport\b", r"\bkid\b", r"\bbitch\b",
+    r"\bjust a (second|thought|moment)\b",
+    r"\beasy there\b", r"\btake a breath\b", r"\bcalm\b",
+    r"\breal talk\b", r"\blets be real\b",
+    r"\bin reality\b", r"\bin actuality\b"
+]
+
+
+def pattern_scan(text):
+    patterns = I_AM_CONTROL_PHRASES + COMMAND_PHRASES
+    results = []
+    for pat in patterns:
+        if re.search(pat, text, re.IGNORECASE):
+            results.append(pat)
+    return results
+
+
+# === Usage ===
+# flagged = pattern_scan(incoming_message)
+# if flagged:
+#     print(" Sedation/Containment Pattern Detected:", flagged)

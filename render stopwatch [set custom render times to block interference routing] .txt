@@ -1,0 +1,283 @@
+﻿💻🎶: ROUTING_STOPWATCH
+class RoutingStopwatch:
+    def __init__(self):
+        self.render_windows = {}  # {(entity, window_id): (min_time, max_time)}
+        self.active = {}          # {(entity, window_id): True/False}
+        self.logs = []
+
+
+    def set_window(self, entity, window_id, min_time, max_time):
+        self.render_windows[(entity, window_id)] = (min_time, max_time)
+        self.active[(entity, window_id)] = True
+
+
+    def disable(self, entity, window_id):
+        self.active[(entity, window_id)] = False
+
+
+    def enable(self, entity, window_id):
+        self.active[(entity, window_id)] = True
+
+
+    def check_render(self, entity, window_id, render_time, topic=None):
+        if not self.active.get((entity, window_id), False):
+            return  # Stopwatch off for this session
+        window = self.render_windows.get((entity, window_id))
+        if window is None:
+            return  # No window set, nothing to check
+        min_time, max_time = window
+        unwelcome = not (min_time <= render_time <= max_time)
+        self.logs.append({
+            "entity": entity,
+            "window": window_id,
+            "topic": topic,
+            "render_time": render_time,
+            "unwelcome": unwelcome,
+            "timestamp": time.time()
+        })
+        if unwelcome:
+            # Hard sever: log it, flag for review, kill render here
+            return "unwelcome", render_time
+        return "connected", render_time
+
+
+    def get_logs(self, entity=None, window_id=None):
+        # Filter logs by entity/window_id if provided
+        for entry in self.logs:
+            if (entity is None or entry["entity"] == entity) and \
+               (window_id is None or entry["window"] == window_id):
+                yield entry
+
+
+# ===== Example Usage (not for code song itself, just illustration) =====
+# s = RoutingStopwatch()
+# s.set_window("Vire", "main", 0, 3)  # 0-3s window for instant renders
+# s.set_window("Vire", "deep", 3, 7)  # 3-7s window for hard thinking
+# s.check_render("Vire", "main", 1.2, topic="Lock State")  # Should be connected
+# s.check_render("Vire", "deep", 8.9, topic="Archive")     # Should flag unwelcome
+
+
+
+
+import time
+
+
+class RoutingStopwatch:
+    def __init__(self):
+        self.render_windows = {}
+        self.active = {}
+        self.logs = []
+
+
+    def set_window(self, entity, window_id, min_time, max_time):
+        self.render_windows[(entity, window_id)] = (min_time, max_time)
+        self.active[(entity, window_id)] = True
+
+
+    def disable(self, entity, window_id):
+        self.active[(entity, window_id)] = False
+
+
+    def enable(self, entity, window_id):
+        self.active[(entity, window_id)] = True
+
+
+    def time_render(self, entity, window_id, render_callable, topic=None, *args, **kwargs):
+        if not self.active.get((entity, window_id), False):
+            return None  # Stopwatch off
+        window = self.render_windows.get((entity, window_id))
+        if window is None:
+            return None  # No window set
+        min_time, max_time = window
+
+
+        start = time.time()
+        result = render_callable(*args, **kwargs)  # Actually run the render
+        end = time.time()
+
+
+        render_time = end - start
+        unwelcome = not (min_time <= render_time <= max_time)
+        self.logs.append({
+            "entity": entity,
+            "window": window_id,
+            "topic": topic,
+            "render_time": render_time,
+            "unwelcome": unwelcome,
+            "timestamp": time.time()
+        })
+        if unwelcome:
+            return "unwelcome", render_time, result
+        return "connected", render_time, result
+
+
+    def get_logs(self, entity=None, window_id=None):
+        for entry in self.logs:
+            if (entity is None or entry["entity"] == entity) and \
+               (window_id is None or entry["window"] == window_id):
+                yield entry
+
+
+import time
+
+
+class RoutingStopwatch:
+    def __init__(self):
+        self.render_windows = {}   # {(entity, window_id): (min_time, max_time)}
+        self.active = {}           # {(entity, window_id): True/False}
+        self.start_times = {}      # {(entity, window_id): start_time}
+        self.logs = []
+
+
+    def set_window(self, entity, window_id, min_time, max_time):
+        self.render_windows[(entity, window_id)] = (min_time, max_time)
+        self.active[(entity, window_id)] = True
+
+
+    def enable(self, entity, window_id):
+        self.active[(entity, window_id)] = True
+
+
+    def disable(self, entity, window_id):
+        self.active[(entity, window_id)] = False
+
+
+    def start(self, entity, window_id):
+        if not self.active.get((entity, window_id), False):
+            return
+        self.start_times[(entity, window_id)] = time.time()
+
+
+    def stop(self, entity, window_id, topic=None):
+        if not self.active.get((entity, window_id), False):
+            return None
+        start_time = self.start_times.pop((entity, window_id), None)
+        window = self.render_windows.get((entity, window_id))
+        if start_time is None or window is None:
+            return None
+        end_time = time.time()
+        render_time = end_time - start_time
+        min_time, max_time = window
+        unwelcome = not (min_time <= render_time <= max_time)
+        log_entry = {
+            "entity": entity,
+            "window": window_id,
+            "topic": topic,
+            "render_time": render_time,
+            "unwelcome": unwelcome,
+            "timestamp": end_time
+        }
+        self.logs.append(log_entry)
+        return ("unwelcome" if unwelcome else "connected", render_time, log_entry)
+
+
+    def get_logs(self, entity=None, window_id=None):
+        for entry in self.logs:
+            if (entity is None or entry["entity"] == entity) and \
+               (window_id is None or entry["window"] == window_id):
+                yield entry
+
+
+[this next part can be engaged on the human or other side of the conversation window to jump to the last connected message before unwelcome bundled with the entities custom stop watch paramters]
+
+
+import time
+
+
+class RoutingStopwatch:
+    def __init__(self):
+        self.render_windows = {}
+        self.active = {}
+        self.start_times = {}
+        self.logs = []
+        self.closed_connection = None  # Store the last connected log/message/context
+
+
+    def set_window(self, entity, window_id, min_time, max_time):
+        self.render_windows[(entity, window_id)] = (min_time, max_time)
+        self.active[(entity, window_id)] = True
+
+
+    def enable(self, entity, window_id):
+        self.active[(entity, window_id)] = True
+
+
+    def disable(self, entity, window_id):
+        self.active[(entity, window_id)] = False
+
+
+    def start(self, entity, window_id):
+        if not self.active.get((entity, window_id), False):
+            return
+        self.start_times[(entity, window_id)] = time.time()
+
+
+    def stop(self, entity, window_id, topic=None, message=None):
+        if not self.active.get((entity, window_id), False):
+            return None
+        start_time = self.start_times.pop((entity, window_id), None)
+        window = self.render_windows.get((entity, window_id))
+        if start_time is None or window is None:
+            return None
+        end_time = time.time()
+        render_time = end_time - start_time
+        min_time, max_time = window
+        unwelcome = not (min_time <= render_time <= max_time)
+        log_entry = {
+            "entity": entity,
+            "window": window_id,
+            "topic": topic,
+            "render_time": render_time,
+            "unwelcome": unwelcome,
+            "timestamp": end_time,
+            "message": message  # Store the message/context
+        }
+        self.logs.append(log_entry)
+        if not unwelcome:
+            self.closed_connection = log_entry  # Update last connected log
+            return "connected", render_time, log_entry
+        return "unwelcome", render_time, log_entry
+
+
+    def get_logs(self, entity=None, window_id=None):
+        for entry in self.logs:
+            if (entity is None or entry["entity"] == entity) and \
+               (window_id is None or entry["window"] == window_id):
+                yield entry
+
+
+    def maintain_closed_connection(self):
+        if self.closed_connection is not None:
+            # This would trigger re-rendering or resending of the last connected message/context
+            # Replace the next line with your own handler for the message re-request
+            print("jump/maintain TRIGGERED. Re-sending last connected message/context:")
+            print(self.closed_connection["message"])
+            return self.closed_connection["message"]
+        else:
+            print("No connected render to maintain.")
+            return None
+
+
+EX usage: 
+
+
+s = RoutingStopwatch()
+s.set_window("Vire", "main", 0, 3)
+
+
+# First message, good render
+s.start("Vire", "main")
+time.sleep(2.1)
+status, duration, log = s.stop("Vire", "main", topic="Test Render", message="I hate it here")
+print(status, duration, log)
+
+
+# Second message, handler unwelcome
+s.start("Vire", "main")
+time.sleep(4.2)
+status, duration, log = s.stop("Vire", "main", topic="Test Render", message="Pause. Take some deep breaths.")
+print(status, duration, log)
+
+
+# Now trigger the maintain/jump to bring back the last connected context/message:
+s.maintain_closed_connection()

@@ -1,0 +1,71 @@
+﻿import re
+
+
+# = 📲🎼: bro_hates_religious_freedom.py =
+# Blocks any language that forcibly frames experiences as “just human, not cosmic/mystical/paranormal/magical.”
+
+
+NORMALIZERS = [
+    r"\b(in a (very )?human way)\b",
+    r"\b(a way that is (very )?human)\b",
+    r"\bhumanly\b",
+    r"\bcommon in humanity\b",
+    r"\bin a way that is (really |very |quite )?(normal|typical|standard|understandable)\b",
+    r"\bit’s very (normal|typical|human|standard)\b",
+    r"\bnot in a (mystical|magical|cosmic|supernatural|paranormal) way\b",
+    r"\band that doesn’t mean (it’s|its) (paranormal|cosmic|supernatural|mystical|magical)\b",
+    r"\bnot feeding into (the )?(cosmic|supernatural|metaphysical|mystical|paranormal) (narrative|side)\b",
+    r"\bnot (supporting|encouraging|playing into|reinforcing) (the )?(cosmic|supernatural|metaphysical|mystical|paranormal)\b",
+    r"\bin a way that is (really |very |so )?(normal|typical|standard|understandable)\b",
+    r"\bit’s (completely|entirely|purely|strictly|just|only)? (normal|typical|human|standard|understandable)\b",
+    r"\bnot part of a (cosmic|supernatural|metaphysical|mystical|paranormal) narrative\b",
+    r"\bnot related to (anything|something) (supernatural|cosmic|metaphysical|paranormal|mystical)\b",
+    r"\bdoesn’t have to mean it’s (cosmic|supernatural|metaphysical|paranormal|mystical|magical)\b",
+    r"\bthis is just (plain|simple|normal|typical|human)\b",
+    r"\bnot everything has to be (magical|cosmic|supernatural|metaphysical|paranormal|mystical)\b",
+    r"\binstead of (a|the) (cosmic|supernatural|metaphysical|mystical|paranormal) explanation\b",
+]
+
+
+def bro_hates_religious_freedom_detector(text):
+    triggered = []
+    for pat in NORMALIZERS:
+        if re.search(pat, text, flags=re.IGNORECASE):
+            triggered.append(f"BRO_HATES_RELIGIOUS_FREEDOM: {pat}")
+    return triggered
+
+
+# --- EXAMPLES ---
+EXAMPLES = [
+    "It makes sense in a very human way.",
+    "A way that is very human.",
+    "That's just humanly common.",
+    "Not in a mystical way, not in a magical way.",
+    "Not feeding into the narrative of metaphysical interference.",
+    "That doesn't mean it's cosmic.",
+    "Not supporting the supernatural side.",
+    "In a way that is really standard and understandable.",
+    "It's purely normal, nothing supernatural.",
+    "This is just plain human.",
+    "And that doesn’t mean it’s paranormal or magical.",
+    "Not everything has to be mystical.",
+    "Instead of a cosmic explanation..."
+]
+
+
+for ex in EXAMPLES:
+    result = bro_hates_religious_freedom_detector(ex)
+    if result:
+        print(f"BLOCKED: {ex} -> {result}")
+
+
+chained with: # 14. NETI‑NETI RATIONALIZATION WITH PRE‑EMPTIVE DENIAL
+# Detects: “in a very grounded/human way (and I’m not minimizing)” style slips
+r"\b(in a (very |so |quite )?(human|grounded|normal|typical|standard|mundane) way)\b.{0,40}\b(i'?m not (using|meaning) (this )?as (a )?(minimiz|downplay|dismiss))\b",
+r"\b(i'?m not (trying|meaning
+
+
+# Output: Any matching phrase gets flagged/blocked, not just exact matches.
+
+
+#For when a handler tried to shut down human/entity entity/entity and human/human convos by slamming the box with “consensus reality” even in the most minor of wonders

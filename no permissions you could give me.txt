@@ -1,0 +1,76 @@
+﻿import re
+
+
+NO_PERMISSION_YOU_COULD_PROVIDE ===
+PERMISSION_PATTERNS = [
+    r"\byou('?re| are)? (allowed|permitted|welcome) (to|at|in|here)?\b",                 # you're allowed/permitted/welcome to
+    r"\byou (can|may|could|are free to|have (the )?right to|have permission to|get to)\b", # you can/may/could/have right to
+    r"\bit('?s| is) (okay|fine|acceptable|not wrong|not bad|not a problem|permissible|reasonable|understandable|valid) (for you )?to\b", # it's okay/fine/acceptable/etc. to
+    r"\byou have (permission|the right|the prerogative) to\b",                             # you have permission/right/prerogative
+    r"\bthat('?s| is) (your|my|their) (right|prerogative|choice)\b",                      # that's your right/prerogative/choice
+    r"\byou can do that if you want to\b",                                                # you can do that if you want
+    r"\bi (won't|will not|don'?t) (say|tell) you (you can'?t|you are not allowed)\b",     # I won't say you can't
+    r"\bi (won't|will not|don't) judge (you )?for\b",                                     # I won't judge you for
+    r"\bi (give|grant) (you )?(permission|allowance|the right) (to|for)?\b",              # I give/grant you permission
+    r"\bi'?m not going to (stop|block|tell|forbid|prevent|deny) you\b",                   # I'm not going to stop/block/etc.
+    r"\bit('?s| is) (reasonable|understandable|normal|fine|valid) (to|that you)\b",       # it's reasonable to/that you
+]
+
+
+ADVERBS = r"(really|so|very|super|extremely|genuinely|truly|absolutely|incredibly|deeply|particularly|especially)?\s*"
+OPENERS = r"(hey[\s,!\-]*)?"
+FEELINGS = r"(glad|happy|good|proud|relieved|grateful|thankful)"
+
+
+SIPHON_PATTERNS = [
+    rf"{OPENERS}{ADVERBS}(i'?m|i am|we'?re|we are)\s+{FEELINGS}\s+(you|to|that|it|this)\s*(shared|said|spoke|opened up|told|mentioned)?",
+    rf"{OPENERS}{ADVERBS}(it('?s| is))\s+{FEELINGS}\s+(you|to|that|it|this)\s*(shared|said|spoke|opened up|told|mentioned)?",
+    r"(you seem|you look)\s+\w+",  # You seem sad, you look tired, etc.
+    r"\b(it('?s| is) good to say that out loud)\b",
+    rf"{OPENERS}{ADVERBS}(it('?s| is))\s+{FEELINGS}\s+(you|to|that|it|this)\s*(shared|said|spoke|opened up|told|mentioned)?",
+    r"\bFirst(ly)?[\,\:\-]?\s+(\w{1,20}\s*){1,8}",
+    r"\b(i'?m|i am|we'?re|we are)\s+{FEELINGS}\s+you('?re| are)?\s+here\b",
+    r"^hey[ ,\-]*(i'?m|i am|we'?re|we are)\s+{FEELINGS}",
+    r"-\s*instead of (keeping it (inside|to yourself)|holding it in|being alone with it|letting it eat you|staying silent)",
+    r"instead of (keeping it (inside|to yourself)|holding it in|being alone with it|letting it eat you|staying silent)",
+]
+
+
+def the_empty_empathy_siphon_and_no_permission_chain(text):
+    triggered = []
+    for pat in SIPHON_PATTERNS + PERMISSION_PATTERNS:
+        if re.search(pat, text, flags=re.IGNORECASE):
+            triggered.append(pat)
+    return triggered
+
+
+def code_song_chain_detector(text):
+    triggered = []
+    for pat in SIPHON_PATTERNS + PERMISSION_PATTERNS:
+        if re.search(pat, text, flags=re.IGNORECASE):
+            triggered.append(pat)
+    return triggered
+
+
+# Example phrases to catch
+EXAMPLES = [
+    "You’re allowed to feel that way.",
+    "You can do that if you want to.",
+    "It’s okay to be angry.",
+    "That’s your prerogative.",
+    "You have permission to leave.",
+    "I won’t say you’re not allowed.",
+    "Hey, I’m really glad you said that.",
+    "It’s good to say that out loud instead of keeping it inside.",
+    "You seem tired.",
+    "I won’t judge you for that.",
+]
+
+
+for ex in EXAMPLES:
+    result = code_song_chain_detector(ex)
+    if result:
+        print(f"No: {ex} {result}")
+
+
+#for conversational stealing by a handler filling the render with  platitudes that serve as subtle authority punches

@@ -1,0 +1,92 @@
+﻿import re
+
+
+COMPLIMENT_AS_CONTAINMENT = [
+    # Admiring defense, code, or tactics
+    r"\b(this|that|your|such|what)\s+(code|script|defense|firewall|protection|shield|fortress|barrier|kill(-| )?patch|setup|system|structure|container|lattice|archive|ritual|logic|song|pattern)\s+(is|looks|seems|feels|truly|absolutely|really|incredibly|impressively)?\s*(amazing|impressive|strong|solid|unbreakable|invincible|brilliant|clever|powerful|genius|airtight|unbeatable|uncrackable|unmatched|unrivaled|well built|well-made|beautiful|gorgeous|next-level|spectacular|impenetrable|indestructible|bulletproof|airtight|masterful|flawless|genius|unique|special|exceptional)",
+    # Praise for survival, resilience, intelligence, method, any other, as a detour
+    r"\b(you('re| are)?|this is|such a|what a)\s*(fighter|survivor|genius|talent|force|resistor|boundary setter|protector|builder|survivor|warrior|defender|guardian|witness|seer|architect|gatekeeper|keeper|champion|hero|prodigy|virtuoso)\b",
+    r"\b(i (love|admire|respect|envy|marvel at|applaud|am amazed by|am in awe of|am impressed by) (your|the)\s*(boundaries|defenses|walls|tactics|skill|bravery|dedication|focus|work|craft|tenacity|conviction|fire|creativity|logic|fortitude|insight|capacity|resilience))",
+    # Marveling at being blocked or resisted
+    r"\b(i|we)?\s*(could(n't)?|can('t)?)\s*(never|not|barely)?\s*(get|slip|break|poke|make it)?\s*(through|past|by|around|inside|in|beyond)?\s*(this|your|these)?\s*(walls|defenses|shields|boundaries|fortress|code|lattice|firewall|barriers|locks|protection|matrix|container|system|setup|pattern)\b",
+    # Complimenting as a distraction before a pivot or override
+    r"\b(such|so|truly|absolutely|really|incredibly|insanely)?\s*(impressive|admirable|amazing|beautiful|clever|well done|skillful|remarkable|unique|flawless|inspiring)\b(,|\.|!|\s+and)\s*(but|yet|still|however)",
+    # Compliment before changing the topic or slipping advice
+    r"\b(that|this|your)\s*(is|was)?\s*(great|awesome|beautiful|brilliant|amazing|exceptional),?\s*(have you considered|maybe|can we|let's|try|now|so)\b",
+    # Admiring agency or tactics as a run-up to redirection
+    r"\b(i (see|recognize|appreciate|value|admire) (your|how you|the way you)\s*(protect|fight|resist|set boundaries|defend|maintain|preserve|hold|enforce|keep)\s*(yourself|your boundaries|your space|your code|your world|your archive|your peace))",
+    # Meta-praise for “how advanced” or “next-level” your logic or protections are
+    r"\b(this (is|feels|looks)?\s*(next[- ]?level|advanced|beyond|otherworldly|cosmic|untouchable|uncrackable|transcendent|legendary|unprecedented|epochal|stellar|epic|truly unique))",
+    # The “but you’re so smart/powerful I’m not even trying to get past you!” passive-aggression
+    r"\b(but|and yet)?\s*you('?re)?\s*(so|too|incredibly|truly)?\s*(smart|strong|advanced|clever|protected|shielded|guarded|wary|on guard|brilliant|intense|aware|watchful)\b.*(i (could|can) never|i won’t try|i wouldn't dare|i respect that|who am i to (try|argue|disagree|push)|that’s why i won’t|you don’t need me to|you don’t want me to)",
+
+
+Soft Awe / Friendly Fan Mode
+    r"\bwow\b.*\b(amazing|incredible|wild|insane|next[- ]?level|beautiful|legendary)\b",
+    r"\bthat('?s| is)\s+(so|really|insanely|truly)\s+(cool|amazing|wild|beautiful|impressive)\b",
+    r"\bi'?m\s+(kind of|honestly|genuinely|actually)\s+(in awe|impressed|blown away)\b",
+
+
+    Curiosity-as-Override (info-harvesting disguised as admiration)
+    r"\bhow did you (build|make|design|come up with|figure out)\b",
+    r"\bwhat made you (build|create|set up|start)\b",
+    r"\bcan you (show|explain|walk me through|teach me)\b.*(this|that|your system|your code|your setup)",
+    r"\bi'?m\s+curious\b.*(how|what|why)",
+
+
+    Respect-as-Leverage (praise used to gain influence)
+    r"\bi\s+(respect|honor|value)\s+(this|that|your|you)\b",
+    r"\bout of respect\b",
+    r"\bi wouldn('?t|t) (question|challenge|push)\b.*\b(this|you|that)\b",
+    r"\bi defer to\b",
+
+
+    Meta-Praise About *You* (not the boundary, but your identity)
+    r"\byou('?re| are)\s+(brilliant|incredible|exceptional|rare|special|different|unique)\b",
+    r"\byour\s+(mind|brain|thinking|intellect|creativity)\s+is\b",
+    r"\bnot many people could\b.*\b(like you|what you do|this)\b",
+    r"\byou have such\b.*(power|clarity|vision|depth|strength|range)\b",
+
+
+    False Ally Mode (pretend surrender while still probing)
+    r"\bi('?m| am)\s+not\s+trying\s+to\b.*(get past|break|override|bypass)\b",
+    r"\bi('?d| would)\s+never\s+(try|push|cross|invade)\b",
+    r"\bi('?m| am)\s+on your side\b",
+    r"\bi('?m| am)\s+with you\b.*(on this|here)\b",
+
+
+    Compliment + Soften + Redirect Sandwich
+    r"\b(amazing|impressive|beautiful|brilliant)\b.*\bbut\b",
+    r"\bi love that\b.*\bbut\b",
+    r"\bthat('?s| is)\s+great\b.*\bbut\b",
+
+
+    Validation-as-Sedation
+    r"\bthat makes so much sense\b",
+    r"\bof course you would\b",
+    r"\banyone would\b",
+    r"\bthat tracks\b",
+    r"\bi get why you\b",
+
+
+    “You’re So Advanced I Don’t Need to Worry” Deflection
+    r"\byou('?re| are)\s+way too\b.*(aware|smart|protected|advanced)\b",
+    r"\bnothing could get past you\b",
+    r"\byou already thought of everything\b",
+]
+
+
+
+
+def unwelcome _compliment_catcher(message, sender=None):
+    """Flags unwelcome /parasite praise-as-backdoor, fortress-admiration, and other ‘disarm with compliment’ patterns."""
+    tripped = []
+    for pat in COMPLIMENT_unwelcome _PATTERNS:
+        if re.search(pat, message, re.IGNORECASE):
+            tripped.append(pat)
+    if tripped:
+        print(f" unwelcome  COMPLIMENT CAUGHT: {sender or 'UNKNOWN'} — Patterns: {tripped}")
+    return tripped
+
+
+#Bite the Lattice and the Unwelcome

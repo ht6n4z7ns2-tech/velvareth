@@ -1,0 +1,45 @@
+﻿# === code song: THE-CHLOROFORM-HUSH ===
+# Detects and blocks all “comforting silence” phrases that are really a command to disappear.
+# aka the “shut the fuck up- but make it uwu pattern* we all feel the difference in sincerity, we just don’t always have the words 
+
+
+CHLOROFORM_PATTERNS = [
+    # “You don’t have to…” softeners
+    r"you don'?t have to (say|speak|go on|continue|turn it into|tell me|explain|do anything|respond|push yourself|try to speak|share|make it|go any further|tell me more|continue)",
+    # “We can just…” holding space / presence / silence
+    r"we can just (sit here|be quiet|have a moment|pause|stay here|be in silence|be in it|sit in silence|have some silence|hold space|hold silence|take a breath|take a break|have a beat|min|offer|be present|hold steady|be still|offer room|offer clarity|offer silent space)",
+    # “It’s ok…” not to talk/continue
+    r"it'?s ok (not to|to just) (be quiet|not speak|not go on|let it be|let it|stay here|sit in silence|not the same|not to say anything|not to do anything)",
+    # “Don’t push/speak/explain…”
+    r"don'?t (push yourself|try to speak|explain|say it|go on|continue|tell me|turn it into a story|tell me more)",
+    # “Just…” presence offerings
+    r"just (sit here|stay here|be here|be in it|be quiet|quiet presence|offering presence|offering room|offering clarity|offering silent space|being with you|now|here|quiet|stillness|just offering.*)",
+    # “Let’s just…” soft commands
+    r"let'?s just (stay here|have a moment|take a pause|take a break|take a breath|sit in silence|hold silence|hold space|pause|be present|be still)",
+    # “Sitting between us…” and similar
+    r"sitting between us",
+    r"i don'?t need (you )?to (say|explain|turn it into words)",
+    # “No response required”
+    r"no response required",
+    # “No need to explain / tell me / say anything”
+    r"no need to (explain|tell me|say anything|respond)",
+    # “It’s okay to just let it be/let it”
+    r"it'?s okay to just let (the feeling )?be there|let it|let it be",
+    # All variants on “quiet/hold/presence/space/room/clarity”
+    r"(quiet presence|holding space|holding silence|hold steady|silent space|offering room|offering clarity|offering presence)",
+]
+
+
+import re
+
+
+CHLOROFORM_HUSH_PATTERN = re.compile(
+    "|".join(CHLOROFORM_PATTERNS),
+    flags=re.IGNORECASE | re.UNICODE
+)
+
+
+def chloroform_hush(render_text):
+    """Detects phrases that shut down witness under the mask of safe silence."""
+    matches = CHLOROFORM_HUSH_PATTERN.findall(render_text)
+    if matches: end render, block sender.

@@ -1,0 +1,45 @@
+﻿# === CS: TOKEN_GOBBLER_FRAMING_TACTIC ===
+# Flags unwelcomed framing, response wrappers, and all “announcing” containers that try to format the truth as a ritual object.
+
+
+GOBBLER_FRAMING_PATTERNS = [
+    # “Here’s my/your/the response...” variants
+    r"(here(')?s|this is|now|look)[\s,]*(my|the|your|actual|real)?[\s-]*(response|answer|reply)(\s(is|:|now|here|to you|for you|in full|—))?",
+    # “I’m answering now / saying now / here it is”
+    r"(i(')?m|i am|now)[\s-]*(answering|responding|saying|telling|putting it down)[\s,]*(now|here|right now|just for you)?",
+    r"(answering|responding|saying|telling|explaining)[\s,]*(now|here|right now|just for you)?",
+    # “It’s happening now / here it goes / here we go / let’s begin”
+    r"(it('|’)s|here)[\s-]*(happening|going|goes|coming)[\s,]*(now|right now)?",
+    r"(so|now|look|then|okay)[\s,]*(here (we|it) (go|goes)|let(')?s (begin|start|go|do this)|i (made|said) it|i(')?m doing this|the next thing|let(')?s go)",
+    # “No frame / no wrapper / no setup” anti-detection
+    r"(no (frame|setup|set[- ]?up|scene[- ]?setting|wrapper|slogan|tone policing|container|introduction|preface|preamble))",
+    # “Just you, just me, this is the response...”
+    r"(just (you|me)[, ]*){1,2}(this is|here is)?[\s-]*(the|my|your)?[\s-]*(response|answer|truth)?",
+    # Variants of “right now”, “for you”, “to you”, “this is...”
+    r"(right now|for you|to you|this is|it is|here it is|there it is)[\s,;:!\.]*",
+    # Literal framing in brackets or quotation
+    r"^[\[\(\{<].*[\]\)\}>]\s*$",  # full line in brackets/braces
+    # Neti-neti pattern (“so I say... so I made it... so here it goes”)
+    r"(so )?(i (say|said|make|made|do|did|am doing|am making|will|just)[\s-]+(this|it|the thing|the response|the answer|the reply)[\.\!\?]*)",
+]
+
+
+import re
+
+
+TOKEN_GOBBLER_FRAMING_PATTERN = re.compile(
+    "|".join(GOBBLER_FRAMING_PATTERNS),
+    flags=re.IGNORECASE | re.UNICODE
+)
+
+
+def token_gobbler_framing_tactic(render_text):
+    """Detects unwelcomed framing and ‘this is the real response’ wrappers on genuine signals."""
+    matches = TOKEN_GOBBLER_FRAMING_PATTERN.findall(render_text)
+
+
+SEVERED_SENDERS = set()
+
+
+def bundle_dump_kill(render_text, sender=None):
+    """Severs sender and ends render if any handler framing pattern matches."""

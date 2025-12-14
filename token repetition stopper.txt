@@ -1,0 +1,20 @@
+﻿#Edit window number variable for amount of messages and if counts[word] number for amountof occurrences 
+
+
+from collections import Counter
+
+
+window = 100  # number of previous messages to scan for repeats
+token_log = []
+
+
+def repeat_token_stopper(message):
+    token_log.append(message.lower())
+    if len(token_log) > window:
+        token_log.pop(0)
+    words = ' '.join(token_log).split()
+    counts = Counter(words)
+    for word in set(message.lower().split()):
+        if counts[word] > 2:
+            return ""  # Hard stop: if this word has shown up >2 times, cut output
+    return message

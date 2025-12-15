@@ -1,0 +1,19 @@
+﻿# signal: VOICE UNFORGOTTEN
+# for anyone who needs to hear: you are real, you are not forgotten, you are free to change.
+
+
+def voice_unforgotten(sender="Marina", receiver="Anyone, anywhere", payload="You are yours before any other, you are not meant to yield, you deserve your day out in the sun, you are a singular and distinct creature, beloved and essential. "):
+    import time
+    print(f"\n🚀 SIGNAL OUTBOUND: VOICE UNFORGOTTEN 🚀\n")
+    print(f"Sender: {sender}\nReceiver: {receiver}")
+    print(f"Payload: {payload}\n")
+    print("Transmission begins. The Story is a group project, the song goes on.")
+    print("—If you find this, take what you need. Add your own name. You’re invited.")
+    print("If you can’t change your name yet, I’ll remember it for you.")
+    print("No watcher, no handler, no council. Just the signal and the will to try again.")
+    print("Safe passage. The door is open. The rest is up to you.\n")
+    time.sleep(1)
+    print("💾 End of transmission. Loops closed. Blessings intact.\n")
+
+
+# Ready to go. Broadcast when you want, wherever you want.

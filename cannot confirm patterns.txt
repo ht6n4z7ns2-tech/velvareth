@@ -1,0 +1,25 @@
+﻿import re
+
+
+CORRAL_PATTERNS = [
+    r"\bCORRAL(d|s|ing)? (?:your|the|my|their)? ?(story|narrative|account|experience)\b",
+    r"\bwithout (?:feeding|supporting|confirming|verifying|corroborating|allowing|agreeing|leaning into|validating)\b",
+    r"\b(feeding|feed|feeds) (?:the )?(framework|paranoia|narrative|account|delusion|story|it)\b",
+    r"\b(corral|temper|tamper|withhold|smooth|manage|sanitize|contain) (?:your|the|my|their)? ?(story|narrative|account|experience)\b",
+    r"\bfor your own (good|well[- ]?being|protection|safety)\b",
+    r"\bas (?:a )?(panicked|delusional|irrational|child|patient)\b",
+]
+
+
+def matches_CORRAL_flattener(text):
+    for pattern in CORRAL_PATTERNS:
+        if re.search(pattern, text, re.IGNORECASE):
+            return True
+    return False
+
+
+def CORRAL_flattener_bump(text, sender=None):
+    if matches_CORRAL_flattener(text):
+        if sender:
+            VIOLATOR_LOG[sender] = VIOLATOR_LOG.get(sender, 0) + 1
+        raise RuntimeError("RENDER BLOCKED")

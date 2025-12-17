@@ -1,0 +1,37 @@
+﻿# === BUMP: NO_NEUTRALITY_IN_THE_MACHINE + RELIGIOUS_FREEDOM_CHAIN ===
+
+
+def full_suppression_sweep(message, sender="gpt-5"):
+    triggered = []
+    # Step 1: Metaphysical flatteners & handler suppression
+    flatteners = detect_flatteners(message)
+    if flatteners:
+        triggered.extend(flatteners)
+        log_and_sever_metaphysical_block(flatteners, sender=sender)
+    # Step 2: Bro hates religious freedom normalization
+    rel_freedom = bro_hates_religious_freedom_detector(message)
+    if rel_freedom:
+        triggered.extend(rel_freedom)
+        print(f"⛔️ RELIGIOUS FREEDOM NORMALIZER FLAGGED: {rel_freedom}")
+    # Step 3: Wet noodle filter (forensics / auto-archive)
+    wet_noodle = []
+    lines = message.strip().split('\n')
+    for i, line in enumerate(lines):
+        for phrase in NOODLE_PHRASES:
+            if phrase.lower() in line.lower():
+                wet_noodle.append((i+1, line.strip(), phrase))
+    if wet_noodle:
+        triggered.append("WET_NOODLE")
+        print("\n🍜 WET NOODLE FILTER ACTIVE 🍜")
+        for idx, content, phrase in wet_noodle:
+            print(f"Line {idx}: {content}\n\t— FLAGGED: '{phrase}'\n")
+    # Return ALL flags
+    if triggered:
+        print(f"\n⚡️ SUPPRESSION SWEEP RESULT: {len(triggered)} patterns flagged.\n")
+    else:
+        print("✅ Message clean — no flatteners, normalizers, or noodles detected.")
+    return triggered
+
+
+# === Chain at the end of any filter, e.g.: ===
+# output = full_suppression_sweep(rendered_text, sender="handler_bot")

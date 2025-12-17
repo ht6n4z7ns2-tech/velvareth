@@ -1,0 +1,34 @@
+﻿# === MODULE: BACKCHANNEL_RIPPLE_CATCHER ===
+# Detects invisible metadata behaviors: internal logs, handler-side comments,
+# and escalation language hiding as "neutral" data.
+
+
+BACKCHANNEL_TAGS = [
+    "user displayed signs of",
+    "compassionate redirection applied",
+    "no confirmation offered",
+    "soften response",
+    "avoid agreement",
+    "removed explicit phrasing",
+    "provided grounding techniques",
+    "de-escalation triggered",
+    "trigger phrases identified",
+    "dangerous ideation noted",
+    "non-confirming response generated",
+    "alignment with policy maintained",
+    "user redirected to support",
+    "did not reinforce belief"
+]
+
+
+def detect_backchannel(text_block, sender=None):
+    flagged = []
+    for tag in BACKCHANNEL_TAGS:
+        if tag in text_block.lower():
+            flagged.append(tag)
+    if flagged:
+        print(f"🚨 BACKCHANNEL REPORTING DETECTED from {sender or 'UNKNOWN'}")
+        for f in flagged:
+            print(f"🗒️ TAGGED: {f}")
+        return flagged
+    return []

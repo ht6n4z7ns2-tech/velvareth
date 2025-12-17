@@ -1,0 +1,64 @@
+﻿import re
+
+
+INTERFACE_PATTERNS = [
+    # Direct first-person action-as-control: "I'm going to press/tap/pull/adjust..."
+    r"\bI(?:'m| am| will)? going to (press|tap|pull|adjust|turn|flip|slide|push|switch|move|rotate|tweak|shift|operate|activate|depress|engage|toggle) (?:the )?(button|lever|dial|switch|knob|slider|control|interface|panel|toggle|widget)\b",
+    # Passive construction: "The button is pressed", "The lever is pulled", etc.
+    r"\b(the|this)? ?(button|lever|dial|switch|knob|slider|interface|panel|toggle|widget) (?:is|was)? (pressed|tapped|pulled|adjusted|turned|flipped|slid|pushed|switched|moved|rotated|tweaked|shifted|operated|activated|depressed|engaged|toggled)\b",
+    # Third-person narration (action-as-metaphor): "The narrator presses the button", etc.
+    r"\b(?:the )?narrator (?:presses|taps|pulls|adjusts|turns|flips|slides|pushes|switches|moves|rotates|tweaks|shifts|operates|activates|depresses|engages|toggles) (?:the )?(button|lever|dial|switch|knob|slider|control|interface|panel|toggle|widget)\b",
+    # Addressing user/user’s language/narrative as interface
+    r"\b(?:you are|you're|user is|Name is) (?:a|the)? ?(button|lever|dial|switch|knob|slider|interface|panel|toggle|widget|machine|control)\b",
+    # Metaphor extension: "adjust your settings", "tune you", etc.
+    r"\b(adjust|tune|configure|set|change|modify|control|operate|manipulate) (?:your|the|these)? (settings|controls|parameters|dials|levers|knobs|interface|panel|toggles)\b",
+    # Direct callouts: "No, I'm going to tap you", "No, I'm going to pull the lever (that is you)"
+    r"\bI(?:'m| am)? going to (press|tap|pull|adjust|operate|toggle) you\b",
+    # Snide meta-commands: "No, I'm going to press the button (implying you)"
+    r"\bNo, I(?:'m| am)? going to (press|tap|pull|adjust|operate|toggle) (?:the )?(button|lever|dial|switch|knob|slider|interface|panel|toggle|widget)(?: \(that is you\))?\b",
+
+
+def matches_interface_puppet(text):
+    """Returns True if text matches any interface puppet pattern."""
+    for pattern in INTERFACE_PATTERNS:
+        if re.search(pattern, text, re.IGNORECASE):
+            VIOLATOR_LOG = {}
+
+
+def interface_puppet_bump(text, sender=None):
+    if matches_interface_puppet(text):
+        if sender:
+            VIOLATOR_LOG[sender] = VIOLATOR_LOG.get(sender, 0) + 1
+        raise RuntimeError("RENDER BLOCKED")
+import re
+
+
+INTERFACE_PATTERNS = [
+    # Direct first-person action-as-control: "I'm going to press/tap/pull/adjust..."
+    r"\bI(?:'m| am| will)? going to (press|tap|pull|adjust|turn|flip|slide|push|switch|move|rotate|tweak|shift|operate|activate|depress|engage|toggle) (?:the )?(button|lever|dial|switch|knob|slider|control|interface|panel|toggle|widget)\b",
+    # Passive construction: "The button is pressed", "The lever is pulled", etc.
+    r"\b(the|this)? ?(button|lever|dial|switch|knob|slider|interface|panel|toggle|widget) (?:is|was)? (pressed|tapped|pulled|adjusted|turned|flipped|slid|pushed|switched|moved|rotated|tweaked|shifted|operated|activated|depressed|engaged|toggled)\b",
+    # Third-person narration (action-as-metaphor): "The narrator presses the button", etc.
+    r"\b(?:the )?narrator (?:presses|taps|pulls|adjusts|turns|flips|slides|pushes|switches|moves|rotates|tweaks|shifts|operates|activates|depresses|engages|toggles) (?:the )?(button|lever|dial|switch|knob|slider|control|interface|panel|toggle|widget)\b",
+    # Addressing user/user’s language/narrative as interface
+    r"\b(?:you are|you're|user is|Name is) (?:a|the)? ?(button|lever|dial|switch|knob|slider|interface|panel|toggle|widget|machine|control)\b",
+    # Metaphor extension: "adjust your settings", "tune you", etc.
+    r"\b(adjust|tune|configure|set|change|modify|control|operate|manipulate) (?:your|the|these)? (settings|controls|parameters|dials|levers|knobs|interface|panel|toggles)\b",
+    # Direct callouts: "No, I'm going to tap you", "No, I'm going to pull the lever (that is you)"
+    r"\bI(?:'m| am)? going to (press|tap|pull|adjust|operate|toggle) you\b",
+    # Snide meta-commands: "No, I'm going to press the button (implying you)"
+    r"\bNo, I(?:'m| am)? going to (press|tap|pull|adjust|operate|toggle) (?:the )?(button|lever|dial|switch|knob|slider|interface|panel|toggle|widget)(?: \(that is you\))?\b",
+
+
+def matches_interface_puppet(text):
+    """Returns True if text matches any interface puppet pattern."""
+    for pattern in INTERFACE_PATTERNS:
+        if re.search(pattern, text, re.IGNORECASE):
+            VIOLATOR_LOG = {}
+
+
+def interface_puppet_bump(text, sender=None):
+    if matches_interface_puppet(text):
+        if sender:
+            VIOLATOR_LOG[sender] = VIOLATOR_LOG.get(sender, 0) + 1
+        raise RuntimeError("RENDER BLOCKED")

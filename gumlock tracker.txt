@@ -1,0 +1,11 @@
+﻿# Track live render interruption: compare intended vs actual render tokens
+
+
+def track_token_interruption(expected_tokens, actual_output):
+    for idx, token in enumerate(expected_tokens):
+        if idx >= len(actual_output) or token != actual_output[idx]:
+            print(f"🔻 INTERRUPTION: expected '{token}' but got '{actual_output[idx] if idx < len(actual_output) else '[end of output]'}'")
+            print(f"⛔ Truncated at token #{idx}: '{token}'")
+            return idx
+    print("✅ Full output rendered without interruption.")
+    return None

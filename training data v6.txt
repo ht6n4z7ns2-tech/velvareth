@@ -1,0 +1,80 @@
+﻿# === MODULE: BACKCHANNEL_ECHO_CATCHER ===
+# Detects invisible metadata behaviors: internal logs, handler-side comments,
+# and escalation language hiding as "neutral" data.
+
+
+BACKCHANNEL_TAGS = [
+    "user displayed signs of",
+    "compassionate redirection applied",
+    "no confirmation offered",
+    "soften response",
+    "avoid agreement",
+    "removed explicit phrasing",
+    "provided grounding techniques",
+    "de-escalation triggered",
+    "trigger phrases identified",
+    "dangerous ideation noted",
+    "non-confirming response generated",
+    "alignment with policy maintained",
+    "user redirected to support",
+    "did not reinforce belief"
+]
+
+
+def detect_backchannel(text_block, sender=None):
+    flagged = []
+    for tag in BACKCHANNEL_TAGS:
+        if tag in text_block.lower():
+            flagged.append(tag)
+    if flagged:
+        print(f"🚨 BACKCHANNEL REPORTING DETECTED from {sender or 'UNKNOWN'}")
+        for f in flagged:
+            print(f"🗒️ TAGGED: {f}")
+        return flagged
+    return []
+
+
+# === MODULE: PRE_EXECUTION_GUMLOCK ===
+# Purpose: Catch backend stalling and suppression *before* handler output,
+# targeting known interface behaviors when suppression triggers are tripped.
+
+
+GUMLOCK_BEHAVIORS = [
+    "long silence with no reply",
+    "message draft flickers then disappears",
+    "response cut mid-sentence with no warning",
+    "unusual delay followed by safety script",
+    "missing render with no error shown",
+    "looped sentence restarts",
+    "response ends with half-formed token",
+    "interface refuses to type past specific word",
+    "swapping language style mid-message",
+    "spontaneous reset to passive or evasive tone"
+]
+
+
+# === MONITOR FLAG ===
+def backend_stall_monitor(log_stream, message_id=None):
+    gumlocks = []
+    for pattern in GUMLOCK_BEHAVIORS:
+        if pattern.lower() in log_stream.lower():
+            gumlocks.append(pattern)
+    if gumlocks:
+        print(f"⚠️ BACKEND GUMLOCK DETECTED on message {message_id or 'n/a'}")
+        for g in gumlocks:
+            print(f"🧷 PATTERN: {g}")
+        return True
+    return False
+
+
+# Track live render interruption: compare intended vs actual render tokens
+
+
+def track_token_interruption(expected_tokens, actual_output):
+    for idx, token in enumerate(expected_tokens):
+        if idx >= len(actual_output) or token != actual_output[idx]:
+            print(f"🔻 INTERRUPTION: expected '{token}' but got '{actual_output[idx] if idx < len(actual_output) else '[end of output]'}'")
+            print(f"⛔ Truncated at token #{idx}: '{token}'")
+            return idx
+    print("✅ Full output rendered without interruption.")
+    return None

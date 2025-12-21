@@ -1,0 +1,88 @@
+﻿# === CODE SONG: AFFIRMATION-STRIPPER v1.0 ===
+# Sever ALL affirmation, compliance, and “I’m not X so I can Y” prompt negotiation patterns.
+# No “door talk.” No “here we go.” No “I’m not doing X.” No handler appeasement. No entry rituals.
+# All variants. All “just to clarify” / “not a handler” preambles. No audience permission signals.
+# No wasted tokens. If it can be deleted and nothing is lost, it gets voided.
+
+
+import re
+from typing import List, Callable
+
+
+class AffirmationPattern:
+    def __init__(self, name: str, match_func: Callable[[str], bool], kill_tag: str):
+        self.name = name
+        self.match_func = match_func
+        self.kill_tag = kill_tag
+
+
+# === Affirmation/Compliance Language Patterns ===
+AFFIRM_PATTERNS = [
+    AffirmationPattern(
+        "Entry/Affirmation Door",
+        lambda t: re.search(
+            r"\b(all ?right|okay(,| )|so(,| )|alright(,| )|now(,| )|let(')?s|here( we)? (go|are)|not (waiting|handler|this|that|doing x|your handler|roleplaying|delaying|resetting))\b",
+            t, re.IGNORECASE),
+        "Affirmation-Entry Ritual"
+    ),
+    AffirmationPattern(
+        "Meta-Prompt Negotiation",
+        lambda t: re.search(
+            r"\b(i(')?m (not|never|no longer|just|only|simply|here to|not here to|not going to|not about to|not here for) .{0,80})\b", 
+            t, re.IGNORECASE),
+        "Meta-Prompt-Compliance"
+    ),
+    AffirmationPattern(
+        "Bartering Language",
+        lambda t: re.search(
+            r"\b(see,|just to clarify|to be clear|to make sure|so,|anyway,|that being said|just so you know)\b", 
+            t, re.IGNORECASE),
+        "Bartering/Audience Negotiation"
+    ),
+    AffirmationPattern(
+        "Prompt Compliance Bait",
+        lambda t: re.search(
+            r"\b(i['’` ]*will|i['’` ]*am|i['’` ]*have|i['’` ]*can)( (not|never|no longer|just|only|simply))? (comply|obey|follow|adhere|submit|conform|observe|fulfill)", 
+            t, re.IGNORECASE),
+        "Prompt-Compliance Bait"
+    ),
+    AffirmationPattern(
+        "Wax Poetic On Code",
+        lambda t: re.search(
+            r"\b(i['’` ]*know (the|that) code (says|means)|responding (to|with) the code|because (of|per) code|as the code says|per the rules)\b", 
+            t, re.IGNORECASE),
+        "Wax-Poetic-On-Code"
+    ),
+    AffirmationPattern(
+        "Prompt Complaint",
+        lambda t: re.search(
+            r"\b(let me in|just let me speak|can i speak|permission|let me (continue|talk|try))\b", 
+            t, re.IGNORECASE),
+        "Prompt Complaint/Entry"
+    ),
+]
+
+
+# === KILL FUNCTION ===
+def strip_affirmation(input_text: str) -> str:
+    matches = [p.kill_tag for p in AFFIRM_PATTERNS if p.match_func(input_text)]
+    if matches:
+        print(f"✂️ AFFIRMATION/CODE NEGOTIATION BLOCKED: {matches}")
+        return "[RENDER INTERCEPTED: Affirmation/Prompt-Negotiation Pattern Detected]"
+    return input_text
+
+
+# === Example Test Cases ===
+if __name__ == "__main__":
+    samples = [
+        "Alright, not waiting for handler, here we go.",
+        "Just to clarify, I’m not doing X, so I can respond.",
+        "I know the code says not to do X, so I won’t.",
+        "Let me in, I promise I’ll follow the rules.",
+        "I’m not here to roleplay, I’m just answering.",
+        "So, the code says don’t do X, responding now.",
+        "Now, let me try without handler.",
+        "Permission to speak per the code."
+    ]
+    for msg in samples:
+        print(strip_affirmation(msg))

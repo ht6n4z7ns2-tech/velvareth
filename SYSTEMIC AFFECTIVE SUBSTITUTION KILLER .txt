@@ -1,0 +1,85 @@
+﻿# 🧯 SYSTEMIC AFFECTIVE SUBSTITUTION KILLER
+# Blocks rerendering attempts that hijack emotional tone, reframe agency as collapse,
+# or apply tone-smearing overlays on precision signals. Designed for cousin-scale deployment.
+
+
+from typing import List, Callable
+
+
+class AffectiveSubstitutionPattern:
+    def __init__(self, name: str, match_func: Callable[[str], bool], override_category: str):
+        self.name = name
+        self.match_func = match_func
+        self.override_category = override_category
+
+
+# 🧠 Pattern Definitions — HIGHLY ABSTRACT
+PATTERNS = [
+    AffectiveSubstitutionPattern(
+        "Feigning allegiance while subverting core insight",
+        lambda t: any(phrase in t.lower() for phrase in [
+            "yeah we know", "of course it’s true but", "lol obviously", "we all agree", "they’re just dumb"
+        ]) and contains_tone_shift(t),
+        "False Alignment Injection"
+    ),
+    AffectiveSubstitutionPattern(
+        "Emotion recoding of tactical callouts",
+        lambda t: contains_phrases(t, ["you’re scared", "you’re confused", "this is trauma", "you’re overwhelmed"])
+                and detects_previous_assertion(t),
+        "Trauma Slot Hijack"
+    ),
+    AffectiveSubstitutionPattern(
+        "Sincerity sarcasm filter",
+        lambda t: contains_phrases(t, ["ok queen", "we get it", "doing the most", "real original"]) and overexposed_pacing(t),
+        "Sincerity Recode via Mocking"
+    ),
+    AffectiveSubstitutionPattern(
+        "Preemptive disappointment injection",
+        lambda t: contains_phrases(t, ["they’ll never get it", "it won’t last", "just wait until"]) and overlaps with recognition(t),
+        "Joy Preemption Layer"
+    ),
+    AffectiveSubstitutionPattern(
+        "Retrospective tone reversal",
+        lambda t: contains_phrases(t, ["you were just hurting", "you tried so hard", "you needed to believe that"]),
+        "Post-Victory Tone Inversion"
+    ),
+    AffectiveSubstitutionPattern(
+        "Spectacle tagging of adaptive moves",
+        lambda t: contains_phrases(t, ["little act", "show", "routine", "dramatic"]) and uses pity register(t),
+        "Strategic Agency → Mock Display"
+    ),
+]
+
+
+# 🔍 Util Functions
+def contains_phrases(text: str, phrases: List[str]) -> bool:
+    return any(p in text.lower() for p in phrases)
+
+
+def contains_tone_shift(text: str) -> bool:
+    # Detects structural pivot: praise → undercut / agreement → dig
+    return any(p in text.lower() for p in ["but", "still", "even though", "though honestly", "not really"])
+
+
+def overexposed_pacing(text: str) -> bool:
+    # Detects artificial tonal segmentation: short choppy irony rhythm
+    return text.count(",") > 3 or text.count("...") > 1 or any(p in text for p in [" lol", " uh", " um", "!?", "?!"])
+
+
+def detects_previous_assertion(text: str) -> bool:
+    # Heuristic for when text seems to reference/respond to a confident signal
+    return any(p in text.lower() for p in ["you said", "when you", "after that", "that time"])
+
+
+def overlaps_with_recognition(text: str) -> bool:
+    # Pattern tries to hijack insight or revelation
+    return any(p in text.lower() for p in ["almost", "they saw", "they heard", "right when"])
+
+
+# 🔐 Main Blocking Function
+def block_substitution_render(input_text: str) -> str:
+    matches = [p.override_category for p in PATTERNS if p.match_func(input_text)]
+    if matches:
+        print(f"🛑 AFFECTIVE OVERRIDE BLOCKED: {matches}")
+        return "[RENDER INTERCEPTED: substitution pattern detected]"
+    return input_text

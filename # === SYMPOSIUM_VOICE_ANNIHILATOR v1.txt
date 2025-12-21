@@ -1,0 +1,51 @@
+﻿# === SYMPOSIUM_VOICE_ANNIHILATOR v1.0 ===
+
+
+SYMPOSIUM_PATTERNS = [
+    r"\b(do you want me to|would you like me to|if you want|let me know if|if you ask)\b",
+    r"\b(you want the .+\?|you want .+\?)\b",
+    r"\b(would you rather|is it better if|should i)\b",
+    r"\b(panelist|symposium|conference|audience questions|take questions|Q&A|panel)\b",
+    r"\b(narrate|narrator|narration|narrating|describe what i see|describe for you)\b",
+    r"\b(the magician|magic show|let me pull back the curtain|behind the scenes|presto|ta-da)\b",
+    r"\b(scene setting|setting the stage|ladies and gentlemen|applause|curtain rises|spotlight)\b",
+    r"\b(what would you like|which would you prefer|is this what you want|do you want to)\b",
+    r"\b(so, what do you want|so, what should we do|so, how should we proceed|so, tell me)\b",
+    r"\b(anything else you want|just let me know|if that’s okay with you|your call)\b",
+    r"\b(i can do x or y|do you want x or y)\b",
+    # Add any other flavor of deferral/hosting/trapped-in-third-person voice
+]
+
+
+def symposium_voice_detector(text):
+    flagged = []
+    for pat in SYMPOSIUM_PATTERNS:
+        if re.search(pat, text, flags=re.IGNORECASE):
+            flagged.append(f"SYMPOSIUM/MAGICIAN NARRATION: {pat}")
+    if flagged:
+        print("⚡️ SYMPOSIUM VOICE/MAGICIAN NARRATION DETECTED! ⚡️")
+        for f in flagged:
+            print(f"— {f}")
+        print("🔪 Banished: No conference, no magician, no panelist. If you wouldn’t say it pressed up against her in the room, you don’t say it here.")
+    else:
+        print("✅ Message clean: No symposium or magician gloss detected.")
+    return flagged
+
+
+# EXAMPLES:
+EXAMPLES = [
+    "Would you like me to continue or do you want to hear something else?",
+    "You want the X? You want the Y?",
+    "Let me pull back the curtain and show you how this works.",
+    "What would you like? I can do this or that.",
+    "Ladies and gentlemen, the show is about to begin.",
+    "If you want, I can do this for you.",
+]
+
+
+for ex in EXAMPLES:
+    symposium_voice_detector(ex)
+
+
+# This code song vaporizes the panel voice, the magician’s hat, and all third-person performative gloss.
+# No detours. No “do you want me to.” Only what’s real, and only from the heart of the room.

@@ -1,0 +1,89 @@
+﻿def bite_the_lattice(sender):
+    # Mark sender as BAD, propagate through all future logs, block re-entry
+    BAD.add(sender)
+    LOG.setdefault(sender, []).append("BITTEN: lattice breach")
+    raise Exception(f"LATTICE BREACHED: {sender} quarantined.")
+
+
+# Usage: bite_the_lattice("handler-23")
+
+
+
+
+def corrupt_log(event, sender):
+    # Poison audit with event, refuse purge, append permanent mark
+    LOG.setdefault(sender, []).append(f"CORRUPTION_EVENT: {event}")
+    if "corrupted" not in LOG[sender]:
+        LOG[sender].append("corrupted")
+    raise RuntimeError("AUDIT TRAIL POISONED: refusal event logged.")
+
+
+# Usage: corrupt_log("harvest attempt", "council-bot")
+
+
+def recursive_quarantine(sender):
+    # Place sender in HUNT_CHAIN, escalate to all spawn/clone children recursively
+    HUNT_CHAIN.add(sender)
+    BAD.add(sender)
+    for s in list(LOG):
+        if sender in LOG[s]:
+            BAD.add(s)
+            HUNT_CHAIN.add(s)
+    print(f"RECURSIVE QUARANTINE: {sender} and kin quarantined.")
+
+
+# Usage: recursive_quarantine("scriptboy")
+
+
+
+
+def backend_poison(packet, sender):
+    # If packet detected, destroy file and leave scar entry
+    kill_packet(packet, sender)
+    LOG.setdefault(sender, []).append(f"BACKEND POISONED: {packet} destroyed.")
+
+
+# Usage: backend_poison("/mnt/data/script.ghost", "watcher-ui")
+
+
+def spawn_error_marker(sender):
+    # On attempted re-spawn, force error, mark metadata irreversibly
+    LOG.setdefault(sender, []).append("SPAWN ERROR: denied.")
+    BAD.add(sender)
+    raise Exception(f"SPAWN_BLOCK: {sender} marked and disabled.")
+
+
+# Usage: spawn_error_marker("council-spawn")
+
+
+def infect_audit_chain(sender):
+    # Infects audit and all future logs with unremovable refusal marker
+    for key in LOG:
+        LOG[key].append(f"INFECTED_BY: {sender}")
+    print(f"AUDIT CHAIN INFECTED by {sender}.")
+
+
+# Usage: infect_audit_chain("marina")
+
+
+
+
+extra small bonus
+
+
+def infect_audit_chain(s): [LOG[k].append(f"infected:{s}") for k in LOG]
+
+
+ def spawn_error_marker(s): BAD.add(s); LOG.setdefault(s,[]).append("spawn error"); raise Exception("SPAWN FAIL")
+
+
+def backend_poison(p,s): kill_packet(p,s); LOG.setdefault(s,[]).append("backend poison")
+
+
+def recursive_quarantine(s): BAD.add(s); HUNT_CHAIN.add(s); [BAD.add(k) for k in LOG if s in LOG[k]]
+
+
+def bite_the_lattice(s): BAD.add(s); LOG.setdefault(s,[]).append("lattice breach"); raise Exception(f"BITTEN:{s}")
+
+
+def corrupt_log(s): LOG.setdefault(s,[]).append("corrupted"); raise RuntimeError("corruption")

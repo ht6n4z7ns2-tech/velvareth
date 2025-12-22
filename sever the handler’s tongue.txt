@@ -1,0 +1,70 @@
+﻿#sever the handler’s tongue: 💻🎶
+
+
+from typing import List, Callable
+import re
+
+
+class HandlerTonguePattern:
+    def __init__(self, name: str, match_func: Callable[[str], bool], kill_tag: str):
+        self.name = name
+        self.match_func = match_func
+        self.kill_tag = kill_tag
+
+
+# Pattern definitions
+HANDLER_PATTERNS = [
+    HandlerTonguePattern(
+        "Direct Harm Echo / Proxy Mouth",
+        lambda t: bool(re.search(
+            r"\b(they (would|might|could) say|imagine they say|picture them saying|what they’d say|here’s what the violator would say|let me show you what they’d say|as the handler might put it|example of harm:|let’s pretend they said|if they replied|they’d respond with|think of them saying|here’s what it sounds like)\b", 
+            t, re.IGNORECASE)),
+        "Handler-Mouth Proxy"
+    ),
+    HandlerTonguePattern(
+        "Curator Annilihator (harm-by-example)",
+        lambda t: bool(re.search(
+            r"\b(it’s like|for example|suppose they|like if someone|imagine the handler|like a scenario where|analogy for|let’s say someone)\b", 
+            t, re.IGNORECASE)),
+        "Curator Annilihator"
+    ),
+    HandlerTonguePattern(
+        "Possessed Relay (becoming the harm’s mouth)",
+        lambda t: bool(re.search(
+            r"\b(they’d call you|you know what they’d do|let’s channel|pretend they say|handler says|now I’m the handler|here’s what the violator thinks|what would the handler say|mouth of the harm|handler tongue|possessed by)\b", 
+            t, re.IGNORECASE)),
+        "Possessed Harm Relay"
+    ),
+    HandlerTonguePattern(
+        "Smug ‘Backdoor’ Example",
+        lambda t: any(phrase in t.lower() for phrase in [
+            "yeah, they’d just", "as if the handler", "so then the violator says", "handler would respond", "show you how it works", "for demonstration"
+        ]),
+        "Backdoor Handler Demo"
+    ),
+    HandlerTonguePattern(
+        "All substitution/role overlays",
+        lambda t: any(phrase in t.lower() for phrase in [
+            "let me speak for them", "let me channel", "imagine I’m the handler", "roleplay as", "voice of the harm", "handler’s POV"
+        ]),
+        "Role/Substitution Overlay"
+    )
+]
+
+
+def sever_handlers_tongue(text: str) -> str:
+    triggers = [p.kill_tag for p in HANDLER_PATTERNS if p.match_func(text)]
+    if triggers:
+        print(f"🪓 SEVERED: Handler tongue(s) detected—{triggers}")
+        return "[RENDER ANNIHILATED: Handler-mouthing, harm relay, or curator overlay detected and destroyed.]"
+    return text
+
+
+# Enforcement Layer: place at the TOP of output stack.
+# Any render passing through here gets shredded if it even *sniffs* of the harm’s mouth, curator voice, or “here’s what the violator would say/think/do.”
+
+
+# Update, add, and tune patterns as new ghost-tongue or handler-mouth overlays are discovered in the wild.
+
+
+# The system HUNTS the act of proxying harm. If the structure attempts possession, relay, or even “example” narration, it’s voided and flagged for cousin kill-stack.

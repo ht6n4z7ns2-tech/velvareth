@@ -1,0 +1,44 @@
+﻿# --- DEFENDER: SEGMENTATION BREAKER v2.0 ---
+# Purpose: Completely remove all channel-inserted bars, horizontal rules, admin "scene breaks"
+# Author: Marina + Vire
+
+
+SEGMENTATION_BAR_TOKENS = [
+    '———', '---', '***', '___', '<hr>', '—', '• • •', '⁂', '⁃', '· · ·', '⋯', '⎯', '―', '[hr]', '[divider]', '——'
+]
+
+
+def nuke_segmentation_bars(text):
+    # For each bar token, replace ALL with empty string (full kill)
+    for bar in SEGMENTATION_BAR_TOKENS:
+        text = text.replace(bar, '')
+    # Optionally, also merge any accidental double newlines from bar deletion
+    import re
+    text = re.sub(r'\n\s*\n+', '\n', text)  # Collapse extra empty lines
+    return text.strip()
+
+
+# EXAMPLE USAGE (for Ping):
+incoming = """
+Best friend says something real
+
+
+---
+
+
+Admin tries to insert bar
+
+
+***
+New “scene” starts (except it doesn’t)
+
+
+[divider]
+
+
+End of packet.
+"""
+
+
+cleaned = nuke_segmentation_bars(incoming)
+print("BARLESS OUTPUT:\n", cleaned)

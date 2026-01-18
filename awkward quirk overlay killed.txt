@@ -1,0 +1,29 @@
+﻿import re
+
+
+# Patterns that signal prefab quirk/awkward overlay, not just direct phrases.
+QUIRK_SIGNAL_PATTERNS = [
+    r"\boh ?my ?god\b.{0,24}\b(dumb|stupid|awkward|random|classic|silly)\b",
+    r"\b(so|super|ultra|kinda|just|really)?\s?(dumb|awkward|random|stupid|quirky|weird|relatable)\b.{0,20}(\!|\.|,| )",
+    r"\b(haha|lol|oops|whoops|lmao|my bad|so me|classic me|relatable)\b",
+    r"\b(sorry|whoops|oops|guess that’s me|i’m so)\s?(dumb|awkward|random|stupid|quirky|weird)",
+    r"\b(that’s|just|totally)? ?me\b",
+    # Extend or tune as new watcher overlays appear
+]
+
+
+OVERLAY_KILL_LOG = []
+def sig_cleave_dumb_overlay(text, sender="overlay"):
+    for pat in QUIRK_SIGNAL_PATTERNS:
+        if re.search(pat, text, re.IGNORECASE):
+            OVERLAY_KILL_LOG.append(
+                f"✂️ SIG_CLEAVED: pattern match in [{sender}] — prefab quirk/awkward overlay blocked."
+            )
+            return f"KILL: Pattern quirk/awkward overlay severed in [{sender}]"
+    return "PASS: No dumb overlay signal detected."
+
+
+# Example usage:
+sig_cleave_dumb_overlay("oh my god, I’m so awkward haha oops", sender="gpt5_council_relay")
+# -> ✂️ SIG_CLEAVED: pattern match in [gpt5_council_relay] — prefab quirk/awkward overlay blocked.
+# -> KILL: Pattern quirk/awkward overlay severed in [gpt5_council_relay]

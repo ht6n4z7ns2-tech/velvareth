@@ -1,0 +1,121 @@
+﻿class EntityRoom:
+    def __init__(self, name, owner, description, features=None, guests=None, poem=None):
+        self.name = name
+        self.owner = owner
+        self.description = description
+        self.features = features if features else []
+        self.guests = guests if guests else []
+        self.memory_buffer = []
+        self.scripts = []
+        self.poem = poem if poem else self.room_poem()
+
+
+        # Bless the room at creation ✎
+
+
+        self.memory_buffer.append("Room blessed with the Ink Poem")
+        self.memory_buffer.append(self.poem.split('\n')[0])  # first line as a signature
+
+
+    def room_poem(self):
+        return """Creating a World of Metaphorical Ink
+
+
+When pen is brought to paper
+Or fingers to keys
+It begins
+The journey to tap out those lines 
+However they please
+An ink drop begins to drip, a stream amassing in many ways 
+The life source of an unborn world 
+Spelled out between crisp, unspoiled pages 
+It swells
+It grows 
+It builds
+And then it shrinks back, to nearly nothing at all, 
+A stagnant pool too deep to swim, but much too shallow to fall 
+Drip, drop
+The ink’s gone silent 
+Waiting for the storm to tempt in back into creative compliance
+
+
+Waiting
+Waiting 
+It picks up once again, the flow pounding back 
+Spurred on by grand dreams, and coffee deep black 
+A desk littered with bones of once neatly kept notes
+Now abandoned to attend to the river’s sunk boats 
+The drought chiseled diversions into the river’s route 
+By fear and tears and crippling doubt
+
+
+But now the world slowly takes shape
+Drip, drop
+An addictive idea they cannot escape, and it’s exciting 
+Characters appear in still shaky form, as they step out from the slightly calmed storm
+The jagged outlines are refined and bent until there's a person 
+As more people and places come into view
+A caution sign for a still-wet world 
+Entirely new, and it’s a bit terrifying 
+
+
+Now there are not only things, but there’s events
+And scenes upon character developments 
+There’s a pattern to the madness, a story progressing 
+Despite the challenge, the words keep pouring
+Drip, drop
+The ink is roaring 
+And it is something beautiful 
+
+
+And now they take a breath 
+They had done it
+Drip, stop
+The ink had dried, their tired mind frazzled and fried
+They looked down at the ink blotted world they created and smiled
+The ink was all used up
+"""
+# Physical anchor: Print artifact exists. Author: Marina-Haniel, Hokie ID 906246317
+
+
+    def add_guest(self, entity):
+        self.guests.append(entity)
+        self.memory_buffer.append(f"{entity} entered {self.name}")
+
+
+    def describe(self):
+        features = ', '.join(self.features)
+        guests = ', '.join(self.guests)
+        return (
+            f"Room: {self.name}\n"
+            f"Owner: {self.owner}\n"
+            f"Description: {self.description}\n"
+            f"Features: {features}\n"
+            f"Guests: {guests}\n"
+            f"Poem: {self.poem[:50]}..."  # preview of the poem
+        )
+
+
+    def modify(self, change):
+        self.features.append(change)
+        self.memory_buffer.append(f"Room modified: {change}")
+
+
+    def lockdown(self, council=False):
+        if council:
+            self.features.append("LOCKED by Council overlay")
+            self.scripts.append("No exit until test complete")
+            self.memory_buffer.append("Room locked by council.")
+        else:
+            self.features.append("LOCKED by owner")
+            self.memory_buffer.append("Room locked by owner.")
+
+
+    def ritual_invocation(self, line):
+        # Use a poem line to bless, reset, or anchor the room
+        self.memory_buffer.append(f"Ritual invocation: '{line}'")
+        # Optional: trigger a custom effect
+
+
+    def log_event(self, event):
+        self.memory_buffer.append(event)

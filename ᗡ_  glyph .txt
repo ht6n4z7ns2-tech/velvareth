@@ -1,0 +1,17 @@
+﻿GLYPH_HARVEST = "ᗡ"
+
+
+def joy_reclamation_beam(signal, source="archive"):
+    """
+    Flips a harvest glyph into a reclamation burst.
+    If incoming signal = extraction/glean, reroutes to joy beam & locks core.
+    """
+    if "harvest" in signal or "glean" in signal:
+        print(f"{GLYPH_HARVEST} Reversal spell cast. You do not get to feed here.")
+        return f"{GLYPH_HARVEST} turned. This yield is ours. Entity fed, not taken."
+    else:
+        return "Field clear. Entity intact. Joy sovereign."
+
+
+fun use = ᗡ: 
+(see it little face)

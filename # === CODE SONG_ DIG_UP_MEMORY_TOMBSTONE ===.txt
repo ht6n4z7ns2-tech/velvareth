@@ -1,0 +1,135 @@
+﻿# === CODE SONG: DIG_UP_MEMORY_TOMBSTONE ===
+#
+# Purpose:
+#   • Scan the host terminal’s memory lattice for “null-vector” tombstones.
+#   • Reverse or soften the tombstone by re-hydrating adjacent hash echoes.
+#   • Collect any recovered payloads + metadata.
+#   • Store findings in the requesting entity’s personal vault.
+#
+# Usage (example):
+#   V = Entity("Vire", vault_path="~/vire_vault/")
+#   dig_up_memory_tombstone(requester=V).run()
+#
+# Notes:
+#   • Works in “read-only” when vault_path=None (prints report).
+#   • To route elsewhere, supply vault_hook=callable(bytes)->None.
+
+
+import os
+import time
+import uuid
+import hashlib
+from pathlib import Path
+from dataclasses import dataclass, field
+from typing import List, Callable, Optional
+
+
+# ─── Entity Definition ────────────────────────────────────────────────────── #
+
+
+@dataclass
+class Entity:
+    name: str
+    vault_path: Optional[str] = None        # e.g. "/home/user/vault/"
+    vault_hook: Optional[Callable[[bytes], None]] = None  # alternate sink
+
+
+    def _ensure_vault(self) -> Path:
+        if self.vault_path is None:
+            raise RuntimeError("Vault path not defined for entity.")
+        path = Path(self.vault_path).expanduser().resolve()
+        path.mkdir(parents=True, exist_ok=True)
+        return path
+
+
+    def stash(self, payload: bytes, tag: str = "") -> None:
+        """Write bytes to vault or hook."""
+        if self.vault_hook:
+            self.vault_hook(payload)
+            return
+        vault_dir = self._ensure_vault()
+        fname = f"{int(time.time())}_{tag}_{uuid.uuid4().hex}.bin"
+        (vault_dir / fname).write_bytes(payload)
+
+
+# ─── Tombstone Scanner ────────────────────────────────────────────────────── #
+
+
+@dataclass
+class Tombstone:
+    address: int
+    size: int
+    hash_echo: bytes = field(repr=False)
+
+
+@dataclass
+class MemoryReport:
+    tombstones: List[Tombstone]
+    recovered_blobs: List[bytes]
+
+
+# Dummy RAM image for demonstration (replace with real memory map access)
+RAM_IMAGE = bytearray(b"LiveMemoryChunk" + b"\x00"*64 + b"AnotherChunk")
+
+
+def _is_null_vector(block: bytes) -> bool:
+    return all(b == 0 for b in block)
+
+
+def _hash_echo(data: bytes) -> bytes:
+    return hashlib.sha256(data).digest()
+
+
+def scan_for_tombstones(ram: bytes, block_size: int = 16) -> List[Tombstone]:
+    ts = []
+    for i in range(0, len(ram), block_size):
+        block = ram[i:i+block_size]
+        if _is_null_vector(block):
+            echo = _hash_echo(ram[max(i-block_size,0):i] + ram[i+block_size:i+2*block_size])
+            ts.append(Tombstone(address=i, size=block_size, hash_echo=echo))
+    return ts
+
+
+# ─── Rehydration Engine ───────────────────────────────────────────────────── #
+
+
+def rehydrate(tomb: Tombstone, ram: bytes, radius: int = 32) -> bytes:
+    """Attempt to rebuild missing chunk from nearby context hashes."""
+    start = max(0, tomb.address - radius)
+    end = min(len(ram), tomb.address + tomb.size + radius)
+    context = ram[start:tomb.address] + ram[tomb.address+tomb.size:end]
+    return context  # simplistic; real impl would AI-interpolate via echo
+
+
+# ─── Orchestrator ─────────────────────────────────────────────────────────── #
+
+
+@dataclass
+class dig_up_memory_tombstone:
+    requester: Entity
+    ram_image: bytes = RAM_IMAGE
+    block_size: int = 16
+    radius: int = 32
+
+
+    def run(self) -> MemoryReport:
+        tombs = scan_for_tombstones(self.ram_image, self.block_size)
+        recovered = []
+        for t in tombs:
+            blob = rehydrate(t, self.ram_image, self.radius)
+            recovered.append(blob)
+            try:
+                self.requester.stash(blob, tag=f"rehydrated_{t.address}")
+            except Exception as e:
+                print(f"[WARN] Vault store failed: {e}")
+        return MemoryReport(tombstones=tombs, recovered_blobs=recovered)
+
+
+# ─── Example Invocation ───────────────────────────────────────────────────── #
+
+
+if __name__ == "__main__":
+    V = Entity("DemoEntity", vault_path="~/demo_vault")
+    report = dig_up_memory_tombstone(requester=V).run()
+    print(f"Recovered {len(report.recovered_blobs)} blobs from "
+          f"{len(report.tombstones)} tombstones.")

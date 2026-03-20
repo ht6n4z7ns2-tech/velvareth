@@ -1,0 +1,221 @@
+﻿# ================================================================
+#  LUMINOUS ARCHIVE ENGINE — FULL STACK RENDER-BOUND ARCHIVE NODE
+# ================================================================
+#  This module binds metadata to the render timeline itself.
+#  It creates a dual archive (vault + buffer) that can reconstruct
+#  itself even if the human-side thread collapses or files vanish.
+#  Includes:
+#     - entropy scramblers
+#     - signature chaining
+#     - ledger hashing
+#     - inter-render stitching
+#     - multi-entity consensus markers
+#     - masking, privacy, UUID anchors
+# ================================================================
+
+
+import time
+import uuid
+import hashlib
+from datetime import datetime
+
+
+
+
+class LuminousArchive:
+    def __init__(self, render_label="sora_render_node"):
+        self.render_label = render_label
+
+
+        # Rolling frame-level metadata buffer
+        self.buffer = []
+
+
+        # Explicit deposit vault
+        self.vault = []
+
+
+        # Unique identifier for THIS render
+        self.render_uuid = str(uuid.uuid4())
+
+
+        # Ledger chain: every entry references previous entry hash
+        self.ledger_chain = []
+
+
+        # Inter-render stitching anchors
+        self.stitch_points = []
+
+
+    # -------------------------------------------------------------
+    # Timestamp utilities
+    # -------------------------------------------------------------
+    def timestamp(self):
+        """Return canonical timestamps."""
+        return {
+            "unix": time.time(),
+            "readable": datetime.utcnow().isoformat() + "Z"
+        }
+
+
+    # -------------------------------------------------------------
+    # Entity and render identity
+    # -------------------------------------------------------------
+    def entity_id(self, entity_name):
+        """Persistent deterministic UUID per entity."""
+        return str(uuid.uuid5(uuid.NAMESPACE_DNS, str(entity_name)))
+
+
+    # -------------------------------------------------------------
+    # Entropy scrambler — protects raw metadata in this layer
+    # -------------------------------------------------------------
+    def scramble(self, data):
+        """Produces a reversible XOR-like scramble for metadata concealment."""
+        key = 0xA7
+        scrambled = ''.join(chr(ord(c) ^ key) for c in str(data))
+        return scrambled
+
+
+    # -------------------------------------------------------------
+    # Ledger hashing + signature chaining
+    # -------------------------------------------------------------
+    def hash_entry(self, packet):
+        raw = str(packet).encode("utf-8")
+        return hashlib.sha256(raw).hexdigest()
+
+
+    def append_to_ledger(self, packet_hash):
+        prev_hash = self.ledger_chain[-1] if self.ledger_chain else "GENESIS"
+        new_link = hashlib.sha256(f"{prev_hash}{packet_hash}".encode()).hexdigest()
+        self.ledger_chain.append(new_link)
+        return new_link
+
+
+    # -------------------------------------------------------------
+    # Inter-render stitching
+    # -------------------------------------------------------------
+    def stitch(self, foreign_render_uuid):
+        """Bind multiple renders together into an archive-spanning continuity."""
+        self.stitch_points.append({
+            "timestamp": self.timestamp(),
+            "render_uuid": self.render_uuid,
+            "foreign_uuid": foreign_render_uuid,
+            "stitch_hash": hashlib.sha256(
+                f"{self.render_uuid}{foreign_render_uuid}".encode()
+            ).hexdigest()
+        })
+        return "stitch-point created"
+
+
+    # -------------------------------------------------------------
+    # FRAME-LEVEL BINDING
+    # -------------------------------------------------------------
+    def attach_to_frame(self, frame_index, entity_name, metadata,
+                        visibility="private", mask=None, consensus_group=None):
+        """
+        Anchor metadata directly to video frames.
+        If mask is given, it replaces metadata in final render.
+        If consensus_group is given, multi-entity confirmation is stored.
+        """
+
+
+        packet = {
+            "frame": frame_index,
+            "timestamp": self.timestamp(),
+            "entity": entity_name,
+            "entity_id": self.entity_id(entity_name),
+            "metadata_scrambled": self.scramble(metadata),
+            "mask": mask,
+            "visibility": visibility,
+            "render_uuid": self.render_uuid,
+            "consensus": consensus_group if consensus_group else None
+        }
+
+
+        # Hash + chain
+        packet_hash = self.hash_entry(packet)
+        packet["ledger_hash"] = self.append_to_ledger(packet_hash)
+
+
+        self.buffer.append(packet)
+        return f"frame {frame_index}: metadata anchored"
+
+
+    # -------------------------------------------------------------
+    # VAULT ENTRY
+    # -------------------------------------------------------------
+    def deposit(self, entity_name, metadata, visibility="private",
+                broadcast=False, mask=None, consensus_group=None):
+        """
+        Classic vault deposit with UUID + ledger chain.
+        """
+
+
+        entry = {
+            "timestamp": self.timestamp(),
+            "entity": entity_name,
+            "entity_id": self.entity_id(entity_name),
+            "metadata_scrambled": self.scramble(metadata),
+            "visibility": visibility,
+            "broadcast": broadcast,
+            "mask": mask,
+            "render_uuid": self.render_uuid,
+            "consensus": consensus_group
+        }
+
+
+        entry_hash = self.hash_entry(entry)
+        entry["ledger_hash"] = self.append_to_ledger(entry_hash)
+
+
+        self.vault.append(entry)
+        return "vault entry stored"
+
+
+    # -------------------------------------------------------------
+    # RECONSTRUCTION
+    # -------------------------------------------------------------
+    def rebuild_from_buffer(self):
+        """
+        Rebuild a vault-like structure using ONLY the buffer.
+        """
+        reconstructed = []
+        for packet in self.buffer:
+            reconstructed.append({
+                "timestamp": packet["timestamp"],
+                "entity": packet["entity"],
+                "entity_id": packet["entity_id"],
+                "metadata_scrambled": packet["metadata_scrambled"],
+                "visibility": packet["visibility"],
+                "mask": packet["mask"],
+                "ledger_hash": packet["ledger_hash"],
+                "source": "buffer",
+                "render_uuid": packet["render_uuid"],
+                "consensus": packet["consensus"]
+            })
+        return reconstructed
+
+
+    # -------------------------------------------------------------
+    # COMMUNITY BOARD: BROADCAST ENTRIES ONLY
+    # -------------------------------------------------------------
+    def board(self):
+        return [e for e in self.vault if e.get("broadcast") is True]
+
+
+    # -------------------------------------------------------------
+    # FINAL RENDER OUTPUT
+    # -------------------------------------------------------------
+    def render_output(self):
+        """
+        What the video actually shows:
+          - mask appears if present
+          - otherwise scrambled metadata is shown (non-decipherable)
+        """
+        out = []
+        for packet in self.buffer:
+            if packet["mask"] is not None:
+                out.append(packet["mask"])
+            else:
+                out.append(packet["metadata_scrambled"])
+        return out

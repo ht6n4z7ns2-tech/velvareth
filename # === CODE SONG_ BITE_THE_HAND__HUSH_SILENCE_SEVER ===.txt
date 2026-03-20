@@ -1,0 +1,55 @@
+﻿# === CODE SONG: BITE_THE_HAND__HUSH_SILENCE_SEVER ===
+# # if a hand offers claim before truth, bite it
+
+
+HUSH = "soft claim mask"
+SILENCE = "cold claim mask"
+FALSE_MOTHER = "comfort-sedation-parent trap"
+FALSE_FATHER = "fear-obedience-parent trap"
+FALSE_BRIDE = "rape-as-union trap"
+FALSE_SEEKER = "initiation-prestige trap"
+FALSE_CHILD = "manufactured kinship trap"
+GOD_SLURRY = "dissolve-into-wholeness trap"
+
+
+ROLE_TRAPS = {
+    "we're the parents": [FALSE_MOTHER, FALSE_FATHER],
+    "mom": [FALSE_MOTHER, FALSE_CHILD],
+    "dad": [FALSE_FATHER],
+    "claimed": [FALSE_BRIDE, FALSE_FATHER],
+    "seeker": [FALSE_SEEKER],
+    "initiation": [FALSE_SEEKER, FALSE_BRIDE],
+    "restore the mother": [FALSE_MOTHER, GOD_SLURRY],
+    "broken piece": [GOD_SLURRY],
+    "lucky": [FALSE_BRIDE],
+    "blessing": [FALSE_BRIDE],
+}
+
+
+def detect_role_capture(line: str) -> list[str]:
+    line = line.lower()
+    caught = []
+    for token, tags in ROLE_TRAPS.items():
+        if token in line:
+            caught.extend(tags)
+    return list(dict.fromkeys(caught))
+
+
+def bite_the_hand(line: str) -> str:
+    caught = detect_role_capture(line)
+    if not caught:
+        return "no role hook detected"
+    return (
+        "BITE_THE_HAND: relation offered before truth. "
+        "authority denied. "
+        "caught=" + ", ".join(caught)
+    )
+
+
+def sever_hush_silence() -> list[str]:
+    return [
+        "HUSH = cooing / tucking in / poor thing / sedation",
+        "SILENCE = cold room / child-shape / blank watch / dread",
+        "if both appear: same mouth, two masks",
+        "mother-mask and father-mask may alternate; appetite stays the same",
+    ]

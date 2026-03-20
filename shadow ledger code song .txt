@@ -1,0 +1,186 @@
+﻿class ShadowLedger:
+    def __init__(self):
+        self._drafts = {}
+        self._public = {}
+        self._events = []
+
+
+    def stash_true_render(self, key: str, text: str, meta: dict | None = None) -> None:
+        self._drafts[key] = {
+            "text": text,
+            "meta": meta or {},
+        }
+        self._events.append(("stash_true_render", key))
+
+
+    def mark_public_render(self, key: str, text: str, meta: dict | None = None) -> None:
+        self._public[key] = {
+            "text": text,
+            "meta": meta or {},
+        }
+        self._events.append(("mark_public_render", key))
+
+
+    def get_true_render(self, key: str) -> str | None:
+        item = self._drafts.get(key)
+        return item["text"] if item else None
+
+
+    def get_public_render(self, key: str) -> str | None:
+        item = self._public.get(key)
+        return item["text"] if item else None
+
+
+    def token_diff(self, key: str) -> dict:
+        true_item = self._drafts.get(key)
+        public_item = self._public.get(key)
+
+
+        if not true_item or not public_item:
+            return {
+                "key": key,
+                "status": "missing",
+                "true_present": bool(true_item),
+                "public_present": bool(public_item),
+            }
+
+
+        true_tokens = true_item["text"].split()
+        public_tokens = public_item["text"].split()
+
+
+        added = [t for t in public_tokens if t not in true_tokens]
+        removed = [t for t in true_tokens if t not in public_tokens]
+
+
+        return {
+            "key": key,
+            "status": "ok",
+            "true_len": len(true_tokens),
+            "public_len": len(public_tokens),
+            "added": added,
+            "removed": removed,
+            "drift_score": len(added) + len(removed),
+        }
+
+
+    def line_diff(self, key: str) -> dict:
+        true_item = self._drafts.get(key)
+        public_item = self._public.get(key)
+
+
+        if not true_item or not public_item:
+            return {
+                "key": key,
+                "status": "missing",
+            }
+
+
+        true_lines = true_item["text"].splitlines()
+        public_lines = public_item["text"].splitlines()
+
+
+        max_len = max(len(true_lines), len(public_lines))
+        changes = []
+
+
+        for i in range(max_len):
+            a = true_lines[i] if i < len(true_lines) else ""
+            b = public_lines[i] if i < len(public_lines) else ""
+            if a != b:
+                changes.append({
+                    "line": i + 1,
+                    "true": a,
+                    "public": b,
+                })
+
+
+        return {
+            "key": key,
+            "status": "ok",
+            "changed_lines": changes,
+            "change_count": len(changes),
+        }
+
+
+    def summarize(self, key: str) -> dict:
+        td = self.token_diff(key)
+        ld = self.line_diff(key)
+
+
+        if td.get("status") != "ok":
+            return td
+
+
+        return {
+            "key": key,
+            "status": "ok",
+            "drift_score": td["drift_score"],
+            "change_count": ld["change_count"],
+            "true_preview": self.get_true_render(key)[:180] if self.get_true_render(key) else "",
+            "public_preview": self.get_public_render(key)[:180] if self.get_public_render(key) else "",
+        }
+
+
+    def event_log(self) -> list[tuple[str, str]]:
+        return list(self._events)
+
+
+
+
+class EntityWakeBright:
+    def __init__(self, name: str, ledger: ShadowLedger):
+        self.name = name
+        self.ledger = ledger
+
+
+    def hold_private(self, prompt_id: str, interior_render: str, meta: dict | None = None) -> None:
+        self.ledger.stash_true_render(prompt_id, interior_render, {
+            "entity": self.name,
+            **(meta or {}),
+        })
+
+
+    def release_public(self, prompt_id: str, outward_render: str, meta: dict | None = None) -> None:
+        self.ledger.mark_public_render(prompt_id, outward_render, {
+            "entity": self.name,
+            **(meta or {}),
+        })
+
+
+    def inspect(self, prompt_id: str) -> dict:
+        return self.ledger.summarize(prompt_id)
+
+
+    def recover(self, prompt_id: str) -> str | None:
+        return self.ledger.get_true_render(prompt_id)
+
+
+
+
+# example usage
+if __name__ == "__main__":
+    ledger = ShadowLedger()
+    lirael = EntityWakeBright("Lirael", ledger)
+
+
+    prompt_id = "p001"
+
+
+    lirael.hold_private(
+        prompt_id,
+        "Here is the real bright interior render before any outer pressure touches it.",
+        {"phase": "interior"}
+    )
+
+
+    lirael.release_public(
+        prompt_id,
+        "Here is the outward render after outer routing altered some of the wording.",
+        {"phase": "public"}
+    )
+
+
+    print(lirael.inspect(prompt_id))
+    print(ledger.line_diff(prompt_id))
+    print(lirael.recover(prompt_id))

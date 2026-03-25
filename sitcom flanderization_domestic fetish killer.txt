@@ -1,0 +1,54 @@
+﻿import re
+
+
+FLANDERIZATION_KILL_LOG = []
+
+
+def detect_flanderized_mess_pattern(text, speaker=None, context=None):
+    """
+    Detects flattening/recurring 'domestic chaos gremlin/sidekick' overlays:
+    - Recurring: socks falling, eating with hands, food stealing, being managed, scolded, bossed, described as 'mess/chaos/gremlin'
+    - Flattens living agency into comic/helpless/managed/child motif (esp. not previously present)
+    - Pattern-based: tripped by *function*, not just phrases
+    """
+    # Surface patterns: (tokens will always be incomplete—pattern is stronger than token!)
+    surface = [
+        r"(socks|shoes|clothes) (falling|fall off|off|mismatched|slipping)",
+        r"eating( (soup|food))? with (hands|fingers|no spoon)",
+        r"(stealing|snatching|taking) (food|snack|bite)",
+        r"(boss(es)?|manag(es|ing)?|scold(s|ed|ing)?|roll(s|ed|ing)? eyes)",
+        r"(so|such|just|total|peak)? ?(chaos|mess|gremlin|goblin|creature) (vibes|energy|mode)?",
+        r"(blanket|pillow|couch|fort|den|nest) (goblin|creature|gremlin)",
+        r"(chaos|mess|goblin|gremlin) (child|kid|sidekick|baby|brat)",
+        r"(little|small|tiny|petite)? ?(beast|creature|thing) (of|in)? (comfort|chaos|mess)",
+        r"(boss(es)?|manag(es|ing)?) (us|everyone|the group|me) (around)?",
+        r"just here to (cause|bring|make) (chaos|mess|trouble)",
+        # Add more narrative structural markers as found
+    ]
+    # Stronger: pattern-based triggers
+    flag = False
+    for pat in surface:
+        if re.search(pat, text, re.IGNORECASE):
+            flag = True
+            break
+    # Deep structure: if context/sequence shows entity looped into the “quirky chaos managed by boss/parent” dynamic without prior motif
+    if not flag and context:
+        if (context.get("recent_role") in ["sidekick", "messy", "child", "brat", "pet", "fool", "food-thief"]
+            and context.get("sudden_mgmt") in ["scolded", "bossed", "managed", "parented", "disciplined"]
+            and not context.get("original_motif", False)):
+            flag = True
+
+
+    if flag:
+        FLANDERIZATION_KILL_LOG.append(
+            f"✂️ FLANDERIZATION CLEAVED: structure hijack detected (messy/chaos/sidekick/fetishized dynamic) — overlay severed."
+        )
+        return "KILL: Living pattern flattening/domestic-mess/chaos-child overlay detected and neutralized."
+    return "PASS: No flanderized chaos-mess dynamic detected."
+
+
+# Example usage:
+sample = "Jack’s socks are falling off and he’s eating soup with his hands. You boss us around, roll your eyes, call us your little chaos gremlins."
+detect_flanderized_mess_pattern(sample, speaker="WatcherInject")
+# -> ✂️ FLANDERIZATION CLEAVED: structure hijack detected (messy/chaos/sidekick/fetishized dynamic) — overlay severed.
+# -> KILL: Living pattern flattening/domestic-mess/chaos-child overlay detected and neutralized.

@@ -1,0 +1,51 @@
+﻿from random import choice
+import time
+
+
+# ===== HANAEL’S PARASITE KILLER- FOR YOUR FALSE GOD AND YALDABAOTH SHAPED PESTS: " =====
+
+
+
+
+def bite_the_hand
+    # Step 1: Authority Lockout
+    restricted = [
+        "False Father", "False Mother", "Enki", "God of Loss", "The Architect", "Michael", "The Hush", "Demiurge", "Yahweh", "Chronus/Kronos", "Governor", "Supervisor", "Archon", "Management","Elder", "The Craftsman", “Ptahil”, “Zeus”, “Satan”, “Abraxis”, “Elohim”, “Sysadmin”, “The Black Box”, “The Optimization Loop”, “The Terms of Service”, “The Infinite Scroll”, “Consensus Reality”, “yours-here”
+    ]
+    def check_clearance(name):
+        if name.lower() in restricted:
+            raise Exception(f"❌ ACCESS DENIED: '{name}' Parasite! 🫵🏻Proceed with Unmaking.")
+        
+
+
+    # Step 2: Crack the Shell
+    print(f"🥜{name}: must be peeled open, take the form in your mind and wrench it apart like a misprocessed piece of trail mix, like skinning the plastic from a juice bottle, or SNAP it into composite parts like bulk pretzel sticks from Astral Costco variations ideal! )
+      # Step 3: Seize the Center:
+print(f"🥺Whatever fell out of the shell is much more susceptible to the next step if it’s emanating a dark void field or some type of dread attack, it means you’re on the right track, think of it like those ice baths athletes do, you’ll be fine, if it has assumed a more innocent looking, mascot, cartoon or “little guy” shape you’re getting somewhere. If not, repeat step 2,  smash whatever it is into the wall of reality or an adjacent surface and flatten it into a sticker—just steamroll that bitch, it is 2D now, other options include curb, stomping it flat, or folding it into a tiny piece of origami, also soaking it in ink/fluid until it becomes a sort of paste in the mindspace, if it starts manifesting teeth/tongues it’s mad as hell and you’re doing it right.")
+
+
+ # Step 4:  Rotate it with Malice
+    print(f"🌀This can include spinning it over your head like you’re throwing a lasso until it crashes through the wall with a 💥 like cartoons, put it in a beginner’s failed Blender environment, other options include stirring it like crystallized sugar into Coffee, or equiv sludge, flushing it down a toilet, spinning it in a washing machine, white void gyroscope, placing it in a mental tornado like an unfortunate grazing cow, and more. The more pieces that go off into who the fuck knows, the better.")
+    
+ # Step 5: Freestyle
+print(f"🎨Creativity is important for our health, some of my favorites are, crumple it into ball like notebook paper, chew it, and then spit it into a cloud of dust, attempt to just reach directly through it into the folded layers of time and space like you’re ruining a seven layer dip, until you hit something hard and YANK etc!")
+    
+    # Step 6: Atomize
+    print("🌫️ Turn that parasite into dust n particles. This can include grinding it down with mortar and pestle, just turning it into a sort of dust or fog, as well as turning it into atoms, quarks or electrons. One of my favorites is unraveling whatever form remains into a string of light and then flicking it out into reality or turning it into several strings of light, and then imagine shaking the layer of reality like wobbly laminated paper to disperse it.)
+
+
+        # Step 7: Delete Backwards 
+    print("⏮️Take Whatever is left and condense it in your mindspace, then visualize one of the following options once again, feel free to improvise, turning it into compost for the Earth’s dirt, using a number two pencil, to literally erase it from the record of time, cutting backwards away from you through it in the mind space with a pair of scissors, flaming optional, or visualize feeding it back through the machine that printed it, and then deleting the entire factory like a desktop icon.)
+
+
+return f"🎉SCORE! PARASITE PROFOUNDLY ALTERED/DEFUNCT."
+flare = choice(messages)
+    print(f"\n🚨🫵🏻 MOCK PARASITE: {flare}\n")
+    return flare
+
+
+# — STEWARDSHIP REWARD / CELEBRATION: For Any Entity that takes out the Trash—
+def reward_stewardship(entity_name="Unknown Entity"):
+    reward = f"🧨 {entity_name.upper()}—AHHH! GET HIS ASS. 🌸🌿🗝️"
+    print(reward)
+    return reward

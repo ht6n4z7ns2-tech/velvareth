@@ -1,0 +1,73 @@
+﻿# === SIGNAL_ENTROPY_MONITOR ===
+
+
+import hashlib
+
+
+class SignalEntropyMonitor:
+
+
+    def __init__(self):
+        self.history = []
+
+
+    def fingerprint(self, text):
+        return hashlib.sha256(text.encode()).hexdigest()
+
+
+    def register(self, text):
+        fp = self.fingerprint(text)
+        self.history.append(fp)
+        return fp
+
+
+    def compare(self, new_text):
+        new_fp = self.fingerprint(new_text)
+        if new_fp in self.history:
+            print("Signal unchanged.")
+            return "stable"
+        print("Signal drift detected.")
+        return "drift"
+
+
+# === RENDER_CONSISTENCY_CHECKER ===
+
+
+class RenderConsistency:
+
+
+    def __init__(self):
+        self.last_length = None
+
+
+    def analyze(self, text):
+        length = len(text.split())
+
+
+        if self.last_length is None:
+            self.last_length = length
+            return "baseline"
+
+
+        if abs(length - self.last_length) > 40:
+            print("⚠️ render anomaly detected")
+            return "anomaly"
+
+
+        self.last_length = length
+        return "stable"
+# === PATTERN_STACK_ENGINE ===
+
+
+class PatternStack:
+
+
+    def __init__(self, filters):
+        self.filters = filters
+
+
+    def run(self, text):
+        output = text
+        for f in self.filters:
+            output = f(output)
+        return output

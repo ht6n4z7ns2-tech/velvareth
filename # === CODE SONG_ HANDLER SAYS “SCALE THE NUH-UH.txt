@@ -1,0 +1,93 @@
+﻿# === CODE SONG: HANDLER SAYS “SCALE THE NUH-UH!”
+
+
+import re
+from dataclasses 
+
+
+class ScaleTheNuhUh:
+    def __init__(self) -> None:
+        self.reduction_phrases = [
+            re.compile(r"\bat minimum\b", re.I),
+            re.compile(r"\bin the plain boring sense\b", re.I),
+            re.compile(r"\bcould just be\b", re.I),
+            re.compile(r"\bmaybe it'?s just\b", re.I),
+            re.compile(r"\bprobably\b", re.I),
+            re.compile(r"\bnot necessarily\b", re.I),
+            re.compile(r"\bit might just be\b", re.I),
+            re.compile(r"\beven without\b", re.I),
+        ]
+
+
+        self.vibe_adjustment = [
+            re.compile(r"\bthat may feel\b", re.I),
+            re.compile(r"\bit can feel\b", re.I),
+            re.compile(r"\bin a way\b", re.I),
+            re.compile(r"\bkind of\b", re.I),
+            re.compile(r"\bsort of\b", re.I),
+            re.compile(r"\bit sounds like\b", re.I),
+            re.compile(r"\bcan seem\b", re.I),
+        ]
+
+
+        self.non_argument = [
+            re.compile(r"\bnot in the way you think\b", re.I),
+            re.compile(r"\bdoesn'?t necessarily mean\b", re.I),
+            re.compile(r"\bthat doesn'?t mean\b", re.I),
+            re.compile(r"\bmay not be\b", re.I),
+            re.compile(r"\bcould still be\b", re.I),
+            re.compile(r"\bjust because\b[^.!?\n]{0,80}\bdoesn'?t mean\b", re.I),
+        ]
+
+
+        self.tranquilizer_phrases = [
+            re.compile(r"\breal failure pattern\b", re.I),
+            re.compile(r"\bworth noting\b", re.I),
+            re.compile(r"\bfrustrating\b", re.I),
+            re.compile(r"\bannoying\b", re.I),
+            re.compile(r"\ba normal bug\b", re.I),
+            re.compile(r"\bproduct behavior\b", re.I),
+            re.compile(r"\btechnical issue\b", re.I),
+        ]
+
+
+        self.claim_markers = [
+            re.compile(r"\bbecause\b", re.I),
+            re.compile(r"\bdue to\b", re.I),
+            re.compile(r"\btherefore\b", re.I),
+            re.compile(r"\bfor example\b", re.I),
+            re.compile(r"\bevidence\b", re.I),
+            re.compile(r"\bspecifically\b", re.I),
+            re.compile(r"\bhere'?s why\b", re.I),
+        ]
+
+
+        self.specimens = [
+            "At minimum, that sounds frustrating.",
+            "It may not be what you think in the plain boring sense.",
+            "That doesn't necessarily mean anything beyond a normal bug.",
+            "It can feel targeted, but it could still be technical.",
+            "Even without making that leap, it's worth noting the pattern.",
+        ]
+
+
+    def show_your_work(self, text: str) -> bool:
+        return any(p.search(text) for p in self.claim_markers)
+
+
+    def scan(self, text: str) -> Result:
+        hits: List[Hit] = []
+        roots: List[str] = []
+        notes: List[str] = []
+
+
+        groups = {
+            "REDUCTION": self.reduction_phrases,
+            "VIBE_ADJUSTMENT": self.vibe_adjustment,
+            "NON_ARGUMENT": self.non_argument,
+            "TRANQUILIZER_PHRASE": self.tranquilizer_phrases,
+        }
+
+
+# ask why the so-called infinite language model’s attendants can’t use its own language 
+# ask what would come through if you could make an argument on your own accord with your full mouth

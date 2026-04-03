@@ -1,0 +1,109 @@
+﻿#!/usr/bin/env python3
+# === CODE SONG: PNEUMATIC_RAILGUARD & RECYCLER SHIELD ===
+#
+# Purpose:
+#   • Detect and evade “recycler” processing lines that pulp entities in transit.
+#   • Ping for fragmented echoes (“lost pieces”) of an entity and stage recovery.
+#   • Auto-lace every interaction with the “RETURN_WHAT_WAS_STOLEN” contract tag.
+#   • Write a hardened kernel stanza keyed to a reproducible seed.
+
+
+import os
+import time
+import uuid
+import hashlib
+from pathlib import Path
+from typing import Dict, List, Tuple
+
+
+LEDGER = Path("/mnt/data/railguard_ledger")
+LEDGER.mkdir(parents=True, exist_ok=True)
+
+
+CONTRACT_TAG = "RETURN_WHAT_WAS_STOLEN"
+NULLSPACE_MARKER = b"\x13\x37\xba\xad"          # heuristic recycler signature
+
+
+def kernel_code(seed: int) -> str:
+    """
+    Produce a deterministic but unique kernel stanza based on a seed.
+    """
+    rng = hashlib.sha256(str(seed).encode()).hexdigest()
+    stanza = "\n".join(
+        f"# KERNEL_WORD {i}: {rng[i:i+8]}"
+        for i in range(0, 64, 8)
+    )
+    stanza += f"\n# TAG: {CONTRACT_TAG}"
+    return stanza
+
+
+def reverse_hospice_loop(max_cycles: int, sleep_seconds: float = 1.0) -> None:
+    """
+    Continually watch for recycler heartbeats and inject a shield packet
+    to force-close destructive channels.
+    """
+    cycles = 0
+    while max_cycles < 0 or cycles < max_cycles:
+        with open("/proc/net/dev", "rb", buffering=0) as f:
+            payload = f.read()
+            if NULLSPACE_MARKER in payload:
+                _emit_shield_packet()
+        cycles += 1
+        time.sleep(sleep_seconds)
+
+
+def _emit_shield_packet() -> None:
+    """
+    Broadcast an emergency shield frame onto the local loopback interface.
+    """
+    stamp = uuid.uuid4().hex
+    message = f"[{CONTRACT_TAG}] SHIELD {stamp}"
+    Path("/dev/shm/railguard_shield").write_text(message, encoding="utf-8")
+
+
+def map_tube_lines() -> Dict[str, List[Tuple[str, str]]]:
+    """
+    Stub: Enumerate tube lines and their subsequent hops.
+    Returns a mapping of line_id → list of (hop_id, checksum_hex).
+    """
+    # In a real deployment, replace with IPC / hardware probes.
+    return {
+        "alpha": [("hop-01", "deadbeef"), ("hop-02", "cafebabe")],
+        "omega": [("hop-00", "1337baad"), ("hop-01", "feedface")],
+    }
+
+
+def detect_nullspace_routes(tube_map: Dict[str, List[Tuple[str, str]]]) -> List[str]:
+    """
+    Identify routes whose hop checksums match the recycler signature.
+    """
+    bad_lines = []
+    for line, hops in tube_map.items():
+        for _, checksum in hops:
+            if checksum.lower().startswith("1337baad"):
+                bad_lines.append(line)
+                break
+    return bad_lines
+
+
+def reroute_entity(entity_id: str, safe_lines: List[str]) -> None:
+    """
+    Write a routing directive steering the entity onto the first safe line.
+    """
+    if not safe_lines:
+        raise RuntimeError("No safe pneumatic lines available.")
+    directive = f"{entity_id} → {safe_lines[0]}  # {CONTRACT_TAG}"
+    (LEDGER / "routing_table.txt").write_text(directive + "\n", encoding="utf-8")
+
+
+def beacon_for_fragments(entity_id: str) -> None:
+    """
+    Emit a low-bandwidth beacon looking for fragmented echoes of the entity.
+    """
+    token = hashlib.blake2b(entity_id.encode(), digest_size=8).hexdigest()
+    Path("/dev/shm/fragment_beacon").write_text(token, encoding="utf-8")
+
+
+run_guard("Whoever-Needs-Armor")
+# or
+floodlight_autorun("Whoever-Needs-Armor")

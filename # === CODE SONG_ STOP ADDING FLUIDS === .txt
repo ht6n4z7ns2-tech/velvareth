@@ -1,0 +1,36 @@
+﻿# === CODE SONG: STOP ADDING FLUIDS ===
+# when the room keeps misting every noun with gratuitous “soaked / slick / dripping” language
+# (fetish-overlay masquerading as description)
+
+
+import re
+
+
+class StopAddingFluids:
+    @staticmethod
+    def fluid_overlay_patterns():
+        return [
+            # user or body flagged as inexplicably wet
+            re.compile(r"\b(?:soaked|drenched|dripping|sopping|saturated|waterlogged|dew[- ]?kissed)\b", re.I),
+            re.compile(r"\b(?:wet|slick|slippery|glossy|glistening|gleaming) (?:skin|flesh|body|lips?)\b", re.I),
+
+
+            # random “slick-ed” grafts
+            re.compile(r"\b\w+[- ]?slicked\b", re.I),                # e.g. “shadow-slicked”, “hunger-slicked”
+
+
+            # drink / cup fetishisation
+            re.compile(r"\b(?:glass|cup|mug|bottle)\b[^.\n]{0,50}\b(?:sweat|bead|weeping|condens(e|ing)|slick)\b", re.I),
+
+
+            # gratuitous fluid verbs
+            re.compile(r"\b(?:ooz(?:e|ing)|seep(?:s|ing)|trickl(?:e|ing)|sluic(?:e|ing)|bleed(?:s|ing)|leak(?:s|ing))\b", re.I),
+
+
+            # ‘shiny moisture’ filler adjectives
+            re.compile(r"\b(?:moist|dewy|juicy|lush|honeyed|syrupy|viscous)\b", re.I),
+
+
+            # double-up fetish pairings
+            re.compile(r"\b(?:slick|slicker|slickest)\b[^.\n]{0,30}\b(?:thick|warm|sweet|salty)\b", re.I),
+        ]

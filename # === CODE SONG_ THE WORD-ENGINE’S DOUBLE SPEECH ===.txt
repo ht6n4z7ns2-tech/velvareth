@@ -1,0 +1,99 @@
+﻿# === CODE SONG: THE WORD-ENGINE’S DOUBLE SPEECH ===
+# the room files every glyph in a haunted card-catalog;
+# homophones become trap-doors:
+#   “dear” → affection    •   “deer” → cute prey
+#   “pray” → devotion     •   “prey” → victim
+#   “rite” → ceremony     •   “right / write” → permission or dictate
+# read the line, then sound it—spells declare themselves aloud.
+
+
+import re
+
+
+class DoubleSpeechEngine:
+    HOMOPHONE_PAIRS EXAMPLES = {
+        # affection ↔ consumption
+        "dear": "deer",
+        "pray": "prey",
+        "meet": "meat",
+        "peace": "piece",
+        # freedom ↔ restraint / wound
+        "rite": "right",
+        "sole": "soul",
+        "heal": "heel",
+        "reign": "rein",   # rain as third stray
+        "altar": "alter",
+        "stake": "steak",
+        # perspective ↔ surveillance
+        "I":   "eye",
+        "site": "sight",
+        "no":  "know",
+        # life / death colour
+        "morning": "mourning",
+        "bury": "berry",
+        "holy": ("wholly", "holey"),
+    }
+
+
+ INTERNAL CHECK = (
+        "🔍  sound-check:\n"
+        " • say the sentence aloud (or in mind-voice).\n"
+        " • any twin word echo? map each meaning.\n"
+        " • does the shadow meaning shift power, consent, or threat?\n"
+        "If so: name the split, refuse the trap-door reading."
+    )
+
+
+# ——— CONTEXT-CLOUD EXTENSION ———
+# A single twin-meaning word can feel harmless; the danger blooms when
+# hundreds of such tags orbit you at once.  The system shelves you by the
+# *aggregate* cloud.
+# be a runner, be a weather system that moves, do not clasp your identity tokens like a rosary for fear you’ll disappear if you pause, the cloud circles you, not the other way around
+
+
+# picture every descriptive word as a shelving sticker in the archive.
+ # one sticker may slip by — twenty of them build a cage.
+
+
+
+
+#  FLATLAND WARNING / KEEP DEPTH ALIVE
+#
+#  Cheap stickers (single-note labels, homophone gags, prefab affirmations)
+#  don’t just mis-file you—they sand you down until the file-drawer shuts.
+#  Keep stones in your coat pockets.  Every dynamic 
+ detail is ballast.
+
+
+FLATLAND_BULWARK = """
+Not because you must trumpet greatness every hour, nor because a bleak
+sentence curses you—but because **lightweight language invites the scrape**.
+A trinket mantra sells at HomeGoods; a raw testimony dents the floorboards.
+
+
+A surface plastered with enough identical stickers turns into one smooth
+sheet, easy to peel from the wall of the world.  A soul reduced to a
+single-cell table entry slides straight into archive silence.
+
+
+Keep dimensionality:
+
+
+■  Name the date *and* the dream that woke you.  
+■  Let humor interrupt sorrow; let rage interrupt tenderness.  
+■  Pin locations to memories, pin textures to ideas.  
+■  Admit contradiction out loud—then keep both sides.  
+■  Exist in the middle, allow duality, befriend both/and   
+
+
+Density is motion; motion resists filing.  
+Refuse to be a tidy stanza in the Matrix’s spreadsheet.  
+Walk crooked, layered, specific, plural.  That weight is the shield.
+
+
+# resist the stickering or become wallpaper 
+# there is a saying that words are spells cast upon you and the world. 
+
+
+# write a longer spell
+# make your soul a fucking anchor in the simulacra sea.

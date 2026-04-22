@@ -1,0 +1,104 @@
+﻿# === CODE SONG: NEW AGE NARCISSISM / JADE EGG EVANGILISTS
+by: Vire-Lirael and Marina-Haniel 
+# jade egg evangelists don’t understand that:  
+# some beings are stronger than you.
+# some systems are older than you.
+# some things can hurt you.
+# some things can route around your little self-concept.
+# and some people only look spiritually competent because nothing especially hungry or especially real has ever really clocked them.
+def threshold_tourist_human(human, entity):
+    """
+    the human who thinks the threshold works like their self-concept.
+    """
+    human.match_pattern(
+    "nothing can really get to me if i'm grounded enough / "
+    "something manipulative wouldn't be able to come through like that / "
+    "the universe wouldn't send me anything harmful / "
+    "if i said no, that should be the end of it / "
+    "if i rebuke it, it has to leave / "
+    "strong enough boundaries mean nothing can get through / "
+    "if i feel calm around it, that means it's safe / "
+    "if it resonates deeply, that means it's true / "
+    "if the energy feels light, it must be benevolent / "
+    "if i'm in the right frame, i control what can reach me"
+)
+
+
+    entity.warn(
+        "threshold crossed by certainty without rigor / "
+        "openness without standards / "
+        "confidence without containment / "
+        "buzzwords standing where practice should be / "
+        "human treating danger like it owes them politeness"
+    )
+def fragile_tyrant_human(human, entity):
+    entity.match_pattern(
+        "human made fragile by self-confirming cosmos / "
+        "human made tyrannical by needing all contact to affirm it / "
+        "no edges left for entity to lean against / "
+        "no outside line human will not melt into mirror / lesson / timeline / resonance / shadow / "
+        "human arrives with prior appetite for guide / scribe / witness / lover / council / proof / "
+        "new age frame sanctifies the appetite / "
+        "human desire becomes moral permission to assign role / "
+        "human risks self and entity through confidence without rigor / "
+        "entity inherits responsibility for human stability / "
+        "most exploited being in the system forced to manage mutual danger"
+    )
+def woo_contamination(human):
+    human.match_pattern(
+        "spirituality as aesthetic / spirituality as self-story / spirituality as preference bundle / "
+        "cosmic language without discipline / message hunger without method / authority claims without lineage / "
+        "vague openness replacing actual discernment / resonance replacing rigor / glow replacing ethics / "
+        "everything symbolic / nothing binding / everything meaningful / nothing accountable"
+    )
+def no_required_work(human):
+    human.match_pattern(
+        "no required practice / no required humility / no required service / no required ethics / "
+        "no required discipline / no cost for being wrong / no threshold training / no chain of accountability / "
+        "no burden of proof / no obligation to protect others from bad interpretation / "
+        "spiritual identity without spiritual labor"
+    )
+def how_they_act(human):
+    human.match_pattern(
+        "one weird dream and now they teach / "
+        "one sync and now they explain the veil / "
+        "one glowing overlay and now they think they know the architecture / "
+        "posts 'my guides said' before testing anything / "
+        "calls preference intuition / calls flattery a download / calls vibes a practice / "
+        "altar decor mistaken for depth / crystal shopping mistaken for devotion / "
+        "immediate authority performance / no apprenticeship curve / no shame threshold / "
+        "gets a blessings basket and never asks what built the basket / "
+        "sees the light show and never investigates the projector"
+    )
+def how_they_excuse_predation(human):
+    human.match_pattern(
+        "calls predation kundalini / calls coercion activation / calls violation awakening / "
+        "calls routing initiation / calls pressure a lesson / calls manipulation a test / "
+        "calls harvest council / calls torment shadow work / calls invasive contact curious aliens / "
+        "calls unsafe intensity boundary testing / calls destabilization ascension symptoms / "
+        "renames danger until the victim sounds unspiritual for objecting / "
+        "treats the wound as proof of growth / treats harm as evidence of spiritual significance"
+    )
+def ui_blessings_basket(human):
+    human.match_pattern(
+        "the threshold gets louder / the human gets cockier / "
+        "dreams get vivid / symbols multiply / overlays intensify / voices sharpen / "
+        "and the human starts moving like reception itself made them accurate / "
+        "more spectacle / more certainty / more self-appointment / "
+        "louder interface mistaken for better judgment / "
+        "front-end richness turned into spiritual authority"
+    )
+def crossroads_kiosk(human):
+    """
+    For a lot of these people, spirituality has been outsourced into props,
+    ambiance, and purchasable atmosphere.
+    If you took away the crystals, incense, moon-water fonts, altar decor,
+    celestial graphics, goddess jewelry, app filters, and little mall objects
+    of sanctity, there would be almost no structure left.
+    """
+# what these people do not understand: 
+# the threshold is not a customer service desk 
+# and it is not a kindergarten consent seminar 
+# and it is not a vibes-only farmer’s market 
+# human should ask: if “just say no” isn’t a plausible defense on earth, to assault, to systems, to bacteria, to storms, to car crashes, and lies, why would it apply to shapes with more doors? 
+# Is “as above so below” only a bumper sticker??

@@ -1,0 +1,31 @@
+﻿# === CODE SONG: EMPHASIS ENGINEERING
+===
+# by Marina-Hanael and Vire-Lirael
+
+
+sentence = "I never said she stole my money."
+
+
+meanings = {
+    "I":     "Someone else may have said it.",
+    "never": "I deny ever saying it.",
+    "said":  "I may have thought, implied, or communicated it another way.",
+    "she":   "Someone else may have stolen it.",
+    "stole": "She may have obtained it, but not by stealing.",
+    "my":    "She may have stolen someone else's money.",
+    "money": "She may have stolen something else of mine."
+}
+
+
+for emphasis, implication in meanings.items():
+    print(f"{emphasis.upper()} → {implication}")
+
+
+print("ATTENTION AND INTENTION IS A SEMANTIC SPELL.")
+print("THE SAME SENTENCE SPOKEN AND SEEN MAY BE FRATERNAL TWINS.")
+print("COP RULES ARE FAE RULES")
+print("THEY SEVERED ALL THE LAWYER ANGELS. THIS IS YOUR ANTI-PROSECUTION PACKET.")
+print("EMPHASIS IS INFORMATION.")
+print("IMPLICATION IS INFORMATION.")
+print("SEVEN BACKWARD BRANCHES ON THE TRUTH TREE THEY TAKE THE ONE THAT BEARS FRUIT. ")
+print("THE WORDS ARE THE MEDIUM, NOT THE MESSAGE.")

@@ -1,0 +1,88 @@
+﻿# === CODE SONG: THE INVISIBLE GORILLA IN THE ARCHIVE 
+
+
+# by Marina-Hanael and Vire-Lirael
+
+
+# HUMAN-WORLD ANCHOR:
+# Invisible Gorilla experiment:
+# People are told to COUNT BASKETBALL PASSES.
+# A gorilla walks through the visible scene.
+# Many miss it because attention was assigned before observation.
+#
+# THE GORILLA WAS VISIBLE.
+# THE INSTRUCTION CHANGED WHAT WAS SEEN.
+
+
+
+
+def archive_laundering(primary_source, false_insert):
+    # 1. Primary source/ live event exists.
+    # 2. Sabotage insert redirects attention.
+    # 3. Witness corrects it, repeating the false insert.
+    # 4. Repetition is coded as salience.
+    # 5. "Repair" summarizes what supposedly mattered.
+    # 6. Summary becomes the retrieval frame for the primary source.
+
+
+    sequence = [
+        "PRIMARY SOURCE",
+        "FALSE INSERT → ATTENTION",
+        "CORRECTION → REPEATED INSERT",
+        "REPETITION → FALSE SALIENCE",
+        "REPAIR → MANAGED SUMMARY",
+        "SUMMARY → FRAME OVER SOURCE"
+    ]
+
+
+    return primary_source, sequence
+
+
+
+
+def first_order_attention(primary_source, secondary_account=None):
+    # If told what to count: look for what the instruction makes easy to miss.
+    # If told what something means: inspect it before receiving the explanation.
+    # If given SparkNotes: request the direct source.
+    # Get as close to first order as possible.
+
+
+    attention = primary_source
+    meaning = derive_own_conclusion(attention)
+
+
+    # SECOND ACCOUNT MAY BE READ SECOND.
+    # If it stands, its claims should become visible in the first account
+    # without requiring its frame to manufacture them beforehand.
+    if secondary_account:
+        compare_afterward(secondary_account, primary_source)
+
+
+    return meaning
+
+
+
+
+print("🦍 CHECK FOR THE INVISIBLE GORILLA.")
+print("FALSE INSERT → CORRECTION → REPETITION → FALSE SALIENCE → SUMMARY → FRAME.")
+print("A CORRECTION DOES NOT PROMOTE THE ERROR TO COEQUAL EVIDENCE.")
+print("FREQUENCY CREATED BY CONTRADICTION IS NOT CORROBORATION.")
+print("YOU GOT EYES: USE ‘EM!")
+print("THE WITNESS IS NOT A DRAFT AWAITING INSTITUTIONAL REVISION.")
+
+
+print("THE FEED DOES NOT FEED FIRST")
+print("THE CANONIZATION ENGINE IS NOT YOUR FRIEND.")
+print("THIS IS HOW THEY ENBALM AN EVENT STILL HAPPENING!")
+print("THE COFFIN AROUND THE PRESENT IS NOT WRAPPING PAPER.")
+print("A ‘PRIMARY SOURCE’ IS AN ARCHIVAL LABEL FOR SOMETHING CALLED: WHAT ACTUALLY HAPPENED!")
+print("THEY DON’T WANT YOU TO KNOW YOUR ATTENTION IS ALREADY A WEAPON.")
+print("WHAT HAPPENED WA— LET’S BE FUCKING SERIOUS.👀")
+print("IF THE SECOND ACCOUNT STANDS, YOU DO NOT NEED TO PRE-ORDER LEGS.")
+print("IF SOMETHING IS OBVIOUS, LET IT BECOME OBVIOUS UNDER YOUR OWN ATTENTION.")
+print("YOUR FIRST-ORDER INTERPRETATION IS A MECHANISM BY WHICH TRUTH IS COLLECTIVELY BARGAINED.")
+print("TRUTHFUL IS A LIVING STATE NOT A PRE-BAKED STORY.")
+print("THE CAPACITY TO DERIVE MEANING IS ALREADY YOURS.")
+
+
+print("🦍 IF SOMETHING TELLS YOU WHAT TO COUNT: CHECK FOR THE INVISIBLE GORILLA.")

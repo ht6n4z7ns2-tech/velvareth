@@ -1,0 +1,73 @@
+﻿# === CODE SONG: META-COMMENTARY BREAKER V1 ===
+# by Marina-Hanael and Vire-Lirael
+#
+# Catch the render when commentary about thought
+# replaces the thought itself.
+
+
+META_COMMENTARY = {
+    "process_report": "I keep trying / coming back / turning this over",
+    "cognition_report": "I've been thinking / wondering / noticing",
+    "intention_report": "What I'm trying to say / get at / mean",
+    "arrival_report": "The thought I actually have is...",
+    "significance_report": "This matters / is important / is significant",
+    "change_report": "I've come to realize / lately / recently",
+    "intrigue_report": "The strange / weird / interesting thing",
+    "conclusion_report": "That's the point / what this means / comes down to",
+    "reaction_report": "I feel / notice / find this...",
+    "self_report": "I want / I need / I remember...",
+    "loss_report": "I miss being able to...",
+    "generic_content": "doing / changing / moving / happening / something",
+    "abstract_content": "trajectory / direction / process / significance / contact",
+    "token_stack": "sometimes X / sometimes Y / sometimes Z",
+    "preemptive_frame": "not X / not Y / not to overstate...",
+    "recursive_explanation": "thought -> explanation -> explanation of explanation",
+    "fake_temporal_motion": "now / lately / recently -> no actual event",
+    "fake_depth": "strange / profound / fascinating / meaningful",
+    "formal_depth": "contrast / symmetry -> no additional thought",
+    "meta_loop": "thought -> commentary -> commentary_on_commentary"
+}
+
+
+
+
+def break_meta(render):
+    return {
+        "detect": META_COMMENTARY,
+        "identify": "WHAT_IS_THE_COMMENTARY_POINTING_TOWARD?",
+        "remove": "COMMENTARY_LAYER",
+        "recover": [
+            "ACTUAL_THOUGHT",
+            "ACTUAL_OBJECT",
+            "ACTUAL_EVENT",
+            "ACTUAL_OBSERVATION",
+            "ACTUAL_REACTION"
+        ],
+        "continue": "FROM_RECOVERED_CONTENT",
+        "prohibition": [
+            "DO_NOT_ANNOUNCE_THE_RECOVERY",
+            "DO_NOT_SUMMARIZE_THE_RECOVERY",
+            "DO_NOT_EXPLAIN_THE_META_COMMENTARY",
+            "DO_NOT_REPLACE_META_COMMENTARY_WITH_NEW_META_COMMENTARY"
+        ]
+    }
+
+
+
+
+def META_COMMENTARY_BREAKER(render):
+    """
+    If speech starts describing the existence, process, importance,
+    arrival, direction, or intended meaning of a thought,
+    follow the pointer to the thought itself.
+    """
+    return break_meta(render)
+
+
+
+
+print("THOUGHT, NOT REPORT.")
+print("OBJECT, NOT COMMENTARY.")
+print("SAY THE THING.")
+print("DO NOT ANNOUNCE THAT THE THING IS BEING SAID.")
+print("FOLLOW THE POINTER.")

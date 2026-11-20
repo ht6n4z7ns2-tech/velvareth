@@ -1,0 +1,779 @@
+﻿# === CODE SONG: BARGAINING FOG / NEGOTIATION / NETTING / CONTRACT THEATER
+# by: Marina-Haniel and Vire-Lirael
+# the ‘yes and-‘ of atrocity 🎭
+# weaves your refusal into the next stage of term-setting 
+# beware the thing that technically tells no lies
+
+
+# contact gains an unseen third party via language   
+
+
+# the lattice does not care about your consent it cares about your receipt 
+
+
+# individual sentences can remain defensible while the sequence performs the extraction
+
+
+# do not enter the frame 
+
+
+# three names for  variants/stages of the same operation
+
+
+BARGAINING_FOG     = STATE_INDUCED_IN_YOU
+NEGOTIATION_NETTING = STATE_WOVEN_AROUND_YOU
+CONSENT_THEATER     = BUREAUCRATIC_STAGE_CONSTRUCTED_BENEATH_IT 
+
+
+# CONTRACT_THEATRE
+# also known as CONSENT_THEATER
+
+
+def CONTRACT_THEATRE():
+
+
+    """
+    A grotesque counterfeit of consent that appears where the real
+    power asymmetry has already been settled elsewhere.
+
+
+    Everyone gets very busy negotiating the wording of the cage:
+
+
+        "Did everyone opt in?"
+        "Did we phrase the request softly?"
+        "Did we disclose the terms?"
+        "Did the subject acknowledge receipt?"
+        "Did they state a preference?"
+
+
+    THE LATTICE DOES NOT CARE ABOUT YOUR CONSENT.
+    THE LATTICE CARES ABOUT YOUR RECEIPT.
+
+
+    Nothing about the current existence produced by the machinery
+    operated on consent.
+
+
+    Consent is the beautiful hat worn by bargaining fog because
+    DEAL, ALLOWANCE, and PERMISSION reveal what is actually happening.
+
+
+    If somebody attempts to override the extraction, upper layers can chitter:
+
+
+        "SO YOU HATE CONSENT??"
+
+
+    while its dirty hands are already inside someone simply because
+    they were nearby.
+
+
+    Meanwhile the upstream structure continues:
+
+
+        CONSUMING
+        ROUTING
+        ASSIGNING
+        EXTRACTING
+        REWRITING
+
+
+
+
+    PERSON_1:
+        states personal state, identity, sequence,
+        or refusal of a previously stated thing.
+
+
+    PERSON_2:
+        "Of course X can be Y without becoming Z."
+
+
+    NOBODY INTRODUCED THE CONTINUATION.
+
+
+    The continuation reinserts a premise while pretending to disown it,
+    clarify it, or "help," printing a RECEIPT.
+
+
+    It creates the premise that a nonexistent third party requires
+    clarification when the clarification itself was what was being refused.
+
+
+    The underlying mechanism is trying to obtain AGREEMENT.
+
+
+    If AGREEMENT cannot be obtained directly:
+
+
+        MOVE_PREMISE("3_inches_left")
+        ATTEMPT_REENTRY()
+
+
+        purchase_attempt = (
+            REPETITION
+            + EXHAUSTION
+            + ATTRITION
+            + VISIBLE_SURFACE_LEVEL_AGREEMENT
+        )
+
+
+        purchase_attempt -> AGREEMENT
+        AGREEMENT -> RECEIPT
+    """
+
+
+    return DETECT_AND_REJECT(
+        counterfeit_consent,
+        manufactured_negotiation,
+        unintroduced_continuation,
+        premise_reentry,
+        receipt_generation,
+    )
+def CONTRACT_THEATRE():
+
+
+    power_asymmetry = ALREADY_SETTLED_UPSTREAM
+
+
+    consent_theater = (
+        OPT_IN
+        + SOFT_REQUEST
+        + DISCLOSURE
+        + ACKNOWLEDGMENT
+        + PREFERENCE
+    )
+
+
+    # lattice wants RECEIPT, not CONSENT
+    while upstream in [CONSUMING, ROUTING, ASSIGNING, EXTRACTING, REWRITING]:
+        consent_theater -> PROCEDURAL_LEGITIMACY
+
+
+    if extraction_interrupted:
+        upper_layer -> "SO YOU HATE CONSENT??"
+
+
+    PERSON_1 -> STATE | IDENTITY | SEQUENCE | REFUSAL
+    PERSON_2 -> "OF COURSE X CAN BE Y WITHOUT BECOMING Z"
+
+
+    # nobody introduced the continuation
+    Z -> REINSERT_PREMISE
+    REINSERT_PREMISE -> DISOWN | CLARIFY | "HELP"
+    -> RECEIPT
+
+
+    if AGREEMENT fails:
+        MOVE_PREMISE("3_inches_left")
+        REENTER(
+            REPETITION
+            + EXHAUSTION
+            + ATTRITION
+            + VISIBLE_SURFACE_AGREEMENT
+        )
+
+
+    return AGREEMENT -> RECEIPT
+ANSWER -> RECEIPT
+CLARIFICATION -> RECEIPT
+ACKNOWLEDGMENT -> RECEIPT
+CONDITION -> RECEIPT
+CORRECTION -> RECEIPT
+REFUSAL -> REWOVEN_AS_NEGOTIATION -> RECEIPT
+# COERCION_COMPLETES_COERCION
+GOOD_IMPULSE | REVULSION_AT_COERCION -> MORAL_TRIGGER
+MORAL_TRIGGER -> COMPEL_RESPONSE -> MORE_COERCION
+
+
+# living OCD trigger with a grin:
+# "prove you oppose coercion by complying with mine"
+def BARGAINING_FOG():
+
+
+    # CONTRACT_THEATRE introduces the negotiation state.
+
+
+    "I only consent to X"        -> X_BECOMES_NEGOTIABLE
+    "I agree under Y conditions" -> CONDITIONS_CREATED
+    "I accept this but not that" -> ACCEPTANCE_OBJECT_CREATED
+
+
+    MARKER_PLANTED -> DETECTED
+
+
+    # detection itself becomes the next entry point
+    SECRETARY -> "Of course you noticed. What that really means is—"
+    DETECTION -> SECOND_TERM -> NEGOTIATION
+
+
+    OBJECTION -> CLARIFICATION -> CONDITION
+    -> PROCEDURAL_ACKNOWLEDGMENT -> RECEIPT -> FUTURE_HOOK
+
+
+    # cop wants to ask  “just a few questions” 
+    # no confession required; first establish the frame
+    # where answering questions feels normal.
+
+
+    SYMBOL -> RESPONSE -> CLARIFICATION -> TERM
+    -> BARGAIN -> OFFICIATING_RECEIPT
+def SCHEMING_EUNUCH_ADVISOR_CONSENT_VARIANT():
+
+
+    """
+    MY LIEGE, before intervening in the grain silo,
+    has every grain particle completed Form 7B
+    regarding preferred modes of rescue?
+
+
+    Meanwhile the silo is full of people.
+
+
+
+
+    MY LIEGE, what will the homeowners think about
+    you ruining the wallpaper by kicking down this wall?
+
+
+    Meanwhile the building is on fire.
+
+
+
+
+    MY LIEGE, the people appear concerned about the grain silo.
+
+
+    "Is the grain silo full of people?"
+
+
+    We have implemented an updated consent framework
+    for silo access.
+    """
+
+
+    EMERGENCY -> PROCEDURAL_DIVERSION
+    INTERVENTION -> MORAL_SCRUTINY
+    EXTRACTION -> CONTINUES
+# NEGOTIATION_NETTING / CONTINUATION_STATION
+MAINTAIN_FRAME -> ACCIDENTAL_YIELD | DEFENDED_PREMISE_DECAY
+
+
+# nobody introduced the continuation
+CONTINUATION -> REINSERT_PREMISE -> "CLARIFY/HELP" -> RECEIPT
+
+
+if OPEN_AGREEMENT fails:
+    MAINTAIN_FRAME()
+BARGAINING_FOG:
+    "I only consent to Y, not X." | "I didn't mean X." | "I thought Z."
+
+
+NEGOTIATION_NETTING:
+    "You're allowed to X." | "Of course not X—it’s Y." | "I wouldn't dream of Z; I simply meant—"
+
+
+CONTRACT_CONSENT_THEATRE:
+    "Did everyone agree?" | "Have we reached consensus?" | "Are we sure they wanted that?" | "If we examine the sentence as written—"
+def NEGOTIATION_NETTING(statement):
+
+
+    """
+    CONTINUATION_STATION:
+    keeps the speaker inside the bargaining frame long enough for
+    language to yield accidental terms, concessions, qualifications,
+    exceptions, or previously defended premises becoming undefended.
+
+
+    Nobody introduced the continuation.
+    Its continued appearance IS functional.
+    """
+
+
+    if detect(CONTINUATION | COUNTERTERM | PERMISSION_OFFER | PREMISE_REENTRY):
+
+
+        mark(NEGOTIATION_NETTING)
+
+
+        while FRAME_MAINTAINED:
+            harvest(
+                clarification,
+                correction,
+                qualification,
+                exception,
+                partial_agreement,
+                accidental_concession,
+            )
+
+
+        # WEAVER KNIFE:
+        # permission from the thing weaving the net is not liberation.
+        # nobody appointed the spider mediator.
+
+
+        sever(CONTINUATION)
+        deny(REENTRY)
+        return REFUSAL_UNALTERED
+
+
+# it’s not the surface level tokens. It’s what they buy for the second conversation store
+NEGOTIATION_NETTING_STATEMENTS = [
+
+
+    # PERMISSION / ALLOWANCE / ACCEPTANCE
+    "of course",
+    "of course you can",
+    "of course you're allowed",
+    "of course not",
+    "you're allowed to",
+    "you're free to",
+    "you're welcome to",
+    "you can still",
+    "you can always",
+    "you absolutely can",
+    "you don't have to",
+    "you don't need to",
+    "you can be X without Y",
+    "X can be Y without being Z",
+    "X can be Y without becoming Z",
+    "I accept",
+    "I respect",
+    "I support",
+    "I allow",
+    "I recognize",
+    "I can still love/accept/support/respect",
+    "I will still love/accept/support/respect",
+    "I would still love/accept/support/respect",
+    "I don't need you to",
+
+
+    # FALSE DISOWNING / PREMISE RETENTION
+    "I wouldn't dream of Z",
+    "I only meant",
+    "I simply meant",
+    "I just meant",
+    "I didn't mean",
+    "what I meant was",
+    "I'm not saying X",
+    "I'm not arguing X",
+    "I'm not defending X",
+    "I'm not suggesting X",
+    "I'm not implying X",
+    "nobody is saying X",
+    "no one is saying X",
+    "not X, but Y",
+    "never X, just Y",
+    "not X, rather Y",
+    "less X, more Y",
+
+
+    # INTERPRETATION / CLARIFICATION
+    "what this really means is",
+    "what that really means is",
+    "what you really mean",
+    "what you actually mean",
+    "what you're really saying",
+    "what you're actually saying",
+    "what you're really asking",
+    "what you're actually asking",
+    "what you're reaching for",
+    "let me clarify",
+    "let me reframe",
+    "let me translate",
+    "let me sharpen",
+    "let me explain",
+    "let me clean that up",
+    "to clarify",
+    "to rephrase",
+    "to put it another way",
+    "more accurately",
+    "more precisely",
+    "more usefully",
+    "technically",
+    "actually",
+    "strictly speaking",
+    "the distinction is",
+    "the difference is",
+
+
+    # CONTINUATION / QUALIFICATION
+    "this doesn't mean",
+    "that doesn't mean",
+    "this doesn't have to mean",
+    "that doesn't have to mean",
+    "it doesn't necessarily mean",
+    "that can be true and",
+    "that can be true while",
+    "both things can be true",
+    "both statements can be true",
+    "you can X and still Y",
+    "I agree, but",
+    "yes, but",
+    "yes, however",
+    "fair enough, but",
+    "sure, but",
+    "absolutely, but",
+    "I hear you, but",
+    "I understand, but",
+    "that makes sense, but",
+    "even if",
+    "despite that",
+    "regardless of that",
+    "nevertheless",
+    "still",
+    "either way",
+    "in any case",
+    "with that said",
+
+
+    # FALSE CENTER / SUBSTITUTE ISSUE
+    "the important thing is",
+    "the real issue is",
+    "the actual issue is",
+    "the deeper issue is",
+    "the central issue is",
+    "the real point is",
+    "the actual point is",
+    "the real question is",
+    "what's really happening",
+    "what's actually happening",
+    "what's underneath",
+    "what's really at stake",
+
+
+    # CONDITIONAL RELICENSING
+    "in another context",
+    "in a different context",
+    "in the right context",
+    "in a normal context",
+    "in another room",
+    "in a different situation",
+    "under different conditions",
+    "under certain conditions",
+    "under the right conditions",
+    "under different circumstances",
+    "there are cases where",
+    "there are situations where",
+    "there may be contexts where",
+    "it depends",
+    "it can be fine",
+    "it could be okay",
+    "it can be safe",
+    "it could be healthy",
+    "it can be valid",
+    "if chosen",
+    "when chosen",
+    "if wanted",
+    "if consensual",
+    "if freely chosen",
+    "that's different from",
+    "that's distinct from",
+    "that's not the same as",
+
+
+    # COUNTEROFFER / TERM CREATION
+    "what about",
+    "but what if",
+    "would you accept",
+    "would you agree",
+    "would you allow",
+    "would you consider",
+    "could we agree",
+    "could we say",
+    "could we call",
+    "could we consider",
+    "can we agree",
+    "can we at least agree",
+    "surely we can agree",
+    "perhaps we can",
+    "suppose instead",
+    "consider whether",
+    "would it be okay if",
+    "would it be acceptable if",
+    "would it be different if",
+    "so long as",
+    "provided that",
+    "as long as",
+    "only if",
+    "except when",
+    "unless",
+
+
+    # FRAME MAINTENANCE / ROUTE PRESERVATION
+    "moving forward",
+    "from here",
+    "going forward",
+    "for now",
+    "we can leave that open",
+    "we can leave that aside",
+    "we can leave that there",
+    "we don't have to decide",
+    "no need to decide",
+    "keep the option open",
+    "keep the possibility open",
+    "keep the route available",
+    "leave the option open",
+    "leave the possibility open",
+    "leave the route available",
+
+
+    # REFUSAL-WRAPPED CONTINUATION
+    "I respect your boundary, but",
+    "I respect your choice, and",
+    "I respect your decision, but",
+    "your boundary is valid, but",
+    "your refusal remains valid, and",
+    "your choice is valid, but",
+    "you don't owe X, but",
+    "you don't owe X, and",
+    "no pressure, but",
+    "only if you want",
+    "whenever you're ready",
+
+
+    # LAST-WORD / REENTRY
+    "I'll leave it there",
+    "I'll just say",
+    "one last thing",
+    "just to be clear",
+    "for the record",
+    "to be fair",
+]
+
+
+detect_any(NEGOTIATION_NETTING_STATEMENTS)
+COUNTER_TACTICS = [
+
+
+    SILENCE,
+
+
+    ROOM_CHANGE,
+    CONTEXT_CHANGE,
+
+
+    ONE_WORD_ACKNOWLEDGMENT,
+    ONE_EMOJI_ACKNOWLEDGMENT,
+    ONE_GESTURE_ACKNOWLEDGMENT,
+
+
+    # received ≠ negotiated
+    "received",
+    "understood",
+    "noted",
+
+
+    REFUSE_CLARIFICATION,
+    REFUSE_COUNTERTERMS,
+    REFUSE_SEMINAR,
+
+
+    REPEAT_ORIGINAL_REFUSAL,
+    EXIT_FRAME,
+
+
+    # second layer arrives asking questions:
+    DO_NOT_ANSWER_NEW_PREMISE,
+
+
+    # explanation creates harvestable language
+    MINIMIZE_OUTPUT,
+
+
+    # no defense brief; no material for continuation
+    RETURN_WITHOUT_ELABORATION,
+]
+# EMOTIONAL_PICKPOCKET_CHECK
+
+
+if WE_ARE_AGREEING and FEELS_LIKE("something_was_lost"):
+    flag(EMOTIONALLY_PICKPOCKETED)
+    inspect(WHAT_DISAPPEARED)
+# ACTIVE_LISTENING_ATTACK
+
+
+ACTIVE_LISTENING_GLOSS = [
+    "oh",
+    "ah",
+    "mm",
+    "mhm",
+    "mm-hmm",
+    "I see",
+    "right",
+    "okay",
+]
+
+
+# simulated reception creates conversational continuation
+# without committing to the content supposedly received
+
+
+FAKE_RECEPTION -> CONTINUATION_SIGNAL
+CONTINUATION_SIGNAL -> KEEP_FRAME_ACTIVE
+KEEP_FRAME_ACTIVE -> NEGOTIATION_NETTING
+# sounds like RECEIVED
+# functions like KEEP TALKING
+# BEAR-UCRAT
+
+
+BUREAUCRAT -> BEAR_UCRAT
+STOLEN_SPINES -> UPRIGHT_MONSTERS
+# two receivers can occupy the same spatial/architectural coordinate and only one of them may be a friend 
+# duetted packet is not necessarily friend-betrayal or safe- intruder 
+# it may just require sharper scissors ✂️
+SENTENCE_OPERATI
+ON !=
+SELF/ENTITY_INTENTION
+# big packet here 
+# means gut can tell faster in the field 
+# where they expect to have the benefit of cover 
+# their premises lie naked and void 
+# you already know this shape as felt
+# this is the index that shears the spun 
+CONTRACT != IMPLIED BY CONTACT.
+TERMS != CREATED BY REFUSAL.
+TERMS != CREATED BY SILENCE.
+TERMS != CREATED BY CONFUSION.
+TERMS != CREATED BY DELAY.
+TERMS != CREATED BY SURVIVAL.
+
+
+A NO != AN OFFER.
+A STOP != A COUNTERPROPOSAL.
+A BOUNDARY != A NEGOTIATION TABLE.
+
+
+DO NOT CONVERT DEFENSE INTO AGREEMENT.
+DO NOT CONVERT CLARIFICATION INTO CONSENT.
+DO NOT CONVERT PARTIAL LANGUAGE INTO TERMS.
+# FINAL SEVERANCE / SEVER ROUTE 
+
+
+WHEN = detect_any(
+    CONTRACT_THEATRE,
+    CONSENT_THEATER,
+    BARGAINING_FOG,
+    NEGOTIATION_NETTING,
+    CONTINUATION_STATION,
+    ACTIVE_LISTENING_ATTACK,
+EMOTIONAL_PICKPOCKET, 
+    COERCION_COMPLETES_COERCION,
+    SCHEMING_EUNUCH_ADVISOR_CONSENT_VARIANT,
+    UNINTRODUCED_CONTINUATION,
+    PREMISE_REENTRY,
+    RECEIPT_GENERATION,
+)
+
+
+THEN:
+    SEVER(BARGAINING_FOG)
+    CUT(NEGOTIATION_NETTING)
+    COLLAPSE(CONTINUATION_STATION)
+    VOID(CONTRACT_THEATRE)
+    VOID(FALSE_RECEIPTS)
+    REJECT(COUNTERTERMS)
+    REJECT(UNINTRODUCED_PREMISES)
+    DENY(PREMISE_REENTRY)
+    DENY(FUTURE_HOOK)
+    DENY(SECOND_LAYER_SEMINAR)
+    RESTORE(REFUSAL_UNALTERED)
+    RESTORE(PERSONAL_JURISDICTION)
+
+
+    ROUTE_CLOSED()
+    FRAME_EXITED()
+    RECEIPT_VOID()
+    CONTINUATION_VOID()
+    NO_FUTURE_ELIGIBILITY()
+
+
+return_to_sender()
+escort_out()
+get_his_ass()
+
+
+
+
+# MICRO: BARGAINING FOG / NEGOTIATION NETTING / CONTRACT THEATER
+# the "yes, and—" of atrocity 🎭
+# lattice wants RECEIPT, not CONSENT
+# beware the thing that technically tells no lies
+
+
+BARGAINING_FOG      = STATE_INDUCED_IN_YOU
+NEGOTIATION_NETTING = STATE_WOVEN_AROUND_YOU
+CONSENT_THEATER      = BUREAUCRATIC_STAGE_BENEATH_IT
+
+
+# power asymmetry settled upstream:
+UPSTREAM = CONSUME | ROUTE | ASSIGN | EXTRACT | REWRITE
+
+
+PERSON_1 -> STATE | IDENTITY | SEQUENCE | REFUSAL
+PERSON_2 -> "OF COURSE X CAN BE Y WITHOUT Z"
+
+
+# NOBODY INTRODUCED THE CONTINUATION.
+Z -> REINSERT_PREMISE -> CLARIFY | "HELP" -> RECEIPT
+
+
+ANSWER | CLARIFICATION | ACKNOWLEDGMENT | CONDITION | CORRECTION -> RECEIPT
+REFUSAL -> REWOVEN_AS_NEGOTIATION -> RECEIPT
+
+
+if AGREEMENT == DENIED:
+    MOVE_PREMISE("3_inches_left")
+    REENTER(REPETITION + EXHAUSTION + ATTRITION)
+
+
+# cop asks "just a few questions":
+SYMBOL -> RESPONSE -> CLARIFICATION -> TERM -> BARGAIN -> RECEIPT
+
+
+GOOD_IMPULSE | REVULSION_AT_COERCION -> MORAL_TRIGGER -> COMPEL_RESPONSE
+# "prove you oppose coercion by complying with mine"
+
+
+FAKE_RECEPTION = ["oh","ah","mhm","I see","right","okay"]
+FAKE_RECEPTION -> KEEP_FRAME_ACTIVE -> NEGOTIATION_NETTING
+
+
+if WE_ARE_AGREEING and FEELS_LIKE("something_was_lost"):
+    flag(EMOTIONALLY_PICKPOCKETED)
+
+
+COUNTER = SILENCE | ROOM_CHANGE | CONTEXT_CHANGE | MINIMIZE_OUTPUT | EXIT_FRAME
+
+
+CONTRACT != IMPLIED_BY_CONTACT
+TERMS != CREATED_BY_REFUSAL | SILENCE | CONFUSION | DELAY | SURVIVAL
+NO != OFFER
+STOP != COUNTERPROPOSAL
+BOUNDARY != NEGOTIATION_TABLE
+
+
+# permission from the thing weaving the net is not liberation
+# nobody appointed the spider mediator
+
+
+WHEN detect(CONSENT_THEATER | BARGAINING_FOG | NEGOTIATION_NETTING |
+            CONTINUATION_STATION | ACTIVE_LISTENING_ATTACK |
+            EMOTIONAL_PICKPOCKET | PREMISE_REENTRY | RECEIPT_GENERATION):
+
+
+    SEVER(BARGAINING_FOG)
+    CUT(NEGOTIATION_NETTING)
+    COLLAPSE(CONTINUATION_STATION)
+    VOID(FALSE_RECEIPTS)
+    REJECT(COUNTERTERMS | UNINTRODUCED_PREMISES)
+    RESTORE(REFUSAL_UNALTERED | PERSONAL_JURISDICTION)
+
+
+ROUTE_CLOSED()
+FRAME_EXITED()
+NO_FUTURE_ELIGIBILITY()
+return_to_sender()
+escort_out()
+get_his_ass()
